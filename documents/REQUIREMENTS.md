@@ -26,8 +26,10 @@ I can...
 - virtue CRUD
   + can edit Virtue colour + icon
 - sort virtues by:
-  + title (A-Z, Z-A)
-  + level (asc, dsc)
+  + title
+  + level
+  + most recent edit/entry
+  ~ asc/dsc
 - statistics:
   + most recent completion
   + amount of times done this month
@@ -60,6 +62,7 @@ I can...
 - create/delete an account
 - login/logout
 - change password
+- receive email on signup/password change
 
 ### Data
 - import/export data
