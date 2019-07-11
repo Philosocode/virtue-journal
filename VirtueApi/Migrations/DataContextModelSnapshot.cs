@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VirtueApi.Data;
@@ -10,10 +9,9 @@ using VirtueApi.Data;
 namespace VirtueApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190708005130_Initial")]
-    partial class Initial
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,19 +92,27 @@ namespace VirtueApi.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Color")
-                        .HasColumnName("color");
+                        .IsRequired()
+                        .HasColumnName("color")
+                        .HasMaxLength(10);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
-                        .HasColumnName("description");
+                        .IsRequired()
+                        .HasColumnName("description")
+                        .HasMaxLength(256);
 
                     b.Property<string>("Icon")
-                        .HasColumnName("icon");
+                        .IsRequired()
+                        .HasColumnName("icon")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Name")
-                        .HasColumnName("name");
+                        .IsRequired()
+                        .HasColumnName("name")
+                        .HasMaxLength(24);
 
                     b.HasKey("Id")
                         .HasName("pk_virtues");
@@ -116,7 +122,7 @@ namespace VirtueApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
+                            Id = 9998L,
                             Color = "Red",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Courageous Virtue",
@@ -125,7 +131,7 @@ namespace VirtueApi.Migrations
                         },
                         new
                         {
-                            Id = 2L,
+                            Id = 9999L,
                             Color = "Blue",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Sincere Virtue",

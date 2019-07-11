@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace VirtueApi.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,10 +46,10 @@ namespace VirtueApi.Migrations
                 {
                     id = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    name = table.Column<string>(nullable: true),
-                    color = table.Column<string>(nullable: true),
-                    description = table.Column<string>(nullable: true),
-                    icon = table.Column<string>(nullable: true),
+                    name = table.Column<string>(maxLength: 24, nullable: false),
+                    color = table.Column<string>(maxLength: 10, nullable: false),
+                    description = table.Column<string>(maxLength: 256, nullable: false),
+                    icon = table.Column<string>(maxLength: 100, nullable: false),
                     created_at = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -71,8 +71,8 @@ namespace VirtueApi.Migrations
                 columns: new[] { "id", "color", "created_at", "description", "icon", "name" },
                 values: new object[,]
                 {
-                    { 1L, "Red", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Courageous Virtue", "Cool Icon", "Courage" },
-                    { 2L, "Blue", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sincere Virtue", "Cool Icon", "Sincerity" }
+                    { 9998L, "Red", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Courageous Virtue", "Cool Icon", "Courage" },
+                    { 9999L, "Blue", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sincere Virtue", "Cool Icon", "Sincerity" }
                 });
         }
 

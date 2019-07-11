@@ -1,6 +1,6 @@
 using VirtueApi.Entities;
 
-namespace VirtueApi.Repositories
+namespace VirtueApi.Data
 {
     public interface IEntryRepository : IGenericRepository<Entry> {}
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using VirtueApi.Repositories;
+using VirtueApi.Data;
 
 namespace VirtueApi.Entities
 {

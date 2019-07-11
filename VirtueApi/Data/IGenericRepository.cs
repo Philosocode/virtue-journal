@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace VirtueApi.Repositories
+namespace VirtueApi.Data
 {
     public interface IGenericRepository<TEntity> 
         where TEntity : class
@@ -9,7 +9,8 @@ namespace VirtueApi.Repositories
         IEnumerable<TEntity> GetAll();
         Task<TEntity> GetById(long id);
         Task Create(TEntity entity);
-        Task Update(long id, TEntity entity);
+        Task<bool> Exists(long id);
+        Task Update(TEntity entity);
         Task Delete(long id);
     }
 }

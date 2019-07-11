@@ -1,4 +1,4 @@
-namespace VirtueApi.Repositories
+namespace VirtueApi.Data
 {
     public interface IEntity
     {

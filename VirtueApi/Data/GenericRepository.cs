@@ -1,10 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using VirtueApi.Data;
 
-namespace VirtueApi.Repositories
+namespace VirtueApi.Data
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : class, IEntity
@@ -36,7 +36,12 @@ namespace VirtueApi.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task Update(long id, TEntity entity)
+        public async Task<bool> Exists(long id)
+        {
+            return await _context.Set<TEntity>().AnyAsync(e => e.Id == id);
+        }
+
+        public async Task Update(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
             await _context.SaveChangesAsync();
