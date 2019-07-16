@@ -1,59 +1,63 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
+// FROM: Mosh Hamedani Repository Tutorial
+// https://github.com/chanson5000/Repository-Pattern-with-Csharp-and-Entity-Framework
 namespace VirtueApi.Data
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity>
-        where TEntity : class, IEntity
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly DataContext _context;
+        protected readonly DbContext Context;
+        private readonly DbSet<TEntity> _entities;
 
-        public GenericRepository(DataContext context)
+        protected GenericRepository(DbContext context)
         {
-            _context = context;
+            Context = context;
+            _entities = Context.Set<TEntity>();
+        }
+
+        public async Task<TEntity> GetByIdAsync(int id)
+        {
+            return await _entities.FindAsync(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _context.Set<TEntity>()
-                .AsNoTracking()
-                .AsEnumerable();
+            return _entities.AsEnumerable();
         }
 
-        public async Task<TEntity> GetById(long id)
+        public IEnumerable<TEntity> FindAll(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _context.Set<TEntity>()
-                .AsNoTracking()
-                .FirstOrDefaultAsync(e => e.Id == id);
+            return _entities.Where(predicate);
         }
 
-        public async Task Create(TEntity entity)
+        public async Task<TEntity> FindSingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            await _context.Set<TEntity>().AddAsync(entity);
-            await _context.SaveChangesAsync();
+            return await _entities.SingleOrDefaultAsync(predicate);
         }
 
-        public async Task<bool> Exists(long id)
+        public async Task AddAsync(TEntity entity)
         {
-            return await _context.Set<TEntity>().AnyAsync(e => e.Id == id);
+            await _entities.AddAsync(entity);
         }
 
-        public async Task Update(TEntity entity)
+        public async Task AddRange(IEnumerable<TEntity> entities)
         {
-            _context.Set<TEntity>().Update(entity);
-            await _context.SaveChangesAsync();
+            await _entities.AddRangeAsync(entities);
         }
 
-        // Potential errors if deleting a non-existent thing
-        public async Task Delete(long id)
+        public void Remove(TEntity entity)
         {
-            var entity = await GetById(id);
+            _entities.Remove(entity);
+        }
 
-            _context.Set<TEntity>().Remove(entity);
-            await _context.SaveChangesAsync();
+        public void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            _entities.RemoveRange(entities);
         }
     }
 }

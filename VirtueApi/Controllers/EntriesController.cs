@@ -26,7 +26,7 @@ namespace VirtueApi.Controllers
         
         // GET api/entries/1
         [HttpGet("{id}")] 
-        public ActionResult<Entry> GetEntry(long id) 
+        public ActionResult<Entry> GetEntry(int id) 
         {    
             var entry = _context.Entries.Find(id);     
             if (entry == null)
@@ -44,13 +44,13 @@ namespace VirtueApi.Controllers
 
         // PUT api/entries/1
         [HttpPut("{id}")]
-        public void Put(long id, [FromBody] Entry entry)
+        public void Put(int id, [FromBody] Entry entry)
         {
         }
 
         // DELETE api/entries/5
         [HttpDelete("{id}")]
-        public void Delete(long id)
+        public void Delete(int id)
         {
         }
     }

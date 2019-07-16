@@ -31,7 +31,7 @@ namespace VirtueApi.Extensions
             modelBuilder.Entity<Virtue>().HasData(
                 new Virtue
                 {
-                    Id = 9998,
+                    VirtueId = 9998,
                     Color = "Red",
                     Description = "Courageous Virtue",
                     Icon = "Cool Icon",
@@ -40,7 +40,7 @@ namespace VirtueApi.Extensions
                 },
                 new Virtue
                 {
-                    Id = 9999,
+                    VirtueId = 9999,
                     Color = "Blue",
                     Description = "Sincere Virtue",
                     Icon = "Cool Icon",
@@ -55,7 +55,7 @@ namespace VirtueApi.Extensions
             modelBuilder.Entity<Entry>().HasData(
                 new Entry
                 {
-                    Id = 1,
+                    EntryId = 1,
                     CreatedAt = new DateTime(),
                     Description = "Blah blah blah",
                     Starred = true,
@@ -63,7 +63,7 @@ namespace VirtueApi.Extensions
                 },
                 new Entry
                 {
-                    Id = 2,
+                    EntryId = 2,
                     CreatedAt = new DateTime(),
                     Description = "Blah blah blah",
                     Starred = true,

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using VirtueApi.Data;
+using VirtueApi.Extensions;
 
 namespace VirtueApi
 {
@@ -32,11 +34,10 @@ namespace VirtueApi
             services.AddDbContextPool<DataContext>(options => 
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
             );
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(typeof(Startup));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            
-            // Add repositories to DI container
-            services.AddScoped<IVirtueRepository, VirtueRepository>();
-            services.AddScoped<IEntryRepository, EntryRepository>();
             
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -59,6 +60,8 @@ namespace VirtueApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -10,7 +10,7 @@ using VirtueApi.Data;
 namespace VirtueApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190711230419_initial")]
+    [Migration("20190716231417_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,9 @@ namespace VirtueApi.Migrations
 
             modelBuilder.Entity("VirtueApi.Entities.Entry", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("EntryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id");
+                        .HasColumnName("entry_id");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnName("created_at");
@@ -42,7 +42,7 @@ namespace VirtueApi.Migrations
                     b.Property<string>("Title")
                         .HasColumnName("title");
 
-                    b.HasKey("Id")
+                    b.HasKey("EntryId")
                         .HasName("pk_entries");
 
                     b.ToTable("entries");
@@ -50,7 +50,7 @@ namespace VirtueApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
+                            EntryId = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Blah blah blah",
                             Starred = true,
@@ -58,7 +58,7 @@ namespace VirtueApi.Migrations
                         },
                         new
                         {
-                            Id = 2L,
+                            EntryId = 2,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Blah blah blah",
                             Starred = true,
@@ -68,7 +68,7 @@ namespace VirtueApi.Migrations
 
             modelBuilder.Entity("VirtueApi.Entities.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id");
 
@@ -89,9 +89,9 @@ namespace VirtueApi.Migrations
 
             modelBuilder.Entity("VirtueApi.Entities.Virtue", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("VirtueId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id");
+                        .HasColumnName("virtue_id");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -116,7 +116,7 @@ namespace VirtueApi.Migrations
                         .HasColumnName("name")
                         .HasMaxLength(24);
 
-                    b.HasKey("Id")
+                    b.HasKey("VirtueId")
                         .HasName("pk_virtues");
 
                     b.ToTable("virtues");
@@ -124,7 +124,7 @@ namespace VirtueApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 9998L,
+                            VirtueId = 9998,
                             Color = "Red",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Courageous Virtue",
@@ -133,13 +133,47 @@ namespace VirtueApi.Migrations
                         },
                         new
                         {
-                            Id = 9999L,
+                            VirtueId = 9999,
                             Color = "Blue",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Sincere Virtue",
                             Icon = "Cool Icon",
                             Name = "Sincerity"
                         });
+                });
+
+            modelBuilder.Entity("VirtueApi.Entities.VirtueEntry", b =>
+                {
+                    b.Property<int>("VirtueId")
+                        .HasColumnName("virtue_id");
+
+                    b.Property<int>("EntryId")
+                        .HasColumnName("entry_id");
+
+                    b.Property<int>("Difficulty")
+                        .HasColumnName("difficulty");
+
+                    b.HasKey("VirtueId", "EntryId");
+
+                    b.HasIndex("EntryId")
+                        .HasName("ix_virtue_entry_entry_id");
+
+                    b.ToTable("virtue_entry");
+                });
+
+            modelBuilder.Entity("VirtueApi.Entities.VirtueEntry", b =>
+                {
+                    b.HasOne("VirtueApi.Entities.Entry", "Entry")
+                        .WithMany("VirtuesLink")
+                        .HasForeignKey("EntryId")
+                        .HasConstraintName("fk_virtue_entry_entries_entry_id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("VirtueApi.Entities.Virtue", "Virtue")
+                        .WithMany("EntriesLink")
+                        .HasForeignKey("VirtueId")
+                        .HasConstraintName("fk_virtue_entry_virtues_virtue_id")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

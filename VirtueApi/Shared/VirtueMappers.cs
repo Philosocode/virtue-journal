@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using VirtueApi.Entities;
 
 namespace VirtueApi.Shared
@@ -34,7 +35,7 @@ namespace VirtueApi.Shared
             {
                 return new Virtue()
                 {
-                    Id = oldVirtue.Id,
+                    VirtueId = oldVirtue.VirtueId,
                     Color = updates.Color ?? oldVirtue.Color,
                     Description = updates.Description ?? oldVirtue.Description,
                     Icon = updates.Icon ?? oldVirtue.Icon,

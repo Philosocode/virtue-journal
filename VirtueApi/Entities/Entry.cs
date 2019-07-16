@@ -1,15 +1,18 @@
 ﻿using System;
-using VirtueApi.Data;
+using System.Collections.Generic;
 
 namespace VirtueApi.Entities
 {
-    public class Entry : IEntity
+    public class Entry
     {
-        public long Id { get; set; }
+        public int EntryId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? LastEdited { get; set; }
         public bool Starred { get; set; }
+        
+        // Relationships
+        public ICollection<VirtueEntry> VirtuesLink { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace VirtueApi.Data
          * Represents a table in the DB of class TEntity
          * LINQ queries will be transformed to SQL
         */
-        public DbSet<Entry> Entries { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Virtue> Virtues { get; set; }
+        public virtual DbSet<Entry> Entries { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Virtue> Virtues { get; set; }
         
         /* snake_case mapping for tables instead of PascalCase
          * @see: https://animesh.blog/ef-core-code-first-with-postgres/
@@ -27,7 +27,13 @@ namespace VirtueApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
             modelBuilder.SnakeCaseRelations();
+            
+            // Set primary key of VirtueEntry
+            modelBuilder.Entity<VirtueEntry>()
+                .HasKey(x => new {x.VirtueId, x.EntryId});
+            
             modelBuilder.SeedVirtues();
             modelBuilder.SeedEntries();
         }
