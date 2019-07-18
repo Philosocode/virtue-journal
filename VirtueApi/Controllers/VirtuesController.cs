@@ -9,45 +9,35 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using VirtueApi.Data;
-using VirtueApi.Entities;
-using VirtueApi.Shared;
+using VirtueApi.Data.Dtos;
+using VirtueApi.Data.Entities;
+using VirtueApi.Data.Repositories;
 
 namespace VirtueApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/virtues")]
     [ApiController]
     public class VirtuesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly LinkGenerator _linkGenerator;
 
-        public VirtuesController(IUnitOfWork unitOfWork, IMapper mapper, LinkGenerator linkGenerator)
+        public VirtuesController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _linkGenerator = linkGenerator;
         }
         
         [HttpGet]
-        // TODO: Test no virtues
         public IActionResult GetVirtues()
         {
-            try
-            {
-                return Ok(_unitOfWork.Virtues.GetAll());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    "Failed to retrieve virtues"
-                );
-            }
+            var virtuesFromRepo = _unitOfWork.Virtues.GetAll();
+            var virtues = _mapper.Map<IEnumerable<VirtueGetDto>>(virtuesFromRepo);
+            
+            return Ok(virtues);
         }
         
-        [HttpGet("{id}")] 
+        [HttpGet("{id}", Name = "GetVirtue")] 
         // TODO: Make sure virtue belongs to user
         public async Task<IActionResult> GetVirtueAsync(int id)
         {
@@ -60,27 +50,39 @@ namespace VirtueApi.Controllers
         
         [HttpPost]
         // TODO: Add Virtue to user
-        public async Task<IActionResult> CreateVirtueAsync([FromForm] VirtueCreateDTO data)
+        public async Task<IActionResult> CreateVirtueAsync([FromForm] VirtueCreateDto data)
         {
-            var newVirtue = VirtueMappers.VirtueFromCreateDTO(data);
-
-            await _unitOfWork.Virtues.AddAsync(newVirtue);
-
-            if (!await _unitOfWork.Complete()) return BadRequest("Could not create virtue");
+            if (data == null)
+                return BadRequest("Failed to create virtue");
             
-            return Created($"api/virtues/{newVirtue.VirtueId}", newVirtue);
+            var virtueEntity = _mapper.Map<Virtue>(data);
+
+            await _unitOfWork.Virtues.AddAsync(virtueEntity);
+
+            if (!await _unitOfWork.Complete())
+                throw new Exception("Creating a virtue failed on save");
+
+            var virtueToReturn = _mapper.Map<VirtueGetDto>(virtueEntity);
+            
+            return CreatedAtRoute(
+                "GetVirtue",
+                new { id = virtueToReturn.VirtueId },
+                virtueToReturn
+            );
         }
 
         [HttpPatch("{id}")]
         // TODO: Make sure the Virtue belongs to the user
-        public async Task<IActionResult> UpdateVirtueAsync(int id, [FromForm] VirtueEditDTO updates)
+        public async Task<IActionResult> UpdateVirtueAsync(int id, [FromForm] VirtueEditDto updates)
         {
             var toUpdate = await _unitOfWork.Virtues.GetByIdAsync(id);
-            if (toUpdate == null) return NotFound($"Could not find virtue with id of {id}");
+            if (toUpdate == null) 
+                return NotFound($"Could not find virtue with id of {id}");
 
             _mapper.Map(updates, toUpdate);
             
-            if (!await _unitOfWork.Complete()) return BadRequest("Could not update virtue");
+            if (!await _unitOfWork.Complete())
+                return BadRequest("Could not update virtue");
             
             return NoContent();
         }

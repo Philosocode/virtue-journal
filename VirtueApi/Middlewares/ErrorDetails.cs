@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 
 // FROM: https://code-maze.com/global-error-handling-aspnetcore/
-namespace VirtueApi.Data
+namespace VirtueApi.Middlewares
 {
     public class ErrorDetails
     {

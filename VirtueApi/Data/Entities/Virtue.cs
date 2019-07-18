@@ -1,13 +1,13 @@
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using VirtueApi.Data;
+using VirtueApi.Data.Dtos;
 
-namespace VirtueApi.Entities
+namespace VirtueApi.Data.Entities
 {
     public class Virtue
     {
+        [Key]
         public int VirtueId { get; set; }
         [Required]
         [StringLength(24)]
@@ -27,5 +27,6 @@ namespace VirtueApi.Entities
         
         // Relationships
         public ICollection<VirtueEntry> EntriesLink { get; set; }
+            = new List<VirtueEntry>();
     }
 }

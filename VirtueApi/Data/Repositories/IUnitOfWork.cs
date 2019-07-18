@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace VirtueApi.Data
+namespace VirtueApi.Data.Repositories
 {
     public interface IUnitOfWork
     {

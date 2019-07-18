@@ -19,7 +19,7 @@ namespace VirtueApi.Migrations
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("VirtueApi.Entities.Entry", b =>
+            modelBuilder.Entity("VirtueApi.Data.Entities.Entry", b =>
                 {
                     b.Property<int>("EntryId")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace VirtueApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VirtueApi.Entities.User", b =>
+            modelBuilder.Entity("VirtueApi.Data.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,7 +85,7 @@ namespace VirtueApi.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("VirtueApi.Entities.Virtue", b =>
+            modelBuilder.Entity("VirtueApi.Data.Entities.Virtue", b =>
                 {
                     b.Property<int>("VirtueId")
                         .ValueGeneratedOnAdd()
@@ -122,7 +122,7 @@ namespace VirtueApi.Migrations
                     b.HasData(
                         new
                         {
-                            VirtueId = 9998,
+                            VirtueId = 1,
                             Color = "Red",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Courageous Virtue",
@@ -131,7 +131,7 @@ namespace VirtueApi.Migrations
                         },
                         new
                         {
-                            VirtueId = 9999,
+                            VirtueId = 2,
                             Color = "Blue",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Sincere Virtue",
@@ -140,7 +140,7 @@ namespace VirtueApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VirtueApi.Entities.VirtueEntry", b =>
+            modelBuilder.Entity("VirtueApi.Data.Entities.VirtueEntry", b =>
                 {
                     b.Property<int>("VirtueId")
                         .HasColumnName("virtue_id");
@@ -159,15 +159,15 @@ namespace VirtueApi.Migrations
                     b.ToTable("virtue_entry");
                 });
 
-            modelBuilder.Entity("VirtueApi.Entities.VirtueEntry", b =>
+            modelBuilder.Entity("VirtueApi.Data.Entities.VirtueEntry", b =>
                 {
-                    b.HasOne("VirtueApi.Entities.Entry", "Entry")
+                    b.HasOne("VirtueApi.Data.Entities.Entry", "Entry")
                         .WithMany("VirtuesLink")
                         .HasForeignKey("EntryId")
                         .HasConstraintName("fk_virtue_entry_entries_entry_id")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("VirtueApi.Entities.Virtue", "Virtue")
+                    b.HasOne("VirtueApi.Data.Entities.Virtue", "Virtue")
                         .WithMany("EntriesLink")
                         .HasForeignKey("VirtueId")
                         .HasConstraintName("fk_virtue_entry_virtues_virtue_id")

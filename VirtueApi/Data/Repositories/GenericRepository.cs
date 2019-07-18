@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 // FROM: Mosh Hamedani Repository Tutorial
 // https://github.com/chanson5000/Repository-Pattern-with-Csharp-and-Entity-Framework
-namespace VirtueApi.Data
+namespace VirtueApi.Data.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
@@ -45,19 +45,9 @@ namespace VirtueApi.Data
             await _entities.AddAsync(entity);
         }
 
-        public async Task AddRange(IEnumerable<TEntity> entities)
-        {
-            await _entities.AddRangeAsync(entities);
-        }
-
         public void Remove(TEntity entity)
         {
             _entities.Remove(entity);
-        }
-
-        public void RemoveRange(IEnumerable<TEntity> entities)
-        {
-            _entities.RemoveRange(entities);
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace VirtueApi.Entities
+﻿namespace VirtueApi.Data.Entities
 {
     public class User
     {

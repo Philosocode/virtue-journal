@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace VirtueApi.Data
+namespace VirtueApi.Data.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -18,7 +18,7 @@ namespace VirtueApi.Data
         
         public async Task<bool> Complete()
         {
-            return (await _context.SaveChangesAsync()) > 0;
+            return (await _context.SaveChangesAsync()) >= 0;
         }
 
         public void Dispose()

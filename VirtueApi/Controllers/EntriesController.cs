@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VirtueApi.Data;
-using VirtueApi.Entities;
+using VirtueApi.Data.Entities;
+using VirtueApi.Data.Repositories;
 
 namespace VirtueApi.Controllers
 {
@@ -10,47 +13,49 @@ namespace VirtueApi.Controllers
     [ApiController]
     public class EntriesController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public EntriesController(DataContext context)
+        public EntriesController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         
         // GET api/entries
-        [HttpGet]
-        public ActionResult<IEnumerable<Entry>> GetEntries()
+        [HttpGet("{virtueId:int}")]
+        public IActionResult GetEntriesForVirtue(int virtueId)
         {
-            return _context.Entries.ToList();
+            return Ok(_unitOfWork.Entries.GetEntriesByVirtueId(virtueId));
         }
         
         // GET api/entries/1
-        [HttpGet("{id}")] 
-        public ActionResult<Entry> GetEntry(int id) 
-        {    
-            var entry = _context.Entries.Find(id);     
+        [HttpGet("{entryId}")] 
+        public async Task<ActionResult<Entry>> GetEntryById(int entryId)
+        {
+            var entry = await _unitOfWork.Entries.GetByIdAsync(entryId);
+            
             if (entry == null)
-            {         
-                return NotFound();     
-            }
-            return entry; 
+                return NotFound();
+
+            return Ok(entry);
         }
         
         // POST api/entries
         [HttpPost]
-        public void Post([FromBody] Entry entry)
+        public void CreateEntry([FromBody] Entry entry)
         {
         }
 
-        // PUT api/entries/1
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Entry entry)
+        // PATCH api/entries/1
+        [HttpPatch("{id}")]
+        public void UpdateEntry(int id, [FromBody] Entry entry)
         {
         }
 
         // DELETE api/entries/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteEntry(int id)
         {
         }
     }

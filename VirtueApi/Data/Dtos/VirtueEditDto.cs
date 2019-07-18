@@ -1,20 +1,17 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace VirtueApi.Entities
+namespace VirtueApi.Data.Dtos
 {
-    public class VirtueCreateDTO
+    public class VirtueEditDto
     {
-        [Required]
         [StringLength(24)]
         public string Name { get; set; }
-        [Required]
         [StringLength(10)]
         public string Color { get; set; }
-        [Required]
         [StringLength(256)]
         public string Description { get; set; }
-        [Required]
         [StringLength(100)]
-        public string Icon { get; set; } 
+        public string Icon { get; set; }
     }
 }

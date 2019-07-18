@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using VirtueApi.Entities;
+using VirtueApi.Data.Dtos;
+using VirtueApi.Data.Entities;
 using VirtueApi.Extensions;
 
 /*
@@ -33,9 +34,7 @@ namespace VirtueApi.Data
             // Set primary key of VirtueEntry
             modelBuilder.Entity<VirtueEntry>()
                 .HasKey(x => new {x.VirtueId, x.EntryId});
-            
-            modelBuilder.SeedVirtues();
-            modelBuilder.SeedEntries();
+            modelBuilder.SeedData();
         }
     }
 }

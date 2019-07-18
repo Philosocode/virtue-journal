@@ -1,7 +1,7 @@
 using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
-using VirtueApi.Entities;
+using VirtueApi.Data.Entities;
 
 namespace VirtueApi.Extensions
 {
@@ -26,51 +26,47 @@ namespace VirtueApi.Extensions
                     index.Relational().Name = index.Relational().Name.ToSnakeCase();
             }
         }
-        public static void SeedVirtues(this ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Virtue>().HasData(
-                new Virtue
-                {
-                    VirtueId = 9998,
-                    Color = "Red",
-                    Description = "Courageous Virtue",
-                    Icon = "Cool Icon",
-                    Name = "Courage",
-                    CreatedAt = new DateTime()
-                },
-                new Virtue
-                {
-                    VirtueId = 9999,
-                    Color = "Blue",
-                    Description = "Sincere Virtue",
-                    Icon = "Cool Icon",
-                    Name = "Sincerity",
-                    CreatedAt = new DateTime()
-                }
-            );
-        }
 
-        public static void SeedEntries(this ModelBuilder modelBuilder)
+        public static void SeedData(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Entry>().HasData(
-                new Entry
-                {
-                    EntryId = 1,
-                    CreatedAt = new DateTime(),
-                    Description = "Blah blah blah",
-                    Starred = true,
-                    Title = "My first entry"
-                },
-                new Entry
-                {
-                    EntryId = 2,
-                    CreatedAt = new DateTime(),
-                    Description = "Blah blah blah",
-                    Starred = true,
-                    Title = "My second entry"
-                }
-            );
+            var virtue1 = new Virtue
+            {
+                VirtueId = 1,
+                Color = "Red",
+                Description = "Courageous Virtue",
+                Icon = "Cool Icon",
+                Name = "Courage",
+                CreatedAt = new DateTime()
+            };
+            var virtue2 = new Virtue
+            {
+                VirtueId = 2,
+                Color = "Blue",
+                Description = "Sincere Virtue",
+                Icon = "Cool Icon",
+                Name = "Sincerity",
+                CreatedAt = new DateTime()
+            };
+
+            var entry1 = new Entry
+            {
+                EntryId = 1,
+                CreatedAt = new DateTime(),
+                Description = "Blah blah blah",
+                Starred = true,
+                Title = "My first entry"
+            };
+            var entry2 = new Entry
+            {
+                EntryId = 2,
+                CreatedAt = new DateTime(),
+                Description = "Blah blah blah",
+                Starred = true,
+                Title = "My second entry"
+            };
+
+            modelBuilder.Entity<Virtue>().HasData(virtue1, virtue2);
+            modelBuilder.Entity<Entry>().HasData(entry1, entry2);
         }
-        
     }
 }

@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using System.Net;
- 
+using VirtueApi.Middlewares;
+
 // FROM: https://code-maze.com/global-error-handling-aspnetcore/
 namespace VirtueApi.Extensions
 {

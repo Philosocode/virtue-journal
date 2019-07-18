@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 // FROM: https://code-maze.com/global-error-handling-aspnetcore/
-namespace VirtueApi.Data
+namespace VirtueApi.Middlewares
 {
     public class CustomExceptionMiddleware
     {
@@ -30,7 +30,7 @@ namespace VirtueApi.Data
             }
         }
         
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private static Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
@@ -38,7 +38,7 @@ namespace VirtueApi.Data
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error"
+                Message = "An unexpected fault happened. Please try again later."
             }.ToString());
         }
     }

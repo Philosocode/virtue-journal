@@ -1,6 +1,6 @@
 using System;
 
-namespace VirtueApi.Enums
+namespace VirtueApi.Shared
 {
     public static class Helpers
     {

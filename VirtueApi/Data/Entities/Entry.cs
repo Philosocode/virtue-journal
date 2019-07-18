@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using VirtueApi.Data.Dtos;
 
-namespace VirtueApi.Entities
+namespace VirtueApi.Data.Entities
 {
     public class Entry
     {
@@ -14,5 +15,6 @@ namespace VirtueApi.Entities
         
         // Relationships
         public ICollection<VirtueEntry> VirtuesLink { get; set; }
+            = new List<VirtueEntry>();
     }
 }

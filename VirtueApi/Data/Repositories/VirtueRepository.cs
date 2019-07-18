@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using VirtueApi.Entities;
+using VirtueApi.Data.Entities;
 
-namespace VirtueApi.Data
+namespace VirtueApi.Data.Repositories
 {
     public class VirtueRepository : GenericRepository<Virtue>, IVirtueRepository
     {

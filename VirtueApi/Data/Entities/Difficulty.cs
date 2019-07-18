@@ -1,5 +1,4 @@
-﻿using System;
-namespace VirtueApi.Enums
+﻿namespace VirtueApi.Data.Entities
 {
     public enum Difficulty
     {

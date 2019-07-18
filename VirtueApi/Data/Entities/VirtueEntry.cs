@@ -1,7 +1,4 @@
-﻿using System;
-using VirtueApi.Enums;
-
-namespace VirtueApi.Entities
+﻿namespace VirtueApi.Data.Entities
 {
     public class VirtueEntry
     {

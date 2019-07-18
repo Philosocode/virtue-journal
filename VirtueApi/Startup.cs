@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using VirtueApi.Data;
+using VirtueApi.Data.Repositories;
 using VirtueApi.Extensions;
 
 namespace VirtueApi
@@ -37,7 +38,7 @@ namespace VirtueApi
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(Startup));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(setupAction => { setupAction.ReturnHttpNotAcceptable = true; }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
