@@ -5,20 +5,15 @@ using VirtueApi.Data.Entities;
 
 namespace VirtueApi.Data.Dtos
 {
-    public class EntryCreateDto
+    public class EntryGetDto
     {
-        [Required]
-        [StringLength(30)]
+        public int EntryId { get; set; }
         public string Title { get; set; }
-        
-        [Required]
-        [StringLength(1000)]
         public string Description { get; set; }
-        
+        public DateTime CreatedAt { get; set; }
+        public DateTime? LastEdited { get; set; }
         public bool Starred { get; set; }
-
-        [Required] 
-        [MinLength(1)]
-        public ICollection<VirtueEntryCreateDto> VirtuesLink { get; set; }
+        
+        public ICollection<VirtueEntryGetDto> VirtuesLink { get; set; } = new List<VirtueEntryGetDto>();
     }
 }

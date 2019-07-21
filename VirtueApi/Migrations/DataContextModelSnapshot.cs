@@ -29,7 +29,9 @@ namespace VirtueApi.Migrations
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
-                        .HasColumnName("description");
+                        .IsRequired()
+                        .HasColumnName("description")
+                        .HasMaxLength(1000);
 
                     b.Property<DateTime?>("LastEdited")
                         .HasColumnName("last_edited");
@@ -38,7 +40,9 @@ namespace VirtueApi.Migrations
                         .HasColumnName("starred");
 
                     b.Property<string>("Title")
-                        .HasColumnName("title");
+                        .IsRequired()
+                        .HasColumnName("title")
+                        .HasMaxLength(30);
 
                     b.HasKey("EntryId")
                         .HasName("pk_entries");

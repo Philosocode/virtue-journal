@@ -14,11 +14,11 @@ namespace VirtueApi.Migrations
                 {
                     entry_id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    title = table.Column<string>(nullable: true),
-                    description = table.Column<string>(nullable: true),
+                    title = table.Column<string>(maxLength: 30, nullable: false),
+                    description = table.Column<string>(maxLength: 1000, nullable: false),
+                    starred = table.Column<bool>(nullable: false),
                     created_at = table.Column<DateTime>(nullable: false),
-                    last_edited = table.Column<DateTime>(nullable: true),
-                    starred = table.Column<bool>(nullable: false)
+                    last_edited = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

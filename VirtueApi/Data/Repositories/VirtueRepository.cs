@@ -1,3 +1,6 @@
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using VirtueApi.Data.Entities;
 
 namespace VirtueApi.Data.Repositories
@@ -9,6 +12,11 @@ namespace VirtueApi.Data.Repositories
         public DataContext DataContext
         {
             get { return Context as DataContext; }
+        }
+
+        public Task<bool> VirtueExists(int virtueId)
+        {
+            return DataContext.Virtues.AnyAsync(v => v.VirtueId == virtueId);
         }
     }
 }

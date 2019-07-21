@@ -70,6 +70,18 @@ namespace VirtueApi.Controllers
                 virtueToReturn
             );
         }
+        
+        [HttpGet("{virtueId:int}/entries")]
+        public async Task<IActionResult> GetEntriesForVirtue(int virtueId)
+        {
+            if (!await _unitOfWork.Virtues.VirtueExists(virtueId))
+                return NotFound($"Could not find virtue with id of {virtueId}");
+            
+            var entriesFromRepo = _unitOfWork.Entries.GetEntriesByVirtueId(virtueId);
+            var entries = _mapper.Map<IEnumerable<EntryGetDto>>(entriesFromRepo);
+            
+            return Ok(entries);
+        }
 
         [HttpPatch("{id}")]
         // TODO: Make sure the Virtue belongs to the user
@@ -91,14 +103,14 @@ namespace VirtueApi.Controllers
         // TODO: Check that Virtue is owned by user
         public async Task<IActionResult> DeleteVirtueAsync(int id)
         {
-            if (await _unitOfWork.Virtues.GetByIdAsync(id) == null) return NotFound();
+            var virtue = await _unitOfWork.Virtues.GetByIdAsync(id);
 
-            var virtue = await _unitOfWork.Virtues.GetByIdAsync((id));
-
-            if (virtue == null) return NotFound($"Virtue with id {id} could not be found");
+            if (virtue == null)
+                return NotFound($"Virtue with id {id} could not be found");
 
             _unitOfWork.Virtues.Remove(virtue);
-            if (!await _unitOfWork.Complete()) return BadRequest("Could not delete virtue");
+            if (!await _unitOfWork.Complete()) 
+                return BadRequest($"Could not delete virtue {id}");
             
             return NoContent();
         }

@@ -10,7 +10,7 @@ using VirtueApi.Data;
 namespace VirtueApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190718215956_initial")]
+    [Migration("20190721023334_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,9 @@ namespace VirtueApi.Migrations
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
-                        .HasColumnName("description");
+                        .IsRequired()
+                        .HasColumnName("description")
+                        .HasMaxLength(1000);
 
                     b.Property<DateTime?>("LastEdited")
                         .HasColumnName("last_edited");
@@ -40,7 +42,9 @@ namespace VirtueApi.Migrations
                         .HasColumnName("starred");
 
                     b.Property<string>("Title")
-                        .HasColumnName("title");
+                        .IsRequired()
+                        .HasColumnName("title")
+                        .HasMaxLength(30);
 
                     b.HasKey("EntryId")
                         .HasName("pk_entries");

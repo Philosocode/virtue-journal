@@ -26,7 +26,6 @@ namespace VirtueApi.Data.Entities
         public DateTime CreatedAt {get; set; }
         
         // Relationships
-        public ICollection<VirtueEntry> EntriesLink { get; set; }
-            = new List<VirtueEntry>();
+        public ICollection<VirtueEntry> EntriesLink { get; set; } = new List<VirtueEntry>();
     }
 }
