@@ -50,7 +50,7 @@ namespace VirtueApi.Extensions
 
             var entry1 = new Entry
             {
-                EntryId = 1,
+                EntryId = 9998,
                 CreatedAt = new DateTime(),
                 Description = "Blah blah blah",
                 Starred = true,
@@ -58,7 +58,7 @@ namespace VirtueApi.Extensions
             };
             var entry2 = new Entry
             {
-                EntryId = 2,
+                EntryId = 9999,
                 CreatedAt = new DateTime(),
                 Description = "Blah blah blah",
                 Starred = true,

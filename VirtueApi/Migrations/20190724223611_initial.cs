@@ -58,7 +58,7 @@ namespace VirtueApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "virtue_entry",
+                name: "virtue_entries",
                 columns: table => new
                 {
                     virtue_id = table.Column<int>(nullable: false),
@@ -67,15 +67,15 @@ namespace VirtueApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_virtue_entry", x => new { x.virtue_id, x.entry_id });
+                    table.PrimaryKey("PK_virtue_entries", x => new { x.virtue_id, x.entry_id });
                     table.ForeignKey(
-                        name: "fk_virtue_entry_entries_entry_id",
+                        name: "fk_virtue_entries_entries_entry_id",
                         column: x => x.entry_id,
                         principalTable: "entries",
                         principalColumn: "entry_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_virtue_entry_virtues_virtue_id",
+                        name: "fk_virtue_entries_virtues_virtue_id",
                         column: x => x.virtue_id,
                         principalTable: "virtues",
                         principalColumn: "virtue_id",
@@ -87,8 +87,8 @@ namespace VirtueApi.Migrations
                 columns: new[] { "entry_id", "created_at", "description", "last_edited", "starred", "title" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blah blah blah", null, true, "My first entry" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blah blah blah", null, true, "My second entry" }
+                    { 9998, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blah blah blah", null, true, "My first entry" },
+                    { 9999, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blah blah blah", null, true, "My second entry" }
                 });
 
             migrationBuilder.InsertData(
@@ -101,8 +101,8 @@ namespace VirtueApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_virtue_entry_entry_id",
-                table: "virtue_entry",
+                name: "ix_virtue_entries_entry_id",
+                table: "virtue_entries",
                 column: "entry_id");
         }
 
@@ -112,7 +112,7 @@ namespace VirtueApi.Migrations
                 name: "users");
 
             migrationBuilder.DropTable(
-                name: "virtue_entry");
+                name: "virtue_entries");
 
             migrationBuilder.DropTable(
                 name: "entries");

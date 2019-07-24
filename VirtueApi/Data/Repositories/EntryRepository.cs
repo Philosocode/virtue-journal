@@ -18,15 +18,18 @@ namespace VirtueApi.Data.Repositories
 
         public IEnumerable<Entry> GetEntriesByVirtueId(int virtueId)
         {
-            var virtue = DataContext
-                .Virtues
-                .Include("EntriesLink")
-                .FirstOrDefaultAsync(v => v.VirtueId == virtueId)
-                .Result;
-
-            var entries = virtue.EntriesLink.Select(e => e.Entry);
-
-            return entries;
+            return DataContext.VirtueEntries
+                .Include(ve => ve.Entry)
+                .Where(ve => ve.VirtueId == virtueId)
+                .Select(ve => ve.Entry);
+            
+            // Using Any could be bad for performance
+            /*
+            return DataContext.Entries
+                .Where(e => e.VirtuesLink
+                    .Any(v => v.VirtueId == virtueId)
+                );
+            */
         }
     }
 }
