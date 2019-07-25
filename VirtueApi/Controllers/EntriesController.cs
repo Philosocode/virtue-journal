@@ -28,12 +28,15 @@ namespace VirtueApi.Controllers
         [HttpGet("{entryId}", Name = "GetEntry")] 
         public async Task<ActionResult<Entry>> GetEntryByIdAsync(int entryId)
         {
-            var entry = await _unitOfWork.Entries.GetByIdAsync(entryId);
+            var entryEntity = await _unitOfWork.Entries.GetByIdAsync(entryId);
             
-            if (entry == null)
+            if (entryEntity == null)
                 return NotFound();
-
-            return Ok(entry);
+            
+            var entryToReturn = _mapper.Map<EntryGetDto>(entryEntity);
+            Console.WriteLine("Count " + entryEntity.VirtuesLink.Count);
+            
+            return Ok(entryToReturn);
         }
         
         // POST api/entries

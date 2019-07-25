@@ -5,10 +5,7 @@ namespace VirtueApi.Data.Dtos
 {
     public class VirtueEntryGetDto
     {
-        [Required]
         public int VirtueId { get; set; }
-        
-        [Required]
         public Difficulty Difficulty { get; set; }
     }
 }

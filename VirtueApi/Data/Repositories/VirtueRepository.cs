@@ -9,10 +9,7 @@ namespace VirtueApi.Data.Repositories
     {
         public VirtueRepository(DataContext context) : base(context) {}
 
-        public DataContext DataContext
-        {
-            get { return Context as DataContext; }
-        }
+        public DataContext DataContext => Context as DataContext;
 
         public Task<bool> VirtueExists(int virtueId)
         {

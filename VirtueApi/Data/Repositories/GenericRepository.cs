@@ -20,12 +20,12 @@ namespace VirtueApi.Data.Repositories
             _entities = Context.Set<TEntity>();
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        public virtual async Task<TEntity> GetByIdAsync(int id)
         {
             return await _entities.FindAsync(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return _entities.AsEnumerable();
         }
