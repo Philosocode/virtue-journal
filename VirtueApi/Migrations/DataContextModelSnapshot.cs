@@ -33,7 +33,7 @@ namespace VirtueApi.Migrations
                         .HasColumnName("description")
                         .HasMaxLength(1000);
 
-                    b.Property<DateTime?>("LastEdited")
+                    b.Property<DateTime>("LastEdited")
                         .HasColumnName("last_edited");
 
                     b.Property<bool>("Starred")
@@ -48,24 +48,6 @@ namespace VirtueApi.Migrations
                         .HasName("pk_entries");
 
                     b.ToTable("entries");
-
-                    b.HasData(
-                        new
-                        {
-                            EntryId = 9998,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Blah blah blah",
-                            Starred = true,
-                            Title = "My first entry"
-                        },
-                        new
-                        {
-                            EntryId = 9999,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Blah blah blah",
-                            Starred = true,
-                            Title = "My second entry"
-                        });
                 });
 
             modelBuilder.Entity("VirtueApi.Data.Entities.User", b =>
@@ -132,15 +114,6 @@ namespace VirtueApi.Migrations
                             Description = "Courageous Virtue",
                             Icon = "Cool Icon",
                             Name = "Courage"
-                        },
-                        new
-                        {
-                            VirtueId = 2,
-                            Color = "Blue",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Sincere Virtue",
-                            Icon = "Cool Icon",
-                            Name = "Sincerity"
                         });
                 });
 

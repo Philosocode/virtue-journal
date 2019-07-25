@@ -38,35 +38,8 @@ namespace VirtueApi.Extensions
                 Name = "Courage",
                 CreatedAt = new DateTime()
             };
-            var virtue2 = new Virtue
-            {
-                VirtueId = 2,
-                Color = "Blue",
-                Description = "Sincere Virtue",
-                Icon = "Cool Icon",
-                Name = "Sincerity",
-                CreatedAt = new DateTime()
-            };
 
-            var entry1 = new Entry
-            {
-                EntryId = 9998,
-                CreatedAt = new DateTime(),
-                Description = "Blah blah blah",
-                Starred = true,
-                Title = "My first entry"
-            };
-            var entry2 = new Entry
-            {
-                EntryId = 9999,
-                CreatedAt = new DateTime(),
-                Description = "Blah blah blah",
-                Starred = true,
-                Title = "My second entry"
-            };
-
-            modelBuilder.Entity<Virtue>().HasData(virtue1, virtue2);
-            modelBuilder.Entity<Entry>().HasData(entry1, entry2);
+            modelBuilder.Entity<Virtue>().HasData(virtue1);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace VirtueApi.Migrations
                     description = table.Column<string>(maxLength: 1000, nullable: false),
                     starred = table.Column<bool>(nullable: false),
                     created_at = table.Column<DateTime>(nullable: false),
-                    last_edited = table.Column<DateTime>(nullable: true)
+                    last_edited = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,22 +83,9 @@ namespace VirtueApi.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "entries",
-                columns: new[] { "entry_id", "created_at", "description", "last_edited", "starred", "title" },
-                values: new object[,]
-                {
-                    { 9998, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blah blah blah", null, true, "My first entry" },
-                    { 9999, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blah blah blah", null, true, "My second entry" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "virtues",
                 columns: new[] { "virtue_id", "color", "created_at", "description", "icon", "name" },
-                values: new object[,]
-                {
-                    { 1, "Red", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Courageous Virtue", "Cool Icon", "Courage" },
-                    { 2, "Blue", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sincere Virtue", "Cool Icon", "Sincerity" }
-                });
+                values: new object[] { 1, "Red", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Courageous Virtue", "Cool Icon", "Courage" });
 
             migrationBuilder.CreateIndex(
                 name: "ix_virtue_entries_entry_id",

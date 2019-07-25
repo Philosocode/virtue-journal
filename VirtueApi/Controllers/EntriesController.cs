@@ -24,6 +24,15 @@ namespace VirtueApi.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
+        public IActionResult GetAllEntriesDev()
+        {
+            var entriesFromRepo = _unitOfWork.Entries.GetAll();
+            var entriesToReturn = _mapper.Map<IEnumerable<EntryGetDto>>(entriesFromRepo);
+            
+            return Ok(entriesToReturn);
+        }
+
         // GET api/entries/1
         [HttpGet("{entryId}", Name = "GetEntry")] 
         public async Task<ActionResult<Entry>> GetEntryByIdAsync(int entryId)
@@ -34,7 +43,6 @@ namespace VirtueApi.Controllers
                 return NotFound();
             
             var entryToReturn = _mapper.Map<EntryGetDto>(entryEntity);
-            Console.WriteLine("Count " + entryEntity.VirtuesLink.Count);
             
             return Ok(entryToReturn);
         }
@@ -47,7 +55,7 @@ namespace VirtueApi.Controllers
                 return BadRequest();
 
             var entryEntity = _mapper.Map<Entry>(data);
-            
+
             // Link multiple Virtues to the Entry
             foreach (var virtueEntryCreateDto in data.VirtuesLink)
             {
@@ -83,8 +91,19 @@ namespace VirtueApi.Controllers
 
         // PATCH api/entries/1
         [HttpPatch("{id}")]
-        public void UpdateEntry(int id, [FromBody] Entry entry)
+        public async Task<IActionResult> UpdateEntryAsync(int id, EntryEditDto updates)
         {
+            var toUpdate = await _unitOfWork.Entries.GetByIdAsync(id);
+            
+            if (toUpdate == null) 
+                return NotFound($"Could not find entry with id {id}");
+            
+            _mapper.Map(updates, toUpdate);
+            
+            if (!await _unitOfWork.Complete())
+                return BadRequest($"Could not update entry with id {id}");
+            
+            return NoContent();
         }
 
         // DELETE api/entries/5

@@ -17,6 +17,25 @@ namespace VirtueApi.Data.Profiles
                 .ForMember(dest => dest.VirtuesLink, opt => opt.Ignore());
 
             CreateMap<Entry, EntryGetDto>();
+
+            CreateMap<EntryEditDto, Entry>()
+                .ForMember(
+                    dest => dest.CreatedAt,
+                    opt => opt.PreCondition(src => src.CreatedAt != null))
+                .ForMember(
+                    dest => dest.LastEdited,
+                    opt => opt.PreCondition(src => src.LastEdited != null))
+                .ForMember(
+                    dest => dest.Starred,
+                    opt => opt.PreCondition(src => src.Starred != null))
+                .ForMember(
+                    dest => dest.VirtuesLink,
+                    opt => opt.Ignore()
+                )
+                .ForAllOtherMembers(
+                    opts => opts.Condition((src, dest, srcMember) => srcMember != null)
+                );
+
         }
     }
 }

@@ -30,10 +30,11 @@ namespace VirtueApi.Data.Repositories
         public IEnumerable<Entry> GetEntriesByVirtueId(int virtueId)
         {
             return DataContext.VirtueEntries
-                .Include(ve => ve.Entry)
-                    .ThenInclude(e => e.VirtuesLink)
                 .Where(ve => ve.VirtueId == virtueId)
-                .Select(ve => ve.Entry);
+                .Include(ve => ve.Entry)
+                .Select(ve => ve.Entry)
+                .Include(e => e.VirtuesLink)
+                .AsEnumerable();
             
             // Using Any could be bad for performance
             /*

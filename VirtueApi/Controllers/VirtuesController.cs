@@ -50,7 +50,7 @@ namespace VirtueApi.Controllers
         
         [HttpPost]
         // TODO: Add Virtue to user
-        public async Task<IActionResult> CreateVirtueAsync([FromForm] VirtueCreateDto data)
+        public async Task<IActionResult> CreateVirtueAsync(VirtueCreateDto data)
         {
             if (data == null)
                 return BadRequest("Failed to create virtue");
@@ -83,9 +83,10 @@ namespace VirtueApi.Controllers
             return Ok(entries);
         }
 
+        // PATCH api/virtues/1
         [HttpPatch("{id}")]
         // TODO: Make sure the Virtue belongs to the user
-        public async Task<IActionResult> UpdateVirtueAsync(int id, [FromForm] VirtueEditDto updates)
+        public async Task<IActionResult> UpdateVirtueAsync(int id, VirtueEditDto updates)
         {
             var toUpdate = await _unitOfWork.Virtues.GetByIdAsync(id);
             if (toUpdate == null) 
