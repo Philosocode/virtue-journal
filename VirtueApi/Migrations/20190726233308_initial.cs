@@ -18,7 +18,7 @@ namespace VirtueApi.Migrations
                     description = table.Column<string>(maxLength: 1000, nullable: false),
                     starred = table.Column<bool>(nullable: false),
                     created_at = table.Column<DateTimeOffset>(nullable: false),
-                    last_edited = table.Column<DateTimeOffset>(nullable: false)
+                    last_edited = table.Column<DateTimeOffset>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,8 +87,8 @@ namespace VirtueApi.Migrations
                 columns: new[] { "virtue_id", "color", "created_at", "description", "icon", "name" },
                 values: new object[,]
                 {
-                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 26, 17, 5, 34, 909, DateTimeKind.Unspecified).AddTicks(9070), new TimeSpan(0, -6, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
-                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 26, 17, 5, 34, 912, DateTimeKind.Unspecified).AddTicks(2790), new TimeSpan(0, -6, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
+                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 26, 17, 33, 7, 846, DateTimeKind.Unspecified).AddTicks(7970), new TimeSpan(0, -6, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
+                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 26, 17, 33, 7, 849, DateTimeKind.Unspecified).AddTicks(1610), new TimeSpan(0, -6, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
                 });
 
             migrationBuilder.CreateIndex(

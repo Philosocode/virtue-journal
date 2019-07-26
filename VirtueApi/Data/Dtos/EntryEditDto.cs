@@ -20,7 +20,6 @@ namespace VirtueApi.Data.Dtos
 
         public bool? Starred { get; set; }
         
-        [MinLength(1)]
         public ICollection<VirtueEntryCreateDto> VirtueLinks { get; set; }
     }
 }

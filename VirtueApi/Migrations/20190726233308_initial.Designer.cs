@@ -10,7 +10,7 @@ using VirtueApi.Data;
 namespace VirtueApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190726230535_initial")]
+    [Migration("20190726233308_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace VirtueApi.Migrations
                         .HasColumnName("description")
                         .HasMaxLength(1000);
 
-                    b.Property<DateTimeOffset>("LastEdited")
+                    b.Property<DateTimeOffset?>("LastEdited")
                         .HasColumnName("last_edited");
 
                     b.Property<bool>("Starred")
@@ -112,7 +112,7 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 1,
                             Color = "Red",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 17, 5, 34, 909, DateTimeKind.Unspecified).AddTicks(9070), new TimeSpan(0, -6, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 17, 33, 7, 846, DateTimeKind.Unspecified).AddTicks(7970), new TimeSpan(0, -6, 0, 0, 0)),
                             Description = "Courageous Virtue",
                             Icon = "Cool Icon",
                             Name = "Courage"
@@ -121,7 +121,7 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 2,
                             Color = "Blue",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 17, 5, 34, 912, DateTimeKind.Unspecified).AddTicks(2790), new TimeSpan(0, -6, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 17, 33, 7, 849, DateTimeKind.Unspecified).AddTicks(1610), new TimeSpan(0, -6, 0, 0, 0)),
                             Description = "Sincere Virtue",
                             Icon = "Cool Icon",
                             Name = "Sincerity"

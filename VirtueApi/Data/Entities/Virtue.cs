@@ -26,6 +26,7 @@ namespace VirtueApi.Data.Entities
         public DateTimeOffset CreatedAt {get; set; }
         
         // Relationships
+        [Required]
         public ICollection<VirtueEntry> EntryLinks { get; set; } = new List<VirtueEntry>();
     }
 }

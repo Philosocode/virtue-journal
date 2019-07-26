@@ -6,6 +6,6 @@ namespace VirtueApi.Data.Repositories
 {
     public interface IVirtueRepository : IGenericRepository<Virtue>
     {
-        Task<bool> VirtueExists(int virtueId);
+        Task<bool> Exists(int virtueId);
     }
 }

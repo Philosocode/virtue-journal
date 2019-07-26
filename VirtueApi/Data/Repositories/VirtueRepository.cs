@@ -11,7 +11,7 @@ namespace VirtueApi.Data.Repositories
 
         public DataContext DataContext => Context as DataContext;
 
-        public Task<bool> VirtueExists(int virtueId)
+        public Task<bool> Exists(int virtueId)
         {
             return DataContext.Virtues.AnyAsync(v => v.VirtueId == virtueId);
         }

@@ -24,11 +24,10 @@ namespace VirtueApi.Data.Entities
         public DateTimeOffset CreatedAt { get; set; }
         
         [DataType(DataType.Date)]
-        public DateTimeOffset LastEdited { get; set; }
+        public DateTimeOffset? LastEdited { get; set; }
         
         // Relationships
         [Required]
-        [MinLength(1)]
         public ICollection<VirtueEntry> VirtueLinks { get; set; } = new List<VirtueEntry>();
     }
 }

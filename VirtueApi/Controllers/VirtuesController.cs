@@ -74,7 +74,7 @@ namespace VirtueApi.Controllers
         [HttpGet("{virtueId:int}/entries")]
         public async Task<IActionResult> GetEntriesForVirtue(int virtueId)
         {
-            if (!await _unitOfWork.Virtues.VirtueExists(virtueId))
+            if (!await _unitOfWork.Virtues.Exists(virtueId))
                 return NotFound($"Could not find virtue with id of {virtueId}");
             
             var entriesFromRepo = _unitOfWork.Entries.GetEntriesByVirtueId(virtueId);

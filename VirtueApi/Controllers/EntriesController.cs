@@ -61,33 +61,12 @@ namespace VirtueApi.Controllers
             {
                 if (!VirtueLinkIdsAreUnique(data.VirtueLinks))
                     return StatusCode(422, "Virtue link IDs must be unique.");
-                if (!VirtueLinkIdsExist(data.VirtueLinks))
+                if (!await VirtueLinkIdsExistAsync(data.VirtueLinks))
                     return StatusCode(422, "Virtue IDs must be valid.");
-                    
-                
-                entryEntity.VirtueLinks = new List<VirtueEntry>();
 
-                LinkVirtuesToEntry(entryEntity, data.VirtueLinks);
+                LinkVirtuesToEntryAsync(entryEntity, data.VirtueLinks);
             }
             
-//            foreach (var virtueEntryCreateDto in data.VirtueLinks)
-//            {
-//                var virtueId = virtueEntryCreateDto.VirtueId;
-//                var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
-//
-//                if (virtueFromRepo == null)
-//                    return NotFound($"Virtue with id {virtueId} not found.");
-//
-//                var virtueEntry = new VirtueEntry()
-//                {
-//                    Difficulty = virtueEntryCreateDto.Difficulty,
-//                    Entry = entryEntity,
-//                    Virtue = virtueFromRepo
-//                };
-//                
-//                entryEntity.VirtueLinks.Add(virtueEntry);
-//            }
-
             await _unitOfWork.Entries.AddAsync(entryEntity);
 
             if (!await _unitOfWork.Complete())
@@ -101,12 +80,7 @@ namespace VirtueApi.Controllers
                 entryToReturn
             );
         }
-
-        private bool VirtueLinkIdsExist(ICollection<VirtueEntryCreateDto> virtueLinks)
-        {
-            return true;
-        }
-
+        
         // PATCH api/entries/1
         [HttpPatch("{id}")]
         public async Task<IActionResult> UpdateEntryAsync(int id, EntryEditDto updates)
@@ -116,8 +90,15 @@ namespace VirtueApi.Controllers
             if (toUpdate == null) 
                 return NotFound($"Could not find entry with id {id}");
             
-            if (!VirtueLinkIdsAreUnique(updates.VirtueLinks))
-                return StatusCode(422, "Virtue link IDs must be unique.");
+            if (updates.VirtueLinks?.Count > 0)
+            {
+                if (!VirtueLinkIdsAreUnique(updates.VirtueLinks))
+                    return StatusCode(422, "Virtue link ID(s) must be unique.");
+                if (!await VirtueLinkIdsExistAsync(updates.VirtueLinks))
+                    return StatusCode(422, "Virtue ID(s) must be valid.");
+
+                LinkVirtuesToEntryAsync(toUpdate, updates.VirtueLinks);
+            }
             
             _mapper.Map(updates, toUpdate);
             
@@ -140,16 +121,26 @@ namespace VirtueApi.Controllers
             return true;
         }
         
-        private async Task<bool> LinkVirtuesToEntry(Entry entry, ICollection<VirtueEntryCreateDto> virtueLinks)
+        private async Task<bool> VirtueLinkIdsExistAsync(ICollection<VirtueEntryCreateDto> virtueLinks)
         {
+            foreach (var virtueLink in virtueLinks)
+            {
+                if (!await _unitOfWork.Virtues.Exists(virtueLink.VirtueId))
+                    return false;
+            }
+
+            return true;
+        }
+
+        
+        private async void LinkVirtuesToEntryAsync(Entry entry, ICollection<VirtueEntryCreateDto> virtueLinks)
+        {
+            entry.VirtueLinks = new List<VirtueEntry>();
+            
             foreach (var virtueEntryCreateDto in virtueLinks)
             {
                 var virtueId = virtueEntryCreateDto.VirtueId;
                 var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
-
-                if (virtueFromRepo == null)
-                    return false;
-
                 var virtueEntry = new VirtueEntry()
                 {
                     Difficulty = virtueEntryCreateDto.Difficulty,
@@ -159,8 +150,6 @@ namespace VirtueApi.Controllers
                 
                 entry.VirtueLinks.Add(virtueEntry);
             }
-
-            return true;
         }
 
         // DELETE api/entries/5
