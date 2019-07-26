@@ -16,14 +16,14 @@ namespace VirtueApi.Data.Repositories
         public override async Task<Entry> GetByIdAsync(int id)
         {
             return await DataContext.Entries
-                .Include(e => e.VirtuesLink)
+                .Include(e => e.VirtueLinks)
                 .FirstOrDefaultAsync(e => e.EntryId == id);
         }
 
         public override IEnumerable<Entry> GetAll()
         {
             return DataContext.Entries
-                .Include(e => e.VirtuesLink)
+                .Include(e => e.VirtueLinks)
                 .AsEnumerable();
         }
 
@@ -33,13 +33,13 @@ namespace VirtueApi.Data.Repositories
                 .Where(ve => ve.VirtueId == virtueId)
                 .Include(ve => ve.Entry)
                 .Select(ve => ve.Entry)
-                .Include(e => e.VirtuesLink)
+                .Include(e => e.VirtueLinks)
                 .AsEnumerable();
             
             // Using Any could be bad for performance
             /*
             return DataContext.Entries
-                .Where(e => e.VirtuesLink
+                .Where(e => e.VirtueLinks
                     .Any(v => v.VirtueId == virtueId)
                 );
             */

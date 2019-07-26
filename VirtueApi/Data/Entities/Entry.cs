@@ -29,6 +29,6 @@ namespace VirtueApi.Data.Entities
         // Relationships
         [Required]
         [MinLength(1)]
-        public ICollection<VirtueEntry> VirtuesLink { get; set; } = new List<VirtueEntry>();
+        public ICollection<VirtueEntry> VirtueLinks { get; set; } = new List<VirtueEntry>();
     }
 }

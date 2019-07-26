@@ -39,7 +39,17 @@ namespace VirtueApi.Extensions
                 CreatedAt = DateTimeOffset.Now
             };
 
-            modelBuilder.Entity<Virtue>().HasData(virtue1);
+            var virtue2 = new Virtue
+            {
+                VirtueId = 2,
+                Color = "Blue",
+                Description = "Sincere Virtue",
+                Icon = "Cool Icon",
+                Name = "Sincerity",
+                CreatedAt = DateTimeOffset.Now
+            };
+
+            modelBuilder.Entity<Virtue>().HasData(virtue1, virtue2);
         }
     }
 }

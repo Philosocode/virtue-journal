@@ -19,6 +19,6 @@ namespace VirtueApi.Data.Dtos
 
         [Required] 
         [MinLength(1)]
-        public ICollection<VirtueEntryCreateDto> VirtuesLink { get; set; }
+        public ICollection<VirtueEntryCreateDto> VirtueLinks { get; set; }
     }
 }

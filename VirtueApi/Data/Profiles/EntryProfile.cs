@@ -14,7 +14,7 @@ namespace VirtueApi.Data.Profiles
                     dest => dest.CreatedAt,
                     opt => opt.MapFrom(_ => DateTimeOffset.Now)
                 )
-                .ForMember(dest => dest.VirtuesLink, opt => opt.Ignore());
+                .ForMember(dest => dest.VirtueLinks, opt => opt.Ignore());
 
             CreateMap<Entry, EntryGetDto>();
 
@@ -29,7 +29,7 @@ namespace VirtueApi.Data.Profiles
                     dest => dest.Starred,
                     opt => opt.PreCondition(src => src.Starred != null))
                 .ForMember(
-                    dest => dest.VirtuesLink,
+                    dest => dest.VirtueLinks,
                     opt => opt.Ignore()
                 )
                 .ForAllOtherMembers(

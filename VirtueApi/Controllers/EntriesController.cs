@@ -56,23 +56,37 @@ namespace VirtueApi.Controllers
 
             var entryEntity = _mapper.Map<Entry>(data);
             
-            foreach (var virtueEntryCreateDto in data.VirtuesLink)
+            // Add virtue links
+            if (data.VirtueLinks.Count > 0)
             {
-                var virtueId = virtueEntryCreateDto.VirtueId;
-                var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
-
-                if (virtueFromRepo == null)
-                    return NotFound($"Virtue with id {virtueId} not found.");
-
-                var virtueEntry = new VirtueEntry()
-                {
-                    Difficulty = virtueEntryCreateDto.Difficulty,
-                    Entry = entryEntity,
-                    Virtue = virtueFromRepo
-                };
+                if (!VirtueLinkIdsAreUnique(data.VirtueLinks))
+                    return StatusCode(422, "Virtue link IDs must be unique.");
+                if (!VirtueLinkIdsExist(data.VirtueLinks))
+                    return StatusCode(422, "Virtue IDs must be valid.");
+                    
                 
-                entryEntity.VirtuesLink.Add(virtueEntry);
+                entryEntity.VirtueLinks = new List<VirtueEntry>();
+
+                LinkVirtuesToEntry(entryEntity, data.VirtueLinks);
             }
+            
+//            foreach (var virtueEntryCreateDto in data.VirtueLinks)
+//            {
+//                var virtueId = virtueEntryCreateDto.VirtueId;
+//                var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
+//
+//                if (virtueFromRepo == null)
+//                    return NotFound($"Virtue with id {virtueId} not found.");
+//
+//                var virtueEntry = new VirtueEntry()
+//                {
+//                    Difficulty = virtueEntryCreateDto.Difficulty,
+//                    Entry = entryEntity,
+//                    Virtue = virtueFromRepo
+//                };
+//                
+//                entryEntity.VirtueLinks.Add(virtueEntry);
+//            }
 
             await _unitOfWork.Entries.AddAsync(entryEntity);
 
@@ -86,7 +100,12 @@ namespace VirtueApi.Controllers
                 new { entryId = entryToReturn.EntryId },
                 entryToReturn
             );
-        } 
+        }
+
+        private bool VirtueLinkIdsExist(ICollection<VirtueEntryCreateDto> virtueLinks)
+        {
+            return true;
+        }
 
         // PATCH api/entries/1
         [HttpPatch("{id}")]
@@ -97,12 +116,51 @@ namespace VirtueApi.Controllers
             if (toUpdate == null) 
                 return NotFound($"Could not find entry with id {id}");
             
+            if (!VirtueLinkIdsAreUnique(updates.VirtueLinks))
+                return StatusCode(422, "Virtue link IDs must be unique.");
+            
             _mapper.Map(updates, toUpdate);
             
             if (!await _unitOfWork.Complete())
                 return BadRequest($"Could not update entry with id {id}");
             
             return NoContent();
+        }
+
+        private bool VirtueLinkIdsAreUnique(ICollection<VirtueEntryCreateDto> virtueLinks)
+        {
+            // Check for duplicate IDs and invalid difficulties
+            foreach (var virtueLink in virtueLinks)
+            {
+                var idCount = virtueLinks.Count(vl => vl.VirtueId == virtueLink.VirtueId);
+                if (idCount > 1)
+                    return false;
+            }
+
+            return true;
+        }
+        
+        private async Task<bool> LinkVirtuesToEntry(Entry entry, ICollection<VirtueEntryCreateDto> virtueLinks)
+        {
+            foreach (var virtueEntryCreateDto in virtueLinks)
+            {
+                var virtueId = virtueEntryCreateDto.VirtueId;
+                var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
+
+                if (virtueFromRepo == null)
+                    return false;
+
+                var virtueEntry = new VirtueEntry()
+                {
+                    Difficulty = virtueEntryCreateDto.Difficulty,
+                    Entry = entry,
+                    Virtue = virtueFromRepo
+                };
+                
+                entry.VirtueLinks.Add(virtueEntry);
+            }
+
+            return true;
         }
 
         // DELETE api/entries/5

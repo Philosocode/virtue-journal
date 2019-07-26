@@ -85,7 +85,11 @@ namespace VirtueApi.Migrations
             migrationBuilder.InsertData(
                 table: "virtues",
                 columns: new[] { "virtue_id", "color", "created_at", "description", "icon", "name" },
-                values: new object[] { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 26, 15, 48, 43, 169, DateTimeKind.Unspecified).AddTicks(2600), new TimeSpan(0, -6, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" });
+                values: new object[,]
+                {
+                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 26, 17, 5, 34, 909, DateTimeKind.Unspecified).AddTicks(9070), new TimeSpan(0, -6, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
+                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 26, 17, 5, 34, 912, DateTimeKind.Unspecified).AddTicks(2790), new TimeSpan(0, -6, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "ix_virtue_entries_entry_id",

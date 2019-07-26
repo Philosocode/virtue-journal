@@ -14,6 +14,6 @@ namespace VirtueApi.Data.Dtos
         public DateTimeOffset? LastEdited { get; set; }
         public bool Starred { get; set; }
         
-        public ICollection<VirtueEntryGetDto> VirtuesLink { get; set; } = new List<VirtueEntryGetDto>();
+        public ICollection<VirtueEntryGetDto> VirtueLinks { get; set; } = new List<VirtueEntryGetDto>();
     }
 }

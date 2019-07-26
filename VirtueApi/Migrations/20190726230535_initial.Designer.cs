@@ -10,7 +10,7 @@ using VirtueApi.Data;
 namespace VirtueApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190726214843_initial")]
+    [Migration("20190726230535_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,10 +112,19 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 1,
                             Color = "Red",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 15, 48, 43, 169, DateTimeKind.Unspecified).AddTicks(2600), new TimeSpan(0, -6, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 17, 5, 34, 909, DateTimeKind.Unspecified).AddTicks(9070), new TimeSpan(0, -6, 0, 0, 0)),
                             Description = "Courageous Virtue",
                             Icon = "Cool Icon",
                             Name = "Courage"
+                        },
+                        new
+                        {
+                            VirtueId = 2,
+                            Color = "Blue",
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 17, 5, 34, 912, DateTimeKind.Unspecified).AddTicks(2790), new TimeSpan(0, -6, 0, 0, 0)),
+                            Description = "Sincere Virtue",
+                            Icon = "Cool Icon",
+                            Name = "Sincerity"
                         });
                 });
 
@@ -141,13 +150,13 @@ namespace VirtueApi.Migrations
             modelBuilder.Entity("VirtueApi.Data.Entities.VirtueEntry", b =>
                 {
                     b.HasOne("VirtueApi.Data.Entities.Entry", "Entry")
-                        .WithMany("VirtuesLink")
+                        .WithMany("VirtueLinks")
                         .HasForeignKey("EntryId")
                         .HasConstraintName("fk_virtue_entries_entries_entry_id")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("VirtueApi.Data.Entities.Virtue", "Virtue")
-                        .WithMany("EntriesLink")
+                        .WithMany("EntryLinks")
                         .HasForeignKey("VirtueId")
                         .HasConstraintName("fk_virtue_entries_virtues_virtue_id")
                         .OnDelete(DeleteBehavior.Cascade);
