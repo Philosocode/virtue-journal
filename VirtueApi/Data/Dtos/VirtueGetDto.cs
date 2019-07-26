@@ -12,6 +12,6 @@ namespace VirtueApi.Data.Dtos
         public string Color { get; set; }
         public string Description { get; set; }
         public string Icon { get; set; }
-        public DateTime CreatedAt {get; set; }
+        public DateTimeOffset CreatedAt {get; set; }
     }
 }

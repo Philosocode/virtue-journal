@@ -13,10 +13,10 @@ namespace VirtueApi.Data.Dtos
         public string Description { get; set; }
         
         [DataType(DataType.Date)]
-        public DateTime? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt { get; set; }
                 
         [DataType(DataType.Date)]
-        public DateTime? LastEdited { get; set; }
+        public DateTimeOffset? LastEdited { get; set; }
 
         public bool? Starred { get; set; }
         

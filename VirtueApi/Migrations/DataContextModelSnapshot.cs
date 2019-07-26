@@ -25,7 +25,7 @@ namespace VirtueApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("entry_id");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
@@ -33,7 +33,7 @@ namespace VirtueApi.Migrations
                         .HasColumnName("description")
                         .HasMaxLength(1000);
 
-                    b.Property<DateTime>("LastEdited")
+                    b.Property<DateTimeOffset>("LastEdited")
                         .HasColumnName("last_edited");
 
                     b.Property<bool>("Starred")
@@ -82,7 +82,7 @@ namespace VirtueApi.Migrations
                         .HasColumnName("color")
                         .HasMaxLength(10);
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
@@ -110,7 +110,7 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 1,
                             Color = "Red",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 15, 48, 43, 169, DateTimeKind.Unspecified).AddTicks(2600), new TimeSpan(0, -6, 0, 0, 0)),
                             Description = "Courageous Virtue",
                             Icon = "Cool Icon",
                             Name = "Courage"

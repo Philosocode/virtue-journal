@@ -55,15 +55,14 @@ namespace VirtueApi.Controllers
                 return BadRequest();
 
             var entryEntity = _mapper.Map<Entry>(data);
-
-            // Link multiple Virtues to the Entry
+            
             foreach (var virtueEntryCreateDto in data.VirtuesLink)
             {
-                var id = virtueEntryCreateDto.VirtueId;
-                var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(id);
+                var virtueId = virtueEntryCreateDto.VirtueId;
+                var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
 
                 if (virtueFromRepo == null)
-                    return NotFound($"Virtue with id {id} not found.");
+                    return NotFound($"Virtue with id {virtueId} not found.");
 
                 var virtueEntry = new VirtueEntry()
                 {
@@ -74,7 +73,7 @@ namespace VirtueApi.Controllers
                 
                 entryEntity.VirtuesLink.Add(virtueEntry);
             }
-            
+
             await _unitOfWork.Entries.AddAsync(entryEntity);
 
             if (!await _unitOfWork.Complete())
@@ -87,7 +86,7 @@ namespace VirtueApi.Controllers
                 new { entryId = entryToReturn.EntryId },
                 entryToReturn
             );
-        }
+        } 
 
         // PATCH api/entries/1
         [HttpPatch("{id}")]

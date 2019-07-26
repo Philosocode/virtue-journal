@@ -17,8 +17,8 @@ namespace VirtueApi.Migrations
                     title = table.Column<string>(maxLength: 30, nullable: false),
                     description = table.Column<string>(maxLength: 1000, nullable: false),
                     starred = table.Column<bool>(nullable: false),
-                    created_at = table.Column<DateTime>(nullable: false),
-                    last_edited = table.Column<DateTime>(nullable: false)
+                    created_at = table.Column<DateTimeOffset>(nullable: false),
+                    last_edited = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +50,7 @@ namespace VirtueApi.Migrations
                     color = table.Column<string>(maxLength: 10, nullable: false),
                     description = table.Column<string>(maxLength: 256, nullable: false),
                     icon = table.Column<string>(maxLength: 100, nullable: false),
-                    created_at = table.Column<DateTime>(nullable: false)
+                    created_at = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,7 +85,7 @@ namespace VirtueApi.Migrations
             migrationBuilder.InsertData(
                 table: "virtues",
                 columns: new[] { "virtue_id", "color", "created_at", "description", "icon", "name" },
-                values: new object[] { 1, "Red", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Courageous Virtue", "Cool Icon", "Courage" });
+                values: new object[] { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 26, 15, 48, 43, 169, DateTimeKind.Unspecified).AddTicks(2600), new TimeSpan(0, -6, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" });
 
             migrationBuilder.CreateIndex(
                 name: "ix_virtue_entries_entry_id",

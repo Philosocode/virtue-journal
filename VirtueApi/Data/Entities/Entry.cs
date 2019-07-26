@@ -21,10 +21,10 @@ namespace VirtueApi.Data.Entities
         
         [Required]
         [DataType(DataType.Date)]
-        public DateTime CreatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
         
         [DataType(DataType.Date)]
-        public DateTime LastEdited { get; set; }
+        public DateTimeOffset LastEdited { get; set; }
         
         // Relationships
         [Required]

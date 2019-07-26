@@ -36,7 +36,7 @@ namespace VirtueApi.Extensions
                 Description = "Courageous Virtue",
                 Icon = "Cool Icon",
                 Name = "Courage",
-                CreatedAt = new DateTime()
+                CreatedAt = DateTimeOffset.Now
             };
 
             modelBuilder.Entity<Virtue>().HasData(virtue1);

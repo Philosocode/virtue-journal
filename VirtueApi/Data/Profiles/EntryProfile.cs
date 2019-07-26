@@ -12,7 +12,7 @@ namespace VirtueApi.Data.Profiles
             CreateMap<EntryCreateDto, Entry>()
                 .ForMember(
                     dest => dest.CreatedAt,
-                    opt => opt.MapFrom(_ => DateTime.Now)
+                    opt => opt.MapFrom(_ => DateTimeOffset.Now)
                 )
                 .ForMember(dest => dest.VirtuesLink, opt => opt.Ignore());
 

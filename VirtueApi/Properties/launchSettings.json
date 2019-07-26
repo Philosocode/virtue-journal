@@ -20,7 +20,7 @@
     "VirtueApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/virtues",
+      "launchUrl": "api/entries",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

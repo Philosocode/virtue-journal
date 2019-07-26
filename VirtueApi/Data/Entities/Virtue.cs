@@ -23,7 +23,7 @@ namespace VirtueApi.Data.Entities
         public string Icon { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateTime CreatedAt {get; set; }
+        public DateTimeOffset CreatedAt {get; set; }
         
         // Relationships
         public ICollection<VirtueEntry> EntriesLink { get; set; } = new List<VirtueEntry>();
