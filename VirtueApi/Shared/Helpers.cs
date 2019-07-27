@@ -4,9 +4,9 @@ namespace VirtueApi.Shared
 {
     public static class Helpers
     {
-        public static string GetTimeRemaining(DateTime warrantyDate)
+        public static string GetTimeRemaining(DateTimeOffset futureDate)
         {
-            var time = warrantyDate - DateTime.Now;
+            var time = futureDate - DateTimeOffset.UtcNow;
             string output = String.Empty;
 
             if (time.Days > 0)

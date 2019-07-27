@@ -13,7 +13,7 @@ namespace VirtueApi.Data.Profiles
             CreateMap<VirtueCreateDto, Virtue>()
                 .ForMember(
                     dest => dest.CreatedAt, opt => opt.MapFrom(
-                        _ => DateTimeOffset.Now
+                        _ => DateTimeOffset.UtcNow
                     ));
                 
             CreateMap<Virtue, VirtueEditDto>()

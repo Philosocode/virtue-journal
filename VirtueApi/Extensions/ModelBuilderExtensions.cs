@@ -36,7 +36,7 @@ namespace VirtueApi.Extensions
                 Description = "Courageous Virtue",
                 Icon = "Cool Icon",
                 Name = "Courage",
-                CreatedAt = DateTimeOffset.Now
+                CreatedAt = DateTimeOffset.UtcNow
             };
 
             var virtue2 = new Virtue
@@ -46,7 +46,7 @@ namespace VirtueApi.Extensions
                 Description = "Sincere Virtue",
                 Icon = "Cool Icon",
                 Name = "Sincerity",
-                CreatedAt = DateTimeOffset.Now
+                CreatedAt = DateTimeOffset.UtcNow
             };
 
             modelBuilder.Entity<Virtue>().HasData(virtue1, virtue2);

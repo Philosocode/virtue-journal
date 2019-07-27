@@ -110,7 +110,7 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 1,
                             Color = "Red",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 17, 33, 7, 846, DateTimeKind.Unspecified).AddTicks(7970), new TimeSpan(0, -6, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 27, 20, 34, 45, 879, DateTimeKind.Unspecified).AddTicks(5170), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Courageous Virtue",
                             Icon = "Cool Icon",
                             Name = "Courage"
@@ -119,7 +119,7 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 2,
                             Color = "Blue",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 26, 17, 33, 7, 849, DateTimeKind.Unspecified).AddTicks(1610), new TimeSpan(0, -6, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 27, 20, 34, 45, 879, DateTimeKind.Unspecified).AddTicks(5810), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Sincere Virtue",
                             Icon = "Cool Icon",
                             Name = "Sincerity"

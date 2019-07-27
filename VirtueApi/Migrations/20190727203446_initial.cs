@@ -87,8 +87,8 @@ namespace VirtueApi.Migrations
                 columns: new[] { "virtue_id", "color", "created_at", "description", "icon", "name" },
                 values: new object[,]
                 {
-                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 26, 17, 33, 7, 846, DateTimeKind.Unspecified).AddTicks(7970), new TimeSpan(0, -6, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
-                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 26, 17, 33, 7, 849, DateTimeKind.Unspecified).AddTicks(1610), new TimeSpan(0, -6, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
+                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 27, 20, 34, 45, 879, DateTimeKind.Unspecified).AddTicks(5170), new TimeSpan(0, 0, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
+                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 27, 20, 34, 45, 879, DateTimeKind.Unspecified).AddTicks(5810), new TimeSpan(0, 0, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
                 });
 
             migrationBuilder.CreateIndex(
