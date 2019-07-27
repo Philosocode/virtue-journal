@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VirtueApi.Data;
 using VirtueApi.Data.Dtos;
 using VirtueApi.Data.Entities;
-using VirtueApi.Data.Repositories;
+using VirtueApi.Services.Repositories;
 
 namespace VirtueApi.Controllers
 {
+    [Authorize]
     [Route("api/entries")]
     [ApiController]
     public class EntriesController : ControllerBase

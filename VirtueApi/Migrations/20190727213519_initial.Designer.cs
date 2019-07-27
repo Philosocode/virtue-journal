@@ -10,7 +10,7 @@ using VirtueApi.Data;
 namespace VirtueApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190727203446_initial")]
+    [Migration("20190727213519_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,9 +54,15 @@ namespace VirtueApi.Migrations
 
             modelBuilder.Entity("VirtueApi.Data.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id");
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnName("first_name");
+
+                    b.Property<string>("LastName")
+                        .HasColumnName("last_name");
 
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnName("password_hash");
@@ -67,7 +73,7 @@ namespace VirtueApi.Migrations
                     b.Property<string>("Username")
                         .HasColumnName("username");
 
-                    b.HasKey("Id")
+                    b.HasKey("UserId")
                         .HasName("pk_users");
 
                     b.ToTable("users");
@@ -112,7 +118,7 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 1,
                             Color = "Red",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 27, 20, 34, 45, 879, DateTimeKind.Unspecified).AddTicks(5170), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 27, 21, 35, 19, 52, DateTimeKind.Unspecified).AddTicks(2600), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Courageous Virtue",
                             Icon = "Cool Icon",
                             Name = "Courage"
@@ -121,7 +127,7 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 2,
                             Color = "Blue",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 27, 20, 34, 45, 879, DateTimeKind.Unspecified).AddTicks(5810), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 27, 21, 35, 19, 52, DateTimeKind.Unspecified).AddTicks(3230), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Sincere Virtue",
                             Icon = "Cool Icon",
                             Name = "Sincerity"

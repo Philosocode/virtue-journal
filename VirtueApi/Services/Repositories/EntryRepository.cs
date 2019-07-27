@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VirtueApi.Data;
 using VirtueApi.Data.Entities;
 
-namespace VirtueApi.Data.Repositories
+namespace VirtueApi.Services.Repositories
 {
     public class EntryRepository : GenericRepository<Entry>, IEntryRepository
     {

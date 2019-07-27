@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 // FROM: Mosh Hamedani Repository Tutorial
 // https://github.com/chanson5000/Repository-Pattern-with-Csharp-and-Entity-Framework
-namespace VirtueApi.Data.Repositories
+namespace VirtueApi.Services.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {

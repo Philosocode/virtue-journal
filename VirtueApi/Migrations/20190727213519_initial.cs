@@ -29,15 +29,17 @@ namespace VirtueApi.Migrations
                 name: "users",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    user_id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     username = table.Column<string>(nullable: true),
+                    first_name = table.Column<string>(nullable: true),
+                    last_name = table.Column<string>(nullable: true),
                     password_hash = table.Column<byte[]>(nullable: true),
                     password_salt = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_users", x => x.id);
+                    table.PrimaryKey("pk_users", x => x.user_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,8 +89,8 @@ namespace VirtueApi.Migrations
                 columns: new[] { "virtue_id", "color", "created_at", "description", "icon", "name" },
                 values: new object[,]
                 {
-                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 27, 20, 34, 45, 879, DateTimeKind.Unspecified).AddTicks(5170), new TimeSpan(0, 0, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
-                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 27, 20, 34, 45, 879, DateTimeKind.Unspecified).AddTicks(5810), new TimeSpan(0, 0, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
+                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 27, 21, 35, 19, 52, DateTimeKind.Unspecified).AddTicks(2600), new TimeSpan(0, 0, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
+                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 27, 21, 35, 19, 52, DateTimeKind.Unspecified).AddTicks(3230), new TimeSpan(0, 0, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
                 });
 
             migrationBuilder.CreateIndex(

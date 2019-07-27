@@ -5,16 +5,18 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using VirtueApi.Data;
 using VirtueApi.Data.Dtos;
 using VirtueApi.Data.Entities;
-using VirtueApi.Data.Repositories;
+using VirtueApi.Services.Repositories;
 
 namespace VirtueApi.Controllers
 {
+    [Authorize]
     [Route("api/virtues")]
     [ApiController]
     public class VirtuesController : Controller

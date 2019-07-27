@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,9 +15,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using VirtueApi.Data;
-using VirtueApi.Data.Repositories;
 using VirtueApi.Extensions;
+using VirtueApi.Services;
+using VirtueApi.Services.Repositories;
+using VirtueApi.Shared;
 
 namespace VirtueApi
 {
@@ -35,10 +40,52 @@ namespace VirtueApi
             services.AddDbContextPool<DataContext>(options => 
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
             );
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc(setupAction => { setupAction.ReturnHttpNotAcceptable = true; }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+            
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
+                    {
+                        var authService = context.HttpContext.RequestServices.GetRequiredService<IAuthService>();
+                        var userId = int.Parse(context.Principal.Identity.Name);
+                        var user = authService.GetById(userId);
+                        
+                        // return unauthorized if user no longer exists
+                        if (user == null)
+                            context.Fail("Unauthorized");
+                        
+                        return Task.CompletedTask;
+                    }
+                };
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            
+            // configure DI for application services
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -67,6 +114,8 @@ namespace VirtueApi
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            
+            app.UseAuthentication();
 
             app.UseMvc();
             
