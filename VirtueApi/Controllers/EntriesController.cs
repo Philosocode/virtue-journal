@@ -57,14 +57,12 @@ namespace VirtueApi.Controllers
             var entryEntity = _mapper.Map<Entry>(data);
             
             // Add virtue links
-            if (data.VirtueLinks.Count > 0)
+            if (data.VirtueLinks?.Count > 0)
             {
-                if (!VirtueLinkIdsAreUnique(data.VirtueLinks))
-                    return StatusCode(422, "Virtue link IDs must be unique.");
-                if (!await VirtueLinkIdsExistAsync(data.VirtueLinks))
-                    return StatusCode(422, "Virtue IDs must be valid.");
+                if (!await VirtueLinksAreValid(data.VirtueLinks))
+                    return StatusCode(422, "Virtue link ID(s) must be valid and unique.");
 
-                LinkVirtuesToEntryAsync(entryEntity, data.VirtueLinks);
+                entryEntity.VirtueLinks = await LinkVirtuesToEntryAsync(entryEntity, data.VirtueLinks); 
             }
             
             await _unitOfWork.Entries.AddAsync(entryEntity);
@@ -90,14 +88,12 @@ namespace VirtueApi.Controllers
             if (toUpdate == null) 
                 return NotFound($"Could not find entry with id {id}");
             
-            if (updates.VirtueLinks?.Count > 0)
+            if (updates.VirtueLinks != null)
             {
-                if (!VirtueLinkIdsAreUnique(updates.VirtueLinks))
-                    return StatusCode(422, "Virtue link ID(s) must be unique.");
-                if (!await VirtueLinkIdsExistAsync(updates.VirtueLinks))
-                    return StatusCode(422, "Virtue ID(s) must be valid.");
+                if (!await VirtueLinksAreValid(updates.VirtueLinks))
+                    return StatusCode(422, "Virtue link ID(s) must be valid and unique.");
 
-                LinkVirtuesToEntryAsync(toUpdate, updates.VirtueLinks);
+                toUpdate.VirtueLinks = await LinkVirtuesToEntryAsync(toUpdate, updates.VirtueLinks);
             }
             
             _mapper.Map(updates, toUpdate);
@@ -108,11 +104,14 @@ namespace VirtueApi.Controllers
             return NoContent();
         }
 
-        private bool VirtueLinkIdsAreUnique(ICollection<VirtueEntryCreateDto> virtueLinks)
+        private async Task<bool> VirtueLinksAreValid(ICollection<VirtueEntryCreateDto> virtueLinks)
         {
-            // Check for duplicate IDs and invalid difficulties
+            // Check for duplicate IDs and make sure virtues exist
             foreach (var virtueLink in virtueLinks)
             {
+                if (!await _unitOfWork.Virtues.Exists(virtueLink.VirtueId))
+                    return false;
+                
                 var idCount = virtueLinks.Count(vl => vl.VirtueId == virtueLink.VirtueId);
                 if (idCount > 1)
                     return false;
@@ -121,21 +120,9 @@ namespace VirtueApi.Controllers
             return true;
         }
         
-        private async Task<bool> VirtueLinkIdsExistAsync(ICollection<VirtueEntryCreateDto> virtueLinks)
+        private async Task<ICollection<VirtueEntry>>LinkVirtuesToEntryAsync(Entry entry, ICollection<VirtueEntryCreateDto> virtueLinks)
         {
-            foreach (var virtueLink in virtueLinks)
-            {
-                if (!await _unitOfWork.Virtues.Exists(virtueLink.VirtueId))
-                    return false;
-            }
-
-            return true;
-        }
-
-        
-        private async void LinkVirtuesToEntryAsync(Entry entry, ICollection<VirtueEntryCreateDto> virtueLinks)
-        {
-            entry.VirtueLinks = new List<VirtueEntry>();
+            var newVirtueLinks = new List<VirtueEntry>();
             
             foreach (var virtueEntryCreateDto in virtueLinks)
             {
@@ -148,8 +135,10 @@ namespace VirtueApi.Controllers
                     Virtue = virtueFromRepo
                 };
                 
-                entry.VirtueLinks.Add(virtueEntry);
+                newVirtueLinks.Add(virtueEntry);
             }
+
+            return newVirtueLinks;
         }
 
         // DELETE api/entries/5

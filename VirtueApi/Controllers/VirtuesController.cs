@@ -41,11 +41,14 @@ namespace VirtueApi.Controllers
         // TODO: Make sure virtue belongs to user
         public async Task<IActionResult> GetVirtueAsync(int id)
         {
-            var virtue = await _unitOfWork.Virtues.GetByIdAsync(id);
+            var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(id);
             
-            if (virtue == null) return NotFound();
+            if (virtueFromRepo == null) 
+                return NotFound();
+            
+            var virtueToReturn = _mapper.Map<VirtueGetDto>(virtueFromRepo);
 
-            return Ok(virtue);
+            return Ok(virtueToReturn);
         }
         
         [HttpPost]
