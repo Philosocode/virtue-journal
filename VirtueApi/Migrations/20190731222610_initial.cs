@@ -31,9 +31,10 @@ namespace VirtueApi.Migrations
                 {
                     user_id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    username = table.Column<string>(nullable: true),
+                    user_name = table.Column<string>(nullable: true),
                     first_name = table.Column<string>(nullable: true),
                     last_name = table.Column<string>(nullable: true),
+                    email = table.Column<string>(nullable: true),
                     password_hash = table.Column<byte[]>(nullable: true),
                     password_salt = table.Column<byte[]>(nullable: true)
                 },
@@ -89,8 +90,8 @@ namespace VirtueApi.Migrations
                 columns: new[] { "virtue_id", "color", "created_at", "description", "icon", "name" },
                 values: new object[,]
                 {
-                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 27, 21, 35, 19, 52, DateTimeKind.Unspecified).AddTicks(2600), new TimeSpan(0, 0, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
-                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 27, 21, 35, 19, 52, DateTimeKind.Unspecified).AddTicks(3230), new TimeSpan(0, 0, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
+                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 31, 22, 26, 10, 137, DateTimeKind.Unspecified).AddTicks(9870), new TimeSpan(0, 0, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
+                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 31, 22, 26, 10, 138, DateTimeKind.Unspecified).AddTicks(470), new TimeSpan(0, 0, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
                 });
 
             migrationBuilder.CreateIndex(

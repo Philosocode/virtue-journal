@@ -1,13 +1,16 @@
+using System.Threading.Tasks;
 using VirtueApi.Data.Entities;
 
 namespace VirtueApi.Services
 {
     public interface IAuthService
     {
-        User Authenticate(string username, string password);
-        User GetById(int id);
-        User Create(User user, string password);
-        void Update(User user, string password = null);
-        void Delete(int id);
+        Task<User> AuthenticateAsync(string userName, string password);
+        Task<User> GetByIdAsync(int id);
+        Task<User> CreateAsync(User user, string password);
+        void UpdateAsync(User user, string password = null);
+        void DeleteAsync(int id);
+        Task<bool> UserNameInUseAsync(string userName);
+        Task<bool> EmailInUseAsync(string email);
     }
 }

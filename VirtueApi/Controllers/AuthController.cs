@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using VirtueApi.Data.Dtos;
 using VirtueApi.Data.Entities;
@@ -23,7 +24,7 @@ namespace VirtueApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IOptions<AppSettings> appSettings)
@@ -35,9 +36,12 @@ namespace VirtueApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate(UserDto userDto)
+        public async Task<IActionResult> Authenticate(UserAuthenticateDto userDto)
         {
-            var user = _unitOfWork.Auth.Authenticate(userDto.Username, userDto.Password);
+            var userName = userDto.UserName.ToLower();
+            var password = userDto.Password;
+            
+            var user = await _unitOfWork.Auth.AuthenticateAsync(userName, password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
@@ -59,7 +63,7 @@ namespace VirtueApi.Controllers
             // return basic user info (without password) and token to store client side
             return Ok(new {
                 UserId = user.UserId,
-                Username = user.Username,
+                UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Token = tokenString
@@ -68,15 +72,22 @@ namespace VirtueApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody] UserDto userDto)
+        public async Task<IActionResult> Register(UserCreateDto userDto)
         {
-            // map dto to entity
+            userDto.UserName = userDto.FirstName.ToLower();
+            userDto.Email = userDto.Email.ToLower();
+            
+            if (await _unitOfWork.Auth.UserNameInUseAsync(userDto.UserName))
+                return StatusCode(409, "Username already in use.");
+            
+            if (await _unitOfWork.Auth.EmailInUseAsync(userDto.Email))
+                return StatusCode(409, "Email already in use.");
+                    
             var user = _mapper.Map<User>(userDto);
-
+            
             try 
             {
-                // save 
-                _unitOfWork.Auth.Create(user, userDto.Password);
+                await _unitOfWork.Auth.CreateAsync(user, userDto.Password);
                 return Ok();
             } 
             catch(AppException ex)
@@ -86,25 +97,25 @@ namespace VirtueApi.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("users/{id}")]
         public IActionResult GetById(int id)
         {
-            var user =  _unitOfWork.Auth.GetById(id);
-            var userDto = _mapper.Map<UserDto>(user);
+            var user =  _unitOfWork.Auth.GetByIdAsync(id);
+            var userDto = _mapper.Map<UserGetDto>(user);
             return Ok(userDto);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UserDto userDto)
+        [HttpPut("users/{id}")]
+        public IActionResult Update(int id, UserGetDto userGetDto)
         {
             // map dto to entity and set id
-            var user = _mapper.Map<User>(userDto);
+            var user = _mapper.Map<User>(userGetDto);
             user.UserId = id;
 
             try 
             {
                 // save 
-                _unitOfWork.Auth.Update(user, userDto.Password);
+                _unitOfWork.Auth.UpdateAsync(user, userGetDto.Password);
                 return Ok();
             } 
             catch(AppException ex)
@@ -114,10 +125,10 @@ namespace VirtueApi.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("users/{id}")]
         public IActionResult Delete(int id)
         {
-            _unitOfWork.Auth.Delete(id);
+            _unitOfWork.Auth.DeleteAsync(id);
             return Ok();
         }
     }

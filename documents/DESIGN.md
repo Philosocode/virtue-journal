@@ -10,7 +10,7 @@
 - PK: id
 - email
 - password
-- username
+- userName
 
 ### Virtue
 - PK: id

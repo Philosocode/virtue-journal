@@ -10,7 +10,7 @@ using VirtueApi.Data;
 namespace VirtueApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190727213519_initial")]
+    [Migration("20190731222610_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,6 +58,9 @@ namespace VirtueApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("user_id");
 
+                    b.Property<string>("Email")
+                        .HasColumnName("email");
+
                     b.Property<string>("FirstName")
                         .HasColumnName("first_name");
 
@@ -70,8 +73,8 @@ namespace VirtueApi.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnName("password_salt");
 
-                    b.Property<string>("Username")
-                        .HasColumnName("username");
+                    b.Property<string>("UserName")
+                        .HasColumnName("user_name");
 
                     b.HasKey("UserId")
                         .HasName("pk_users");
@@ -118,7 +121,7 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 1,
                             Color = "Red",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 27, 21, 35, 19, 52, DateTimeKind.Unspecified).AddTicks(2600), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 31, 22, 26, 10, 137, DateTimeKind.Unspecified).AddTicks(9870), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Courageous Virtue",
                             Icon = "Cool Icon",
                             Name = "Courage"
@@ -127,7 +130,7 @@ namespace VirtueApi.Migrations
                         {
                             VirtueId = 2,
                             Color = "Blue",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 27, 21, 35, 19, 52, DateTimeKind.Unspecified).AddTicks(3230), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 31, 22, 26, 10, 138, DateTimeKind.Unspecified).AddTicks(470), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Sincere Virtue",
                             Icon = "Cool Icon",
                             Name = "Sincerity"

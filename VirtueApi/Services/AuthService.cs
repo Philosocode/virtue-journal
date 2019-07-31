@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using VirtueApi.Data;
 using VirtueApi.Data.Entities;
 using VirtueApi.Shared;
@@ -9,21 +11,21 @@ namespace VirtueApi.Services
     // FROM: https://jasonwatmore.com/post/2018/06/26/aspnet-core-21-simple-api-for-authentication-registration-and-user-management
     public class AuthService : IAuthService
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
         public AuthService(DataContext context)
         {
             _context = context;
         }
         
-        public User Authenticate(string username, string password)
+        public async Task<User> AuthenticateAsync(string userName, string password)
         {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
                 return null;
 
-            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == userName);
 
-            // check if username exists
+            // check if user exists
             if (user == null)
                 return null;
 
@@ -35,71 +37,73 @@ namespace VirtueApi.Services
             return user;
         }
         
-        public User GetById(int id)
+        public Task<User> GetByIdAsync(int id)
         {
-            return _context.Users.Find(id);
+            return _context.Users.FindAsync(id);
         }
         
-        public User Create(User user, string password)
+        public async Task<User> CreateAsync(User user, string password)
         {
-            if (string.IsNullOrWhiteSpace(password))
-                throw new AppException("Password is required");
-
-            if (_context.Users.Any(x => x.Username == user.Username))
-                throw new AppException($"Username {user.Username} is already taken.");
-
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
 
             return user;
         }
         
-        public void Update(User userData, string password = null)
+        public async void UpdateAsync(User userData, string password = null)
         {
-            var user = _context.Users.Find(userData.UserId);
+            var user = await _context.Users.FindAsync(userData.UserId);
 
             if (user == null)
                 throw new AppException("User not found");
 
-            if (userData.Username != user.Username)
+            if (userData.UserName != user.UserName)
             {
-                // username has changed so check if the new username is already taken
-                if (_context.Users.Any(x => x.Username == userData.Username))
-                    throw new AppException($"Username {userData.Username} is already taken.");
+                // UserName has changed so check if the new UserName is already taken
+                if (_context.Users.Any(x => x.UserName == userData.UserName))
+                    throw new AppException($"Username {userData.UserName} is already taken.");
             }
 
             // update user properties
             user.FirstName = userData.FirstName;
             user.LastName = userData.LastName;
-            user.Username = userData.Username;
+            user.UserName = userData.UserName;
 
             // update password if it was entered
             if (!string.IsNullOrWhiteSpace(password))
             {
-                byte[] passwordHash, passwordSalt;
-                CreatePasswordHash(password, out passwordHash, out passwordSalt);
+                CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
 
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
             }
 
             _context.Users.Update(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
         
-        public void Delete(int id)
+        public async void DeleteAsync(int id)
         {
-            var user = _context.Users.Find(id);
+            var user = await _context.Users.FindAsync(id);
             if (user == null) return;
             
             _context.Users.Remove(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+        }
+        
+        public async Task<bool> UserNameInUseAsync(string userName)
+        {
+            return await _context.Users.AnyAsync(u => u.UserName == userName);
+        }
+        
+        public async Task<bool> EmailInUseAsync(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
         }
         
         // private helper methods

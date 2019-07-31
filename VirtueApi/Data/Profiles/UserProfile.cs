@@ -8,8 +8,7 @@ namespace VirtueApi.Data.Profiles
     {
         public UserProfile()
         {
-            CreateMap<User, UserDto>()
-                .ReverseMap();
+            CreateMap<UserCreateDto, User>();
         }
     }
 }

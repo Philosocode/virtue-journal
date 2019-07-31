@@ -61,9 +61,9 @@ namespace VirtueApi
                 {
                     OnTokenValidated = context =>
                     {
-                        var authService = context.HttpContext.RequestServices.GetRequiredService<IAuthService>();
+                        var unitOfWork = context.HttpContext.RequestServices.GetRequiredService<IUnitOfWork>();
                         var userId = int.Parse(context.Principal.Identity.Name);
-                        var user = authService.GetById(userId);
+                        var user = unitOfWork.Auth.GetByIdAsync(userId);
                         
                         // return unauthorized if user no longer exists
                         if (user == null)
