@@ -21,13 +21,13 @@ namespace VirtueApi.Controllers
     [Authorize]
     [ApiController]
     [Route("/api/auth")]
-    public class UsersController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
 
-        public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IOptions<AppSettings> appSettings)
+        public AuthController(IUnitOfWork unitOfWork, IMapper mapper, IOptions<AppSettings> appSettings)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -97,39 +97,32 @@ namespace VirtueApi.Controllers
             }
         }
 
-        [HttpGet("users/{id}")]
-        public IActionResult GetById(int id)
+        [HttpGet("user")]
+        public async Task<IActionResult> GetCurrentUser()
         {
-            var user =  _unitOfWork.Auth.GetByIdAsync(id);
-            var userDto = _mapper.Map<UserGetDto>(user);
-            return Ok(userDto);
+            var id = GetCurrentUserId();
+            var userFromRepo = await _unitOfWork.Auth.GetByIdAsync(id);
+            var userToReturn = _mapper.Map<UserGetDto>(userFromRepo);
+            
+            return Ok(userToReturn);
         }
 
-        [HttpPut("users/{id}")]
-        public IActionResult Update(int id, UserGetDto userGetDto)
+        [HttpPatch("user")]
+        public IActionResult Update(UserUpdateDto userDto)
         {
-            // map dto to entity and set id
-            var user = _mapper.Map<User>(userGetDto);
-            user.UserId = id;
-
-            try 
-            {
-                // save 
-                _unitOfWork.Auth.UpdateAsync(user, userGetDto.Password);
-                return Ok();
-            } 
-            catch(AppException ex)
-            {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
-            }
+            return BadRequest("Not implemented yet");
         }
 
-        [HttpDelete("users/{id}")]
+        [HttpDelete("user")]
         public IActionResult Delete(int id)
         {
             _unitOfWork.Auth.DeleteAsync(id);
             return Ok();
+        }
+
+        private int GetCurrentUserId()
+        {
+            return int.Parse(User.Identity.Name);
         }
     }
 }

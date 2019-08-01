@@ -7,6 +7,11 @@ namespace VirtueApi.Data.Entities
 {
     public class Virtue
     {
+        public Virtue()
+        {
+            EntryLinks = new List<VirtueEntry>();
+        }
+        
         [Key]
         public int VirtueId { get; set; }
         [Required]
@@ -22,11 +27,14 @@ namespace VirtueApi.Data.Entities
         [StringLength(100)]
         public string Icon { get; set; }
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTimeOffset CreatedAt {get; set; }
         
         // Relationships
         [Required]
-        public ICollection<VirtueEntry> EntryLinks { get; set; } = new List<VirtueEntry>();
+        public ICollection<VirtueEntry> EntryLinks { get; set; }
+        
+        public User User { get; set; }
+        public int UserId { get; set; }
     }
 }

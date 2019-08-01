@@ -6,6 +6,11 @@ namespace VirtueApi.Data.Entities
 {
     public class Entry
     {
+        public Entry()
+        {
+            VirtueLinks = new List<VirtueEntry>();
+        }
+        
         public int EntryId { get; set; }
         
         [Required]
@@ -28,6 +33,9 @@ namespace VirtueApi.Data.Entities
         
         // Relationships
         [Required]
-        public ICollection<VirtueEntry> VirtueLinks { get; set; } = new List<VirtueEntry>();
+        public ICollection<VirtueEntry> VirtueLinks { get; set; }
+        
+        public User User { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -9,23 +9,6 @@ namespace VirtueApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "entries",
-                columns: table => new
-                {
-                    entry_id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    title = table.Column<string>(maxLength: 30, nullable: false),
-                    description = table.Column<string>(maxLength: 1000, nullable: false),
-                    starred = table.Column<bool>(nullable: false),
-                    created_at = table.Column<DateTimeOffset>(nullable: false),
-                    last_edited = table.Column<DateTimeOffset>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_entries", x => x.entry_id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "users",
                 columns: table => new
                 {
@@ -44,6 +27,30 @@ namespace VirtueApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "entries",
+                columns: table => new
+                {
+                    entry_id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    title = table.Column<string>(maxLength: 30, nullable: false),
+                    description = table.Column<string>(maxLength: 1000, nullable: false),
+                    starred = table.Column<bool>(nullable: false),
+                    created_at = table.Column<DateTimeOffset>(nullable: false),
+                    last_edited = table.Column<DateTimeOffset>(nullable: true),
+                    user_id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_entries", x => x.entry_id);
+                    table.ForeignKey(
+                        name: "fk_entries_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "user_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "virtues",
                 columns: table => new
                 {
@@ -53,11 +60,18 @@ namespace VirtueApi.Migrations
                     color = table.Column<string>(maxLength: 10, nullable: false),
                     description = table.Column<string>(maxLength: 256, nullable: false),
                     icon = table.Column<string>(maxLength: 100, nullable: false),
-                    created_at = table.Column<DateTimeOffset>(nullable: false)
+                    created_at = table.Column<DateTimeOffset>(nullable: false),
+                    user_id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_virtues", x => x.virtue_id);
+                    table.ForeignKey(
+                        name: "fk_virtues_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "user_id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,26 +99,24 @@ namespace VirtueApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "virtues",
-                columns: new[] { "virtue_id", "color", "created_at", "description", "icon", "name" },
-                values: new object[,]
-                {
-                    { 1, "Red", new DateTimeOffset(new DateTime(2019, 7, 31, 22, 26, 10, 137, DateTimeKind.Unspecified).AddTicks(9870), new TimeSpan(0, 0, 0, 0, 0)), "Courageous Virtue", "Cool Icon", "Courage" },
-                    { 2, "Blue", new DateTimeOffset(new DateTime(2019, 7, 31, 22, 26, 10, 138, DateTimeKind.Unspecified).AddTicks(470), new TimeSpan(0, 0, 0, 0, 0)), "Sincere Virtue", "Cool Icon", "Sincerity" }
-                });
+            migrationBuilder.CreateIndex(
+                name: "ix_entries_user_id",
+                table: "entries",
+                column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_virtue_entries_entry_id",
                 table: "virtue_entries",
                 column: "entry_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_virtues_user_id",
+                table: "virtues",
+                column: "user_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "users");
-
             migrationBuilder.DropTable(
                 name: "virtue_entries");
 
@@ -113,6 +125,9 @@ namespace VirtueApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "virtues");
+
+            migrationBuilder.DropTable(
+                name: "users");
         }
     }
 }

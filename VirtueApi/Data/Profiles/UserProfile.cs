@@ -9,6 +9,8 @@ namespace VirtueApi.Data.Profiles
         public UserProfile()
         {
             CreateMap<UserCreateDto, User>();
+            CreateMap<UserUpdateDto, User>();
+            CreateMap<User, UserGetDto>();
         }
     }
 }

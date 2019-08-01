@@ -10,7 +10,7 @@ using VirtueApi.Data;
 namespace VirtueApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190731222610_initial")]
+    [Migration("20190801211036_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,8 +46,14 @@ namespace VirtueApi.Migrations
                         .HasColumnName("title")
                         .HasMaxLength(30);
 
+                    b.Property<int>("UserId")
+                        .HasColumnName("user_id");
+
                     b.HasKey("EntryId")
                         .HasName("pk_entries");
+
+                    b.HasIndex("UserId")
+                        .HasName("ix_entries_user_id");
 
                     b.ToTable("entries");
                 });
@@ -111,30 +117,16 @@ namespace VirtueApi.Migrations
                         .HasColumnName("name")
                         .HasMaxLength(24);
 
+                    b.Property<int>("UserId")
+                        .HasColumnName("user_id");
+
                     b.HasKey("VirtueId")
                         .HasName("pk_virtues");
 
-                    b.ToTable("virtues");
+                    b.HasIndex("UserId")
+                        .HasName("ix_virtues_user_id");
 
-                    b.HasData(
-                        new
-                        {
-                            VirtueId = 1,
-                            Color = "Red",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 31, 22, 26, 10, 137, DateTimeKind.Unspecified).AddTicks(9870), new TimeSpan(0, 0, 0, 0, 0)),
-                            Description = "Courageous Virtue",
-                            Icon = "Cool Icon",
-                            Name = "Courage"
-                        },
-                        new
-                        {
-                            VirtueId = 2,
-                            Color = "Blue",
-                            CreatedAt = new DateTimeOffset(new DateTime(2019, 7, 31, 22, 26, 10, 138, DateTimeKind.Unspecified).AddTicks(470), new TimeSpan(0, 0, 0, 0, 0)),
-                            Description = "Sincere Virtue",
-                            Icon = "Cool Icon",
-                            Name = "Sincerity"
-                        });
+                    b.ToTable("virtues");
                 });
 
             modelBuilder.Entity("VirtueApi.Data.Entities.VirtueEntry", b =>
@@ -154,6 +146,24 @@ namespace VirtueApi.Migrations
                         .HasName("ix_virtue_entries_entry_id");
 
                     b.ToTable("virtue_entries");
+                });
+
+            modelBuilder.Entity("VirtueApi.Data.Entities.Entry", b =>
+                {
+                    b.HasOne("VirtueApi.Data.Entities.User", "User")
+                        .WithMany("Entries")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_entries_users_user_id")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("VirtueApi.Data.Entities.Virtue", b =>
+                {
+                    b.HasOne("VirtueApi.Data.Entities.User", "User")
+                        .WithMany("Virtues")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_virtues_users_user_id")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("VirtueApi.Data.Entities.VirtueEntry", b =>

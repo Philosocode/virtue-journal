@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using VirtueApi.Data;
 using VirtueApi.Data.Dtos;
 using VirtueApi.Data.Entities;
+using VirtueApi.Extensions;
 using VirtueApi.Services.Repositories;
 
 namespace VirtueApi.Controllers
@@ -19,7 +20,7 @@ namespace VirtueApi.Controllers
     [Authorize]
     [Route("api/virtues")]
     [ApiController]
-    public class VirtuesController : Controller
+    public class VirtuesController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -33,20 +34,24 @@ namespace VirtueApi.Controllers
         [HttpGet]
         public IActionResult GetVirtues()
         {
-            var virtuesFromRepo = _unitOfWork.Virtues.GetAll();
+            var userId = this.GetCurrentUserId();
+            var virtuesFromRepo = _unitOfWork.Virtues.GetVirtuesForUser(userId);
             var virtues = _mapper.Map<IEnumerable<VirtueGetDto>>(virtuesFromRepo);
             
             return Ok(virtues);
         }
         
-        [HttpGet("{id}", Name = "GetVirtue")] 
-        // TODO: Make sure virtue belongs to user
-        public async Task<IActionResult> GetVirtueAsync(int id)
+        [HttpGet("{virtueId}", Name = "GetVirtue")] 
+        public async Task<IActionResult> GetVirtueAsync(int virtueId)
         {
-            var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(id);
-            
+            var userId = this.GetCurrentUserId();
+            var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
+
             if (virtueFromRepo == null) 
                 return NotFound();
+            
+            if (virtueFromRepo.UserId != userId)
+                return Unauthorized();
             
             var virtueToReturn = _mapper.Map<VirtueGetDto>(virtueFromRepo);
 
@@ -54,33 +59,35 @@ namespace VirtueApi.Controllers
         }
         
         [HttpPost]
-        // TODO: Add Virtue to user
         public async Task<IActionResult> CreateVirtueAsync(VirtueCreateDto data)
         {
             if (data == null)
                 return BadRequest("Failed to create virtue");
             
             var virtueEntity = _mapper.Map<Virtue>(data);
+            virtueEntity.UserId = this.GetCurrentUserId();
 
             await _unitOfWork.Virtues.AddAsync(virtueEntity);
 
             if (!await _unitOfWork.Complete())
-                throw new Exception("Creating a virtue failed on save");
+                throw new Exception("Creating a virtue failed on save.");
 
             var virtueToReturn = _mapper.Map<VirtueGetDto>(virtueEntity);
             
             return CreatedAtRoute(
                 "GetVirtue",
-                new { id = virtueToReturn.VirtueId },
+                new { virtueId = virtueToReturn.VirtueId },
                 virtueToReturn
             );
         }
         
         [HttpGet("{virtueId:int}/entries")]
-        public async Task<IActionResult> GetEntriesForVirtue(int virtueId)
+        public async Task<IActionResult> GetEntriesForVirtueAsync(int virtueId)
         {
-            if (!await _unitOfWork.Virtues.Exists(virtueId))
-                return NotFound($"Could not find virtue with id of {virtueId}");
+            var userId = this.GetCurrentUserId();
+            
+            if (!await _unitOfWork.Virtues.BelongsToUser(virtueId, userId))
+                return Unauthorized();
             
             var entriesFromRepo = _unitOfWork.Entries.GetEntriesByVirtueId(virtueId);
             var entries = _mapper.Map<IEnumerable<EntryGetDto>>(entriesFromRepo);
@@ -89,13 +96,17 @@ namespace VirtueApi.Controllers
         }
 
         // PATCH api/virtues/1
-        [HttpPatch("{id}")]
-        // TODO: Make sure the Virtue belongs to the user
-        public async Task<IActionResult> UpdateVirtueAsync(int id, VirtueEditDto updates)
+        [HttpPatch("{virtueId}")]
+        public async Task<IActionResult> UpdateVirtueAsync(int virtueId, VirtueEditDto updates)
         {
-            var toUpdate = await _unitOfWork.Virtues.GetByIdAsync(id);
+            var userId = this.GetCurrentUserId();
+            var toUpdate = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
+            
             if (toUpdate == null) 
-                return NotFound($"Could not find virtue with id of {id}");
+                return NotFound($"Could not find virtue with virtueId of {virtueId}");
+            
+            if (toUpdate.UserId != userId)
+                return Unauthorized();
 
             _mapper.Map(updates, toUpdate);
             
@@ -105,18 +116,22 @@ namespace VirtueApi.Controllers
             return NoContent();
         }
         
-        [HttpDelete("{id}")]
-        // TODO: Check that Virtue is owned by user
-        public async Task<IActionResult> DeleteVirtueAsync(int id)
+        [HttpDelete("{virtueId}")]
+        public async Task<IActionResult> DeleteVirtueAsync(int virtueId)
         {
-            var virtue = await _unitOfWork.Virtues.GetByIdAsync(id);
+            var userId = this.GetCurrentUserId();
+            var virtue = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
 
             if (virtue == null)
-                return NotFound($"Virtue with id {id} could not be found");
+                return NotFound($"Virtue with virtueId {virtueId} could not be found");
+
+            if (virtue.UserId != userId)
+                return Unauthorized();
 
             _unitOfWork.Virtues.Remove(virtue);
+            
             if (!await _unitOfWork.Complete()) 
-                return BadRequest($"Could not delete virtue {id}");
+                return BadRequest($"Could not delete virtue {virtueId}");
             
             return NoContent();
         }

@@ -36,7 +36,7 @@ namespace VirtueApi.Data
             modelBuilder.Entity<VirtueEntry>()
                 .HasKey(x => new {x.VirtueId, x.EntryId});
             
-            modelBuilder.SeedData();
+//            modelBuilder.SeedData();
         }
     }
 }
