@@ -44,13 +44,12 @@ namespace VirtueApi.Controllers
         [HttpGet("{virtueId}", Name = "GetVirtue")] 
         public async Task<IActionResult> GetVirtueAsync(int virtueId)
         {
-            var userId = this.GetCurrentUserId();
             var virtueFromRepo = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
 
             if (virtueFromRepo == null) 
                 return NotFound();
             
-            if (virtueFromRepo.UserId != userId)
+            if (virtueFromRepo.UserId != this.GetCurrentUserId())
                 return Unauthorized();
             
             var virtueToReturn = _mapper.Map<VirtueGetDto>(virtueFromRepo);
@@ -99,13 +98,12 @@ namespace VirtueApi.Controllers
         [HttpPatch("{virtueId}")]
         public async Task<IActionResult> UpdateVirtueAsync(int virtueId, VirtueEditDto updates)
         {
-            var userId = this.GetCurrentUserId();
             var toUpdate = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
             
             if (toUpdate == null) 
                 return NotFound($"Could not find virtue with virtueId of {virtueId}");
             
-            if (toUpdate.UserId != userId)
+            if (toUpdate.UserId != this.GetCurrentUserId())
                 return Unauthorized();
 
             _mapper.Map(updates, toUpdate);
@@ -119,13 +117,12 @@ namespace VirtueApi.Controllers
         [HttpDelete("{virtueId}")]
         public async Task<IActionResult> DeleteVirtueAsync(int virtueId)
         {
-            var userId = this.GetCurrentUserId();
             var virtue = await _unitOfWork.Virtues.GetByIdAsync(virtueId);
 
             if (virtue == null)
                 return NotFound($"Virtue with virtueId {virtueId} could not be found");
 
-            if (virtue.UserId != userId)
+            if (virtue.UserId != this.GetCurrentUserId())
                 return Unauthorized();
 
             _unitOfWork.Virtues.Remove(virtue);

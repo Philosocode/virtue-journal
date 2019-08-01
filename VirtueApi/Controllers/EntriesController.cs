@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using VirtueApi.Data;
 using VirtueApi.Data.Dtos;
 using VirtueApi.Data.Entities;
+using VirtueApi.Extensions;
 using VirtueApi.Services.Repositories;
 
 namespace VirtueApi.Controllers
@@ -27,9 +28,11 @@ namespace VirtueApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllEntriesDev()
+        public IActionResult GetEntries()
         {
-            var entriesFromRepo = _unitOfWork.Entries.GetAll();
+            var userId = this.GetCurrentUserId();
+            
+            var entriesFromRepo = _unitOfWork.Entries.GetAllEntriesForUser(userId);
             var entriesToReturn = _mapper.Map<IEnumerable<EntryGetDto>>(entriesFromRepo);
             
             return Ok(entriesToReturn);
@@ -44,6 +47,9 @@ namespace VirtueApi.Controllers
             if (entryEntity == null)
                 return NotFound();
             
+            if (entryEntity.UserId != this.GetCurrentUserId())
+                return Unauthorized();
+            
             var entryToReturn = _mapper.Map<EntryGetDto>(entryEntity);
             
             return Ok(entryToReturn);
@@ -57,6 +63,8 @@ namespace VirtueApi.Controllers
                 return BadRequest();
 
             var entryEntity = _mapper.Map<Entry>(data);
+            
+            entryEntity.UserId = this.GetCurrentUserId();
             
             // Add virtue links
             if (data.VirtueLinks?.Count > 0)
@@ -82,13 +90,17 @@ namespace VirtueApi.Controllers
         }
         
         // PATCH api/entries/1
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateEntryAsync(int id, EntryEditDto updates)
+        [HttpPatch("{entryId}")]
+        public async Task<IActionResult> UpdateEntryAsync(int entryId, EntryEditDto updates)
         {
-            var toUpdate = await _unitOfWork.Entries.GetByIdAsync(id);
+            var toUpdate = await _unitOfWork.Entries.GetByIdAsync(entryId);
             
             if (toUpdate == null) 
-                return NotFound($"Could not find entry with id {id}");
+                return NotFound($"Could not find entry with entryId {entryId}");
+
+            var userId = this.GetCurrentUserId();
+            if (toUpdate.UserId != userId)
+                return Unauthorized();
             
             if (updates.VirtueLinks != null)
             {
@@ -101,8 +113,28 @@ namespace VirtueApi.Controllers
             _mapper.Map(updates, toUpdate);
             
             if (!await _unitOfWork.Complete())
-                return BadRequest($"Could not update entry with id {id}");
+                return BadRequest($"Could not update entry with entryId {entryId}");
             
+            return NoContent();
+        }
+        
+        // DELETE api/entries/5
+        [HttpDelete("{entryId}")]
+        public async Task<IActionResult> DeleteEntryAsync(int id)
+        {
+            var entry = await _unitOfWork.Entries.GetByIdAsync(id);
+
+            if (entry == null)
+                return NotFound($"Entry with entryId {id} could not be found");
+
+            if (entry.UserId != this.GetCurrentUserId())
+                return Unauthorized();
+            
+            _unitOfWork.Entries.Remove(entry);
+            
+            if (!await _unitOfWork.Complete())
+                return BadRequest($"Could not delete entry {id}");
+
             return NoContent();
         }
 
@@ -141,22 +173,6 @@ namespace VirtueApi.Controllers
             }
 
             return newVirtueLinks;
-        }
-
-        // DELETE api/entries/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEntryAsync(int id)
-        {
-            var entry = await _unitOfWork.Entries.GetByIdAsync(id);
-
-            if (entry == null)
-                return NotFound($"Entry with id {id} could not be found");
-            
-            _unitOfWork.Entries.Remove(entry);
-            if (!await _unitOfWork.Complete())
-                return BadRequest($"Could not delete entry {id}");
-
-            return NoContent();
         }
     }
 }

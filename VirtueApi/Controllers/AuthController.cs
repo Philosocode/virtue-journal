@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using VirtueApi.Data.Dtos;
 using VirtueApi.Data.Entities;
+using VirtueApi.Extensions;
 using VirtueApi.Services;
 using VirtueApi.Services.Repositories;
 using VirtueApi.Shared;
@@ -100,12 +101,22 @@ namespace VirtueApi.Controllers
         [HttpGet("user")]
         public async Task<IActionResult> GetCurrentUser()
         {
-            var id = GetCurrentUserId();
-            var userFromRepo = await _unitOfWork.Auth.GetByIdAsync(id);
+            var userId = this.GetCurrentUserId();
+            
+            var userFromRepo = await _unitOfWork.Auth.GetByIdAsync(userId);
             var userToReturn = _mapper.Map<UserGetDto>(userFromRepo);
             
             return Ok(userToReturn);
         }
+        
+        [HttpGet("user/id")]
+        public IActionResult GetUserId()
+        {
+            var userId = this.GetCurrentUserId();
+            
+            return Ok(userId);
+        }
+
 
         [HttpPatch("user")]
         public IActionResult Update(UserUpdateDto userDto)
@@ -118,11 +129,6 @@ namespace VirtueApi.Controllers
         {
             _unitOfWork.Auth.DeleteAsync(id);
             return Ok();
-        }
-
-        private int GetCurrentUserId()
-        {
-            return int.Parse(User.Identity.Name);
         }
     }
 }

@@ -26,6 +26,15 @@ namespace VirtueApi.Services.Repositories
                 .Include(e => e.VirtueLinks)
                 .AsEnumerable();
         }
+        
+        public IEnumerable<Entry> GetAllEntriesForUser(int userId)
+        {
+            return DataContext.Entries
+                .Where(e => e.UserId == userId)
+                .Include(e => e.VirtueLinks)
+                .AsEnumerable();
+        }
+
 
         public IEnumerable<Entry> GetEntriesByVirtueId(int virtueId)
         {
