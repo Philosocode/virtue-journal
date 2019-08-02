@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VirtueApi.Data;
+using VirtueApi.Data.Dtos;
 using VirtueApi.Data.Entities;
 using VirtueApi.Shared;
 
@@ -55,45 +56,21 @@ namespace VirtueApi.Services
             return user;
         }
         
-        public async void UpdateAsync(User userData, string password = null)
+        public void UpdatePassword(User user, string password)
         {
-            var user = await _context.Users.FindAsync(userData.UserId);
+            CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
 
-            if (user == null)
-                throw new AppException("User not found");
-
-            if (userData.UserName != user.UserName)
-            {
-                // UserName has changed so check if the new UserName is already taken
-                if (_context.Users.Any(x => x.UserName == userData.UserName))
-                    throw new AppException($"Username {userData.UserName} is already taken.");
-            }
-
-            // update user properties
-            user.FirstName = userData.FirstName;
-            user.LastName = userData.LastName;
-            user.UserName = userData.UserName;
-
-            // update password if it was entered
-            if (!string.IsNullOrWhiteSpace(password))
-            {
-                CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
-
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
-            }
-
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
         }
         
-        public async void DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             var user = await _context.Users.FindAsync(id);
-            if (user == null) return;
+            if (user == null)
+                return;
             
             _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
         }
         
         public async Task<bool> UserNameInUseAsync(string userName)

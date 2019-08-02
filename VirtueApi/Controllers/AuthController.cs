@@ -86,16 +86,14 @@ namespace VirtueApi.Controllers
                     
             var user = _mapper.Map<User>(userDto);
             
-            try 
-            {
-                await _unitOfWork.Auth.CreateAsync(user, userDto.Password);
-                return Ok();
-            } 
-            catch(AppException ex)
-            {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
-            }
+            await _unitOfWork.Auth.CreateAsync(user, userDto.Password);
+            
+            if (!await _unitOfWork.Complete()) 
+                return BadRequest($"Could not create user.");
+
+            var userToReturn = _mapper.Map<UserGetDto>(user);
+
+            return StatusCode(201, userToReturn);
         }
 
         [HttpGet("user")]
@@ -110,7 +108,7 @@ namespace VirtueApi.Controllers
         }
         
         [HttpGet("user/id")]
-        public IActionResult GetUserId()
+        public IActionResult GetUserIdDev()
         {
             var userId = this.GetCurrentUserId();
             
@@ -119,16 +117,64 @@ namespace VirtueApi.Controllers
 
 
         [HttpPatch("user")]
-        public IActionResult Update(UserUpdateDto userDto)
+        public async Task<IActionResult> UpdateUser(UserUpdateDto updates)
         {
-            return BadRequest("Not implemented yet");
+            var userId = this.GetCurrentUserId();
+            var toUpdate = await _unitOfWork.Auth.GetByIdAsync(userId);
+            
+            // Update UserName
+            var newUserName = updates.UserName;
+            if (!string.IsNullOrWhiteSpace(newUserName))
+            {
+                // UserName has changed so check if the new UserName is already taken
+                if (await _unitOfWork.Auth.UserNameInUseAsync(newUserName))
+                    return StatusCode(409, "Username already in use.");
+
+                toUpdate.UserName = newUserName;
+            }
+            
+            // Update Email
+            var newEmail = updates.Email;
+            if (!string.IsNullOrWhiteSpace(newEmail))
+            {
+                // Email has changed so check if the new Email is already taken
+                if (await _unitOfWork.Auth.UserNameInUseAsync(newEmail))
+                    return StatusCode(409, "Email already in use.");
+
+                toUpdate.Email = newEmail;
+            }
+            
+            // Update first name and last name
+            var newFirstName = updates.FirstName;
+            if (!string.IsNullOrWhiteSpace(newFirstName))
+                toUpdate.FirstName = newFirstName;
+            var newLastName = updates.LastName;
+            if (!string.IsNullOrWhiteSpace(newLastName))
+                toUpdate.LastName = newLastName;
+            
+            // Update password
+            var newPassword = updates.Password;
+            if (!string.IsNullOrEmpty(newPassword))
+                _unitOfWork.Auth.UpdatePassword(toUpdate, newPassword);
+
+            if (!await _unitOfWork.Complete()) 
+                return BadRequest($"Could not update user {userId}");
+
+            if (!string.IsNullOrWhiteSpace(newPassword))
+                return Challenge();
+            
+            return NoContent();
         }
 
         [HttpDelete("user")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int userId)
         {
-            _unitOfWork.Auth.DeleteAsync(id);
-            return Ok();
+            await _unitOfWork.Auth.DeleteAsync(userId);
+            
+            if (!await _unitOfWork.Complete()) 
+                return BadRequest($"Could not delete user {userId}");
+            
+            return NoContent();
         }
     }
 }
