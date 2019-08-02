@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 // FROM: Mosh Hamedani Repository Tutorial
 // https://github.com/chanson5000/Repository-Pattern-with-Csharp-and-Entity-Framework
-namespace VirtueApi.Services.Repositories
+namespace VirtueApi.Data.Repositories
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

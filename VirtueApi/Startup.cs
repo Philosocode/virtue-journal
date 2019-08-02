@@ -17,9 +17,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using VirtueApi.Data;
+using VirtueApi.Data.Repositories;
 using VirtueApi.Extensions;
-using VirtueApi.Services;
-using VirtueApi.Services.Repositories;
 using VirtueApi.Shared;
 
 namespace VirtueApi

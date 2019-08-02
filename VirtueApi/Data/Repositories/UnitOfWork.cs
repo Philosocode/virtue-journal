@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
-using VirtueApi.Data;
 
-namespace VirtueApi.Services.Repositories
+namespace VirtueApi.Data.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -12,12 +11,12 @@ namespace VirtueApi.Services.Repositories
             _context = context;
             Virtues = new VirtueRepository(_context);
             Entries = new EntryRepository(_context);
-            Auth = new AuthService(_context);
+            Auth = new AuthRepository(_context);
         }
         
         public IVirtueRepository Virtues { get; private set; }
         public IEntryRepository Entries { get; private set; }
-        public IAuthService Auth { get; private set; }
+        public IAuthRepository Auth { get; private set; }
         
         public async Task<bool> Complete()
         {

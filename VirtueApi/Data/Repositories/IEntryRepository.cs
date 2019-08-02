@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using VirtueApi.Data.Entities;
 
-namespace VirtueApi.Services.Repositories
+namespace VirtueApi.Data.Repositories
 {
     public interface IEntryRepository : IGenericRepository<Entry>
     {

@@ -1,12 +1,12 @@
 using System.Threading.Tasks;
 
-namespace VirtueApi.Services.Repositories
+namespace VirtueApi.Data.Repositories
 {
     public interface IUnitOfWork
     {
         IVirtueRepository Virtues { get; }
         IEntryRepository Entries { get; }
-        IAuthService Auth { get; }
+        IAuthRepository Auth { get; }
         Task<bool> Complete();
     }
 }

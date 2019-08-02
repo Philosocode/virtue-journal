@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using VirtueApi.Data;
 using VirtueApi.Data.Dtos;
 using VirtueApi.Data.Entities;
+using VirtueApi.Data.Repositories;
 using VirtueApi.Extensions;
-using VirtueApi.Services.Repositories;
 
 namespace VirtueApi.Controllers
 {

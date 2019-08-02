@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VirtueApi.Data.Entities;
 
-namespace VirtueApi.Services.Repositories
+namespace VirtueApi.Data.Repositories
 {
     public interface IVirtueRepository : IGenericRepository<Virtue>
     {

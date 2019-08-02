@@ -11,15 +11,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using VirtueApi.Data.Dtos;
 using VirtueApi.Data.Entities;
+using VirtueApi.Data.Repositories;
 using VirtueApi.Extensions;
-using VirtueApi.Services;
-using VirtueApi.Services.Repositories;
 using VirtueApi.Shared;
 
 // FROM: https://jasonwatmore.com/post/2018/06/26/aspnet-core-21-simple-api-for-authentication-registration-and-user-management
 namespace VirtueApi.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("/api/auth")]
     public class AuthController : ControllerBase
@@ -35,31 +33,27 @@ namespace VirtueApi.Controllers
             _appSettings = appSettings.Value;
         }
 
-        [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate(UserAuthenticateDto userDto)
         {
+            // Input Validation
             var userName = userDto.UserName.ToLower();
+            var email = userDto.Email.ToLower();
+
+            if (string.IsNullOrWhiteSpace(userName) && string.IsNullOrWhiteSpace(email))
+                return StatusCode(422, "Username or email is required.");
+            
             var password = userDto.Password;
             
-            var user = await _unitOfWork.Auth.AuthenticateAsync(userName, password);
-
+            if (string.IsNullOrWhiteSpace(password))
+                return StatusCode(422, "Password cannot be empty.");
+            
+            var user = await _unitOfWork.Auth.AuthenticateAsync(userName, email, password);
+            
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[] 
-                {
-                    new Claim(ClaimTypes.Name, user.UserId.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            var tokenString = _unitOfWork.Auth.GenerateToken(user.UserId, _appSettings.Secret);
 
             // return basic user info (without password) and token to store client side
             return Ok(new {
@@ -70,7 +64,7 @@ namespace VirtueApi.Controllers
                 Token = tokenString
             });
         }
-
+        
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserCreateDto userDto)
@@ -86,7 +80,7 @@ namespace VirtueApi.Controllers
                     
             var user = _mapper.Map<User>(userDto);
             
-            await _unitOfWork.Auth.CreateAsync(user, userDto.Password);
+            await _unitOfWork.Auth.RegisterAsync(user, userDto.Password);
             
             if (!await _unitOfWork.Complete()) 
                 return BadRequest($"Could not create user.");
@@ -94,87 +88,6 @@ namespace VirtueApi.Controllers
             var userToReturn = _mapper.Map<UserGetDto>(user);
 
             return StatusCode(201, userToReturn);
-        }
-
-        [HttpGet("user")]
-        public async Task<IActionResult> GetCurrentUser()
-        {
-            var userId = this.GetCurrentUserId();
-            
-            var userFromRepo = await _unitOfWork.Auth.GetByIdAsync(userId);
-            var userToReturn = _mapper.Map<UserGetDto>(userFromRepo);
-            
-            return Ok(userToReturn);
-        }
-        
-        [HttpGet("user/id")]
-        public IActionResult GetUserIdDev()
-        {
-            var userId = this.GetCurrentUserId();
-            
-            return Ok(userId);
-        }
-
-
-        [HttpPatch("user")]
-        public async Task<IActionResult> UpdateUser(UserUpdateDto updates)
-        {
-            var userId = this.GetCurrentUserId();
-            var toUpdate = await _unitOfWork.Auth.GetByIdAsync(userId);
-            
-            // Update UserName
-            var newUserName = updates.UserName;
-            if (!string.IsNullOrWhiteSpace(newUserName))
-            {
-                // UserName has changed so check if the new UserName is already taken
-                if (await _unitOfWork.Auth.UserNameInUseAsync(newUserName))
-                    return StatusCode(409, "Username already in use.");
-
-                toUpdate.UserName = newUserName;
-            }
-            
-            // Update Email
-            var newEmail = updates.Email;
-            if (!string.IsNullOrWhiteSpace(newEmail))
-            {
-                // Email has changed so check if the new Email is already taken
-                if (await _unitOfWork.Auth.UserNameInUseAsync(newEmail))
-                    return StatusCode(409, "Email already in use.");
-
-                toUpdate.Email = newEmail;
-            }
-            
-            // Update first name and last name
-            var newFirstName = updates.FirstName;
-            if (!string.IsNullOrWhiteSpace(newFirstName))
-                toUpdate.FirstName = newFirstName;
-            var newLastName = updates.LastName;
-            if (!string.IsNullOrWhiteSpace(newLastName))
-                toUpdate.LastName = newLastName;
-            
-            // Update password
-            var newPassword = updates.Password;
-            if (!string.IsNullOrEmpty(newPassword))
-                _unitOfWork.Auth.UpdatePassword(toUpdate, newPassword);
-
-            if (!await _unitOfWork.Complete()) 
-                return BadRequest($"Could not update user {userId}");
-
-            if (!string.IsNullOrWhiteSpace(newPassword))
-                return Challenge();
-            
-            return NoContent();
-        }
-
-        [HttpDelete("user")]
-        public async Task<IActionResult> Delete(int userId)
-        {
-            await _unitOfWork.Auth.DeleteAsync(userId);
-            
-            if (!await _unitOfWork.Complete()) 
-                return BadRequest($"Could not delete user {userId}");
-            
-            return NoContent();
         }
     }
 }

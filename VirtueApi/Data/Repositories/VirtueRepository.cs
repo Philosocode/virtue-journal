@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using VirtueApi.Data;
 using VirtueApi.Data.Entities;
 
-namespace VirtueApi.Services.Repositories
+namespace VirtueApi.Data.Repositories
 {
     public class VirtueRepository : GenericRepository<Virtue>, IVirtueRepository
     {

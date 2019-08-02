@@ -1,30 +1,31 @@
 using System;
-using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using VirtueApi.Data;
-using VirtueApi.Data.Dtos;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using VirtueApi.Data.Entities;
 using VirtueApi.Shared;
 
-namespace VirtueApi.Services
+namespace VirtueApi.Data.Repositories
 {
     // FROM: https://jasonwatmore.com/post/2018/06/26/aspnet-core-21-simple-api-for-authentication-registration-and-user-management
-    public class AuthService : IAuthService
+    public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
 
-        public AuthService(DataContext context)
+        public AuthRepository(DataContext context)
         {
             _context = context;
         }
         
-        public async Task<User> AuthenticateAsync(string userName, string password)
+        public async Task<User> AuthenticateAsync(string userName, string email, string password)
         {
-            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
-                return null;
-
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == userName);
+            var user = !string.IsNullOrWhiteSpace(userName)
+                ? await _context.Users.SingleOrDefaultAsync(u => u.UserName == userName)
+                : await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
 
             // check if user exists
             if (user == null)
@@ -38,12 +39,22 @@ namespace VirtueApi.Services
             return user;
         }
         
+        public async Task<bool> UserNameInUseAsync(string userName)
+        {
+            return await _context.Users.AnyAsync(u => u.UserName == userName);
+        }
+        
+        public async Task<bool> EmailInUseAsync(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
+        }
+        
         public Task<User> GetByIdAsync(int id)
         {
             return _context.Users.FindAsync(id);
         }
         
-        public async Task<User> CreateAsync(User user, string password)
+        public async Task<User> RegisterAsync(User user, string password)
         {
             CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
 
@@ -73,18 +84,26 @@ namespace VirtueApi.Services
             _context.Users.Remove(user);
         }
         
-        public async Task<bool> UserNameInUseAsync(string userName)
+        public string GenerateToken(int userId, string secret)
         {
-            return await _context.Users.AnyAsync(u => u.UserName == userName);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[] 
+                {
+                    new Claim(ClaimTypes.Name, userId.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            return tokenString;
         }
         
-        public async Task<bool> EmailInUseAsync(string email)
-        {
-            return await _context.Users.AnyAsync(u => u.Email == email);
-        }
-        
-        // private helper methods
-        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             if (password == null) 
                 throw new ArgumentNullException(nameof(password));
@@ -99,7 +118,7 @@ namespace VirtueApi.Services
             }
         }
 
-        private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+        private bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
             if (password == null)
                 throw new ArgumentNullException(nameof(password));
