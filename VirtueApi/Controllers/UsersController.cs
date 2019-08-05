@@ -10,7 +10,7 @@ namespace VirtueApi.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("/api/users")]
+    [Route("/api/user")]
     public class UsersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -22,7 +22,7 @@ namespace VirtueApi.Controllers
             _mapper = mapper;
         }
         
-        [HttpGet("user")]
+        [HttpGet]
         public async Task<IActionResult> GetCurrentUser()
         {
             var userId = this.GetCurrentUserId();
@@ -33,7 +33,7 @@ namespace VirtueApi.Controllers
             return Ok(userToReturn);
         }
         
-        [HttpGet("user/id")]
+        [HttpGet("id")]
         public IActionResult GetUserIdDev()
         {
             var userId = this.GetCurrentUserId();
@@ -41,7 +41,7 @@ namespace VirtueApi.Controllers
             return Ok(userId);
         }
 
-        [HttpPatch("user")]
+        [HttpPatch]
         public async Task<IActionResult> UpdateUser(UserUpdateDto updates)
         {
             var userId = this.GetCurrentUserId();
@@ -93,7 +93,7 @@ namespace VirtueApi.Controllers
             return NoContent();
         }
         
-        [HttpDelete("user")]
+        [HttpDelete]
         // TODO: Make User Delete for admin
         // TODO: What happens after the user deletes their account?
         public async Task<IActionResult> Delete(int userId)

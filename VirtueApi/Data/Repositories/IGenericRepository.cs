@@ -17,5 +17,6 @@ namespace VirtueApi.Data.Repositories
         Task AddAsync(TEntity entity);
 
         void Remove(TEntity entity);
+        void RemoveRange(IEnumerable<TEntity> entities);
     }
 }

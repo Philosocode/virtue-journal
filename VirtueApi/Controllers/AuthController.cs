@@ -37,8 +37,8 @@ namespace VirtueApi.Controllers
         public async Task<IActionResult> Authenticate(UserAuthenticateDto userDto)
         {
             // Input Validation
-            var userName = userDto.UserName.ToLower();
-            var email = userDto.Email.ToLower();
+            var userName = userDto.UserName?.ToLower();
+            var email = userDto.Email?.ToLower();
 
             if (string.IsNullOrWhiteSpace(userName) && string.IsNullOrWhiteSpace(email))
                 return StatusCode(422, "Username or email is required.");

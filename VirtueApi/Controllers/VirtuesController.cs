@@ -80,7 +80,7 @@ namespace VirtueApi.Controllers
             );
         }
         
-        [HttpGet("{virtueId:int}/entries")]
+        [HttpGet("{virtueId}/entries")]
         public async Task<IActionResult> GetEntriesForVirtueAsync(int virtueId)
         {
             var userId = this.GetCurrentUserId();
@@ -128,7 +128,39 @@ namespace VirtueApi.Controllers
             _unitOfWork.Virtues.Remove(virtue);
             
             if (!await _unitOfWork.Complete()) 
-                return BadRequest($"Could not delete virtue {virtueId}");
+                return BadRequest($"Could not delete virtue {virtueId}.");
+            
+            return NoContent();
+        }
+        
+        [HttpDelete("{virtueId}/entries")]
+        public async Task<IActionResult> DeleteEntriesForVirtue(int virtueId)
+        {
+            var userId = this.GetCurrentUserId();
+            
+            if (!await _unitOfWork.Virtues.BelongsToUser(virtueId, userId))
+                return Unauthorized();
+            
+            var entriesForVirtue = _unitOfWork.Entries.GetEntriesByVirtueId(virtueId);
+            
+            _unitOfWork.Entries.RemoveRange(entriesForVirtue);
+            
+            if (!await _unitOfWork.Complete()) 
+                return BadRequest($"Could not delete entries for virtue {virtueId}.");
+            
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAllVirtuesAsync()
+        {
+            var userId = this.GetCurrentUserId();
+            var virtuesToDelete = _unitOfWork.Virtues.GetVirtuesForUser(userId);
+            
+            _unitOfWork.Virtues.RemoveRange(virtuesToDelete);
+            
+            if (!await _unitOfWork.Complete()) 
+                return BadRequest($"Could not delete virtues.");
             
             return NoContent();
         }

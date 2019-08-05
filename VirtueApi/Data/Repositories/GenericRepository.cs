@@ -49,5 +49,10 @@ namespace VirtueApi.Data.Repositories
         {
             _entities.Remove(entity);
         }
+        
+        public void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            _entities.RemoveRange(entities);
+        }
     }
 }

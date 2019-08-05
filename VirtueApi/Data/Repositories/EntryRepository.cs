@@ -26,7 +26,7 @@ namespace VirtueApi.Data.Repositories
                 .AsEnumerable();
         }
         
-        public IEnumerable<Entry> GetAllEntriesForUser(int userId)
+        public IEnumerable<Entry> GetEntriesForUser(int userId)
         {
             return DataContext.Entries
                 .Where(e => e.UserId == userId)

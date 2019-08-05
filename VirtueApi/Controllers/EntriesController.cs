@@ -32,7 +32,7 @@ namespace VirtueApi.Controllers
         {
             var userId = this.GetCurrentUserId();
             
-            var entriesFromRepo = _unitOfWork.Entries.GetAllEntriesForUser(userId);
+            var entriesFromRepo = _unitOfWork.Entries.GetEntriesForUser(userId);
             var entriesToReturn = _mapper.Map<IEnumerable<EntryGetDto>>(entriesFromRepo);
             
             return Ok(entriesToReturn);
@@ -135,6 +135,21 @@ namespace VirtueApi.Controllers
             if (!await _unitOfWork.Complete())
                 return BadRequest($"Could not delete entry {id}");
 
+            return NoContent();
+        }
+        
+        // DELETE api/entries
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAllEntriesAsync()
+        {
+            var userId = this.GetCurrentUserId();
+            var entriesToDelete = _unitOfWork.Entries.GetEntriesForUser(userId);
+            
+            _unitOfWork.Entries.RemoveRange(entriesToDelete);
+            
+            if (!await _unitOfWork.Complete()) 
+                return BadRequest($"Could not delete entries.");
+            
             return NoContent();
         }
 

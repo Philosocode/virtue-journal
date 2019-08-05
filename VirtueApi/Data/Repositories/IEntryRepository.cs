@@ -6,6 +6,6 @@ namespace VirtueApi.Data.Repositories
     public interface IEntryRepository : IGenericRepository<Entry>
     {
         IEnumerable<Entry> GetEntriesByVirtueId(int virtueId);
-        IEnumerable<Entry> GetAllEntriesForUser(int userId);
+        IEnumerable<Entry> GetEntriesForUser(int userId);
     }
 }
