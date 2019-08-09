@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtueJournal.API", "VirtueJournal.API\VirtueJournal.API.csproj", "{86159E1E-4EA1-453F-8898-0B035721A48C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtueJournal.Data", "VirtueJournal.Data\VirtueJournal.Data.csproj", "{63AE198B-07B0-46C0-AAAE-940119352C89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtueJournal.Shared", "VirtueJournal.Shared\VirtueJournal.Shared.csproj", "{04EFB5DE-1F94-408E-879E-788BB16B1E7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86159E1E-4EA1-453F-8898-0B035721A48C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86159E1E-4EA1-453F-8898-0B035721A48C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86159E1E-4EA1-453F-8898-0B035721A48C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86159E1E-4EA1-453F-8898-0B035721A48C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AE198B-07B0-46C0-AAAE-940119352C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AE198B-07B0-46C0-AAAE-940119352C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AE198B-07B0-46C0-AAAE-940119352C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AE198B-07B0-46C0-AAAE-940119352C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04EFB5DE-1F94-408E-879E-788BB16B1E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04EFB5DE-1F94-408E-879E-788BB16B1E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04EFB5DE-1F94-408E-879E-788BB16B1E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04EFB5DE-1F94-408E-879E-788BB16B1E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

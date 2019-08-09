@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="VirtueJournal.API" t="IncludeRecursive">
+        <e p=".gitignore" t="Include" />
+        <e p="app.config" t="Include" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="AuthController.cs" t="Include" />
+          <e p="EntriesController.cs" t="Include" />
+          <e p="UsersController.cs" t="Include" />
+          <e p="VirtuesController.cs" t="Include" />
+        </e>
+        <e p="Middlewares" t="Include">
+          <e p="CustomExceptionMiddleware.cs" t="Include" />
+          <e p="ErrorDetails.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="VirtueJournal.API.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Profiles" t="Include">
+          <e p="EntryProfile.cs" t="Include" />
+          <e p="UserProfile.cs" t="Include" />
+          <e p="VirtueEntryProfile.cs" t="Include" />
+          <e p="VirtueProfile.cs" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="VirtueJournal.API.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="VirtueJournal.Data" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="DataContext.cs" t="Include" />
+        <e p="Dtos" t="Include">
+          <e p="EntryCreateDto.cs" t="Include" />
+          <e p="EntryEditDto.cs" t="Include" />
+          <e p="EntryGetDto.cs" t="Include" />
+          <e p="UserAuthenticateDto.cs" t="Include" />
+          <e p="UserCreateDto.cs" t="Include" />
+          <e p="UserGetDto.cs" t="Include" />
+          <e p="UserUpdateDto.cs" t="Include" />
+          <e p="VirtueCreateDto.cs" t="Include" />
+          <e p="VirtueEditDto.cs" t="Include" />
+          <e p="VirtueEntryCreateDto.cs" t="Include" />
+          <e p="VirtueEntryGetDto.cs" t="Include" />
+          <e p="VirtueGetDto.cs" t="Include" />
+        </e>
+        <e p="Entities" t="Include">
+          <e p="Entry.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+          <e p="Virtue.cs" t="Include" />
+          <e p="VirtueEntry.cs" t="Include" />
+        </e>
+        <e p="Enums" t="Include">
+          <e p="Difficulty.cs" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20190809221152_InitialMigration.cs" t="Include" />
+          <e p="20190809221152_InitialMigration.Designer.cs" t="Include" />
+          <e p="DataContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="VirtueJournal.Data.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="AuthRepository.cs" t="Include" />
+          <e p="EntryRepository.cs" t="Include" />
+          <e p="GenericRepository.cs" t="Include" />
+          <e p="IAuthRepository.cs" t="Include" />
+          <e p="IEntryRepository.cs" t="Include" />
+          <e p="IGenericRepository.cs" t="Include" />
+          <e p="IUnitOfWork.cs" t="Include" />
+          <e p="IVirtueRepository.cs" t="Include" />
+          <e p="UnitOfWork.cs" t="Include" />
+          <e p="VirtueRepository.cs" t="Include" />
+        </e>
+        <e p="VirtueJournal.Data.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="VirtueJournal.Shared" t="IncludeRecursive">
+        <e p="AppException.cs" t="Include" />
+        <e p="AppSettings.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Extensions" t="Include">
+          <e p="ControllerBaseExtensions.cs" t="Include" />
+          <e p="StringExtensions.cs" t="Include" />
+        </e>
+        <e p="HelperMethods.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="VirtueJournal.Shared.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="VirtueJournal.Shared.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="VirtueJournal.sln" t="IncludeFlat" />
+    </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_VirtueJournal.-1137500136.00" t="ExcludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/scratches" t="IncludeRecursive" />
+  </component>
+</project>

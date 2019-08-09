@@ -1,0 +1,14 @@
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/bin/Debug/netcoreapp2.2/VirtueJournal.Data.deps.json
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/bin/Debug/netcoreapp2.2/VirtueJournal.Data.runtimeconfig.json
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/bin/Debug/netcoreapp2.2/VirtueJournal.Data.runtimeconfig.dev.json
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/bin/Debug/netcoreapp2.2/VirtueJournal.Data.dll
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/bin/Debug/netcoreapp2.2/VirtueJournal.Data.pdb
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/bin/Debug/netcoreapp2.2/VirtueJournal.Shared.dll
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/bin/Debug/netcoreapp2.2/VirtueJournal.Shared.pdb
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/obj/Debug/netcoreapp2.2/VirtueJournal.Data.csprojAssemblyReference.cache
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/obj/Debug/netcoreapp2.2/VirtueJournal.Data.csproj.CoreCompileInputs.cache
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/obj/Debug/netcoreapp2.2/VirtueJournal.Data.AssemblyInfoInputs.cache
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/obj/Debug/netcoreapp2.2/VirtueJournal.Data.AssemblyInfo.cs
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/obj/Debug/netcoreapp2.2/VirtueJournal.Data.csproj.CopyComplete
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/obj/Debug/netcoreapp2.2/VirtueJournal.Data.dll
+/Users/eremes/Desktop/virtue-journal/VirtueJournal/VirtueJournal.Data/obj/Debug/netcoreapp2.2/VirtueJournal.Data.pdb
