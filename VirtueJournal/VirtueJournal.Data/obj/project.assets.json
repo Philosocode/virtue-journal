@@ -4527,6 +4527,7 @@
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "6.1.1",
+          "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "2.2.4",
           "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.1"
         },
@@ -12281,6 +12282,7 @@
     ".NETCoreApp,Version=v2.2": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 6.1.1",
       "Microsoft.AspNetCore.App >= 2.2.0",
+      "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 2.2.4",
       "Npgsql.EntityFrameworkCore.PostgreSQL.Design >= 1.1.1",
@@ -12304,7 +12306,7 @@
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/eremes/.nuget/NuGet/NuGet.Config"
+        "/Users/eremes/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
@@ -12339,6 +12341,10 @@
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
+          },
+          "Microsoft.AspNetCore.Razor.Design": {
+            "target": "Package",
+            "version": "[2.2.0, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",

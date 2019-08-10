@@ -39,6 +39,10 @@
           "version": "[2.2.0, )",
           "autoReferenced": true
         },
+        "Microsoft.AspNetCore.Razor.Design": {
+          "target": "Package",
+          "version": "[2.2.0, )"
+        },
         "Microsoft.NETCore.App": {
           "suppressParent": "All",
           "target": "Package",
