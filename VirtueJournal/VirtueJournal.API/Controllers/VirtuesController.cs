@@ -34,6 +34,16 @@ namespace VirtueJournal.API.Controllers
             
             return Ok(virtues);
         }
+
+        [AllowAnonymous]
+        [HttpGet("test")]
+        public IActionResult GetVirtuesDev()
+        {
+            var virtuesFromRepo = _unitOfWork.Virtues.GetVirtuesForUser(1);
+            var virtues = _mapper.Map<IEnumerable<VirtueGetDto>>(virtuesFromRepo);
+            
+            return Ok(virtues);
+        }
         
         [HttpGet("{virtueId}", Name = "GetVirtue")] 
         public async Task<IActionResult> GetVirtueAsync(int virtueId)

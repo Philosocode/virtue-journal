@@ -29,7 +29,16 @@ namespace VirtueJournal.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .SetIsOriginAllowed((host) => true)
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                );
+            });
             services.AddDbContextPool<DataContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     o => o.MigrationsAssembly("VirtueJournal.Data"))
@@ -113,7 +122,7 @@ namespace VirtueJournal.API
             app.UseSpaStaticFiles();
             
             app.UseAuthentication();
-
+            app.UseCors("CorsPolicy");
             app.UseMvc();
             
             app.UseSpa(spa =>
@@ -121,9 +130,7 @@ namespace VirtueJournal.API
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
             });
         }
     }
