@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 // Components
 import { Navbar } from './components/navbar.component';
+import { PrivateRoute } from "./components/private-route";
 
 // Pages
 import { IndexPage } from "./pages/index.page";
@@ -23,28 +24,26 @@ import { NotFoundPage } from "./pages/not-found.page";
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className="o-site-layout">
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={IndexPage} />
-            <Route exact path="/register" component={RegisterPage} />
-            <Route exact path="/login" component={LoginPage} />
-            
-            <Route exact path="/virtues" component={VirtuesPage} />
-            <Route exact path="/virtues/add" component={VirtueAddEditPage} />
-            <Route exact path="/virtues/:virtueId/details" component={VirtueDetailPage} />
-            <Route exact path="/virtues/:virtueId/edit" component={VirtueAddEditPage} />
-            <Route exact path="/virtues/:virtueId/entries" component={EntriesPage} />
+      <div className="o-site-layout">
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={IndexPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/login" component={LoginPage} />
+          
+          <PrivateRoute exact path="/virtues" component={VirtuesPage} />
+          <PrivateRoute exact path="/virtues/add" component={VirtueAddEditPage} />
+          <PrivateRoute exact path="/virtues/:virtueId/details" component={VirtueDetailPage} />
+          <PrivateRoute exact path="/virtues/:virtueId/edit" component={VirtueAddEditPage} />
+          <PrivateRoute exact path="/virtues/:virtueId/entries" component={EntriesPage} />
 
-            <Route exact path="/entries/:entryId" component={EntryDetailPage} />
-            <Route exact path="/entries/:entryId/edit" component={EntryAddEditPage} />
+          <PrivateRoute exact path="/entries/:entryId" component={EntryDetailPage} />
+          <PrivateRoute exact path="/entries/:entryId/edit" component={EntryAddEditPage} />
 
-            <Route exact path="/settings" component={SettingsPage} />
-            <Route component={NotFoundPage} />
-          </Switch>
-        </div>
-      </BrowserRouter>
+          <PrivateRoute exact path="/settings" component={SettingsPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </div>
     )
   }
 };
