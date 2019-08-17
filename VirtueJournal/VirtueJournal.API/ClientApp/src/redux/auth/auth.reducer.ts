@@ -1,4 +1,4 @@
-import { AuthTypes, AuthAction, AuthState, User } from "./auth.types";
+import { AuthConstants, AuthAction, AuthState, User } from "./auth.types";
 
 let user;
 const userJson = localStorage.getItem("user");
@@ -12,17 +12,17 @@ const initialState: AuthState = user
 
 export const authReducer = (state = initialState, action: AuthAction) => {
   switch (action.type) {
-    case AuthTypes.LOGIN_SUCCESS:
+    case AuthConstants.LOGIN_SUCCESS:
       return {
         isLoggedIn: true,
         user: action.payload
       };
-    case AuthTypes.LOGIN_FAILURE:
+    case AuthConstants.LOGIN_FAILURE:
       return {
         isLoggedIn: false,
         user: null
       };
-    case AuthTypes.LOGOUT:
+    case AuthConstants.LOGOUT:
       return {
         isLoggedIn: false,
         user: null

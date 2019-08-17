@@ -1,10 +1,10 @@
-import { GetErrorsAction, ClearErrorsAction, ErrorConstants } from "./error.types";
+import { SetErrorAction, ClearErrorAction, ErrorConstants } from "./error.types";
 
-export const getErrors = (errorMessage: string): GetErrorsAction => ({
-  type: ErrorConstants.GET_ERRORS,
+export const setError = (errorMessage: string): SetErrorAction => ({
+  type: ErrorConstants.SET_ERROR,
   payload: errorMessage
 });
 
-export const stopLoading = (): ClearErrorsAction => ({
-  type: ErrorConstants.CLEAR_ERRORS
+export const clearError = (): ClearErrorAction => ({
+  type: ErrorConstants.CLEAR_ERROR
 });

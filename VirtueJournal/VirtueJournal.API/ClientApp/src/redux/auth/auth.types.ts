@@ -1,4 +1,4 @@
-export enum AuthTypes {
+export enum AuthConstants {
   LOGIN_SUCCESS = "LOGIN_SUCCESS",
   LOGIN_FAILURE = "LOGIN_FAILURE",
   LOGOUT = "LOGOUT"
@@ -6,10 +6,18 @@ export enum AuthTypes {
 
 export interface User {
   userId: number,
-  userName: string,
+  username: string,
   firstName: string,
   lastName: string,
   token: string
+}
+
+export interface UserForRegister {
+  firstName: string,
+  lastName: string,
+  email: string,
+  username: string,
+  password: string
 }
 
 export interface AuthState {
@@ -18,17 +26,16 @@ export interface AuthState {
 }
 
 export interface LoginSuccessAction {
-  type: AuthTypes.LOGIN_SUCCESS;
+  type: AuthConstants.LOGIN_SUCCESS;
   payload: any;
 }
 
 export interface LoginFailureAction {
-  type: AuthTypes.LOGIN_FAILURE,
-  payload: any
+  type: AuthConstants.LOGIN_FAILURE
 }
 
 export interface LogoutAction {
-  type: AuthTypes.LOGOUT;
+  type: AuthConstants.LOGOUT;
 }
 
 export type AuthAction = LoginSuccessAction | LoginFailureAction | LogoutAction;

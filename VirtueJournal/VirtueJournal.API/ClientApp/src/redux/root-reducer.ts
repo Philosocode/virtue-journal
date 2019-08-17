@@ -9,7 +9,7 @@ import { loadingReducer } from "./loading";
 export const rootReducer = combineReducers({
   auth: authReducer,
   // entries: entryReducer,
-  errors: errorReducer,
+  error: errorReducer,
   loading: loadingReducer,
   // virtues: virtueReducer,
 });

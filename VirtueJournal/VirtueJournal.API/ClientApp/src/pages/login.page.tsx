@@ -29,16 +29,10 @@ class _LoginPage extends Component<LoginPageProps> {
   handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
-    const { error, username, password } = this.state;
-
-    if (error) this.setState({ error });
+    const { username, password } = this.state;
 
     this.props.loginUser(username, password)
-      .then((res: any) => {
-        console.log(this.props.auth.isLoggedIn);
-        console.log(this.props.auth.currentUser);
-      })
-      .catch((err: Error) => console.log("ERROR:", err));
+      .catch((err: Error) => this.setState({ error: err.message }));
   }
 
   render() {
@@ -49,7 +43,6 @@ class _LoginPage extends Component<LoginPageProps> {
       <div>
         { isLoggedIn && <Redirect to="/virtues" /> }
         <h1>Login Page</h1>
-        { isLoading && <h2>Loading...</h2>}
         <form className="form" onSubmit={this.handleSubmit}>
 
           <div className="form__group">
@@ -86,6 +79,7 @@ class _LoginPage extends Component<LoginPageProps> {
 
           <button className="button" type="submit">Login</button>
           <div className="error error--server">{this.state.error}</div>
+          { isLoading && <p>Loading...</p>}
         </form>
       </div>
     )

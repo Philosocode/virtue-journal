@@ -9,11 +9,11 @@ export const errorReducer = function(
   action: ErrorAction
 ): ErrorState {
   switch (action.type) {
-    case ErrorConstants.GET_ERRORS:
+    case ErrorConstants.SET_ERROR:
       return {
         errorMessage: action.payload
       };
-    case ErrorConstants.CLEAR_ERRORS:
+    case ErrorConstants.CLEAR_ERROR:
       return {
         errorMessage: ""
       };

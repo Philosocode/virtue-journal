@@ -2,44 +2,49 @@ import axios from "axios";
 import { Dispatch } from "redux";
 
 import {
-  AuthTypes,
+  AuthConstants,
   LoginSuccessAction,
   LoginFailureAction,
-  LogoutAction
+  LogoutAction,
+  UserForRegister
 } from "./auth.types";
 
 import { startLoading, stopLoading } from "../loading";
 
-export const loginUser = (username: string, password: string) => {
-  return async (dispatch: Dispatch) => {
-    startLoading();
+const ROOT_URL = "api/auth";
 
-    const loginData = { username, password };
+export const registerUser = async (user: UserForRegister) => {
+  return axios.post(`${ROOT_URL}/register`, user);
+}
 
-    try {
-      const userData = await axios.post(`api/auth/authenticate`, loginData);
+export const loginUser = (username: string, password: string) => async (
+  dispatch: Dispatch
+) => {
+  dispatch(startLoading());
 
-      // store user details and jwt token in local storage
-      // to keep user logged in between page refreshes
-      localStorage.setItem("user", JSON.stringify(userData));
+  const loginData = { username, password };
 
-      dispatch<LoginSuccessAction>({
-        type: AuthTypes.LOGIN_SUCCESS,
-        payload: userData
-      });
-    } catch (err) {
-      dispatch<LoginFailureAction>({
-        type: AuthTypes.LOGIN_FAILURE,
-        payload: err
-      });
-    } finally {
-      stopLoading();
-    }
-  };
+  try {
+    const userData = await axios.post(`${ROOT_URL}/authenticate`, loginData);
+
+    // store user details and jwt token in local storage
+    // to keep user logged in between page refreshes
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    dispatch<LoginSuccessAction>({
+      type: AuthConstants.LOGIN_SUCCESS,
+      payload: userData
+    });
+  } catch (err) {
+    dispatch<LoginFailureAction>({ type: AuthConstants.LOGIN_FAILURE });
+    throw new Error(err);
+  } finally {
+    dispatch(stopLoading());
+  }
 };
 
 export const logoutUser = (): LogoutAction => {
   localStorage.removeItem("user");
 
-  return { type: AuthTypes.LOGOUT };
+  return { type: AuthConstants.LOGOUT };
 };

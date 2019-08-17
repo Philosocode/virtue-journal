@@ -15,45 +15,57 @@
           <e p="node_modules" t="Include">
             <e p=".cache" t="Include">
               <e p="babel-loader" t="Include">
-                <e p="0c779e59d3daafb75f35b229210eacf6.json" t="Include" />
-                <e p="1096a1a6841bf523126994ef9832ee9d.json" t="Include" />
-                <e p="1160e33ce5bbc1f136db90cea98f42d0.json" t="Include" />
-                <e p="16b8856ddf7c8354bc6a70bdc3d3974a.json" t="Include" />
-                <e p="1abacc82b3209f395bc3b8409eda37fd.json" t="Include" />
-                <e p="1ae62248d6df19fce4982f9edff0d586.json" t="Include" />
-                <e p="1d256ca366de87ae7890f66b4c7a4dfe.json" t="Include" />
-                <e p="1dab43d9d8ddb16a973027389c3c14ee.json" t="Include" />
-                <e p="204cb2d36929b6e826b9653efa4d64d0.json" t="Include" />
-                <e p="2c0f111246027360b2b6f5074d1da26f.json" t="Include" />
-                <e p="31173cbccf5ed8386d75b103c25b0e23.json" t="Include" />
-                <e p="382d680c33b0b0c4201ed29c34c8e672.json" t="Include" />
-                <e p="38bfb711f3950eb11d7073d676a5b325.json" t="Include" />
-                <e p="39d2e02356ce689ca06af80ff26698c6.json" t="Include" />
-                <e p="570ee8135d9bca2b2f5a9951920ccdec.json" t="Include" />
-                <e p="57fc78ecb6e468eb23feadc1863bef67.json" t="Include" />
-                <e p="5ac940ec630c7904f7ff8ab8dec7526e.json" t="Include" />
-                <e p="5b3232d57c79924ac84e56e4f57a7506.json" t="Include" />
-                <e p="620b202a9c8de1b3f172723ef4499d69.json" t="Include" />
-                <e p="675489c79fe876d63d0b663dd36ae274.json" t="Include" />
-                <e p="73eeadb785d2693220ae77905aa5eb3a.json" t="Include" />
-                <e p="74f2e5ab28d74352a8589766489e386e.json" t="Include" />
-                <e p="7b8195ebd7ae78d202cc1db85329491b.json" t="Include" />
-                <e p="94382dddbe127c140ad6189e5443c04f.json" t="Include" />
-                <e p="952d536dc3b4548f312e57a131b1cdfa.json" t="Include" />
-                <e p="99f6a5fb1918522f400c44b67c679da6.json" t="Include" />
-                <e p="9a121f0da3eba8dff979ebb36d6ab585.json" t="Include" />
-                <e p="a0bf43c87993c8331e71242b23c0bef4.json" t="Include" />
-                <e p="a21d2131e21acf5f71dc381d6f41b21d.json" t="Include" />
-                <e p="af3b09b71b7592c74d53755764fc74ff.json" t="Include" />
-                <e p="c3cf2fff98524a8a2c67a7f68ab55199.json" t="Include" />
-                <e p="cb085299ea998d2b5470063dd660ba1f.json" t="Include" />
-                <e p="d4733b8aa743d657084f33dcde23713c.json" t="Include" />
-                <e p="d627b0436316b9ecdac07b611a76a6b8.json" t="Include" />
-                <e p="d724b76fc6119e02a5583614de516e3a.json" t="Include" />
-                <e p="d9fd59b0bd251a9fa33db720a691c463.json" t="Include" />
-                <e p="e3dfe5be2e313f82d3f00be71b1c2f1f.json" t="Include" />
-                <e p="eabc009bb1f9a9ae994d22059f2a4db7.json" t="Include" />
-                <e p="ecae227884e7d2669d64de2b7bec7aec.json" t="Include" />
+                <e p="0a80a3b6169f659262635147398bd0e0.json" t="Include" />
+                <e p="105cefe85cb59bd2845d52c9d2917117.json" t="Include" />
+                <e p="191485d0b1351f43302fa6f84fe1a344.json" t="Include" />
+                <e p="2ca3a9012df1740100ff1d28a2bdc687.json" t="Include" />
+                <e p="3f6c6c1e6954b3f84b67024f89226765.json" t="Include" />
+                <e p="3fb0b72608e7776209b1571b1ea41fcf.json" t="Include" />
+                <e p="44fc7ab51e55d42816a3674a2b569ab7.json" t="Include" />
+                <e p="48c92881dd4b310a5fd16bad81f1b0be.json" t="Include" />
+                <e p="49970c1248eba4af2665b1ddb4aa87de.json" t="Include" />
+                <e p="4cbb4452c34a36bc46af926334db1cdd.json" t="Include" />
+                <e p="504d773b7a31a552f16897f065e2e7a2.json" t="Include" />
+                <e p="52498cb3c241da6a6ad99c2309efb56b.json" t="Include" />
+                <e p="524a6bab61c92fdd17780680464cc116.json" t="Include" />
+                <e p="584ab31584a8fbc36f3b6ca081ef681e.json" t="Include" />
+                <e p="5d22b97b92bed23e10b19fcee00352cb.json" t="Include" />
+                <e p="6a5e281885f54f9141cedca94442858c.json" t="Include" />
+                <e p="71fe6027a4441e09f528be3c34eff835.json" t="Include" />
+                <e p="744a4d62bde4514b383a69b18bfad4f9.json" t="Include" />
+                <e p="7dde6b647747c27a4c9c1907416c5732.json" t="Include" />
+                <e p="8a2d05da186806d3dc247fa91df0aace.json" t="Include" />
+                <e p="8ace3bdfc48bbb03f2c80f356a505d0f.json" t="Include" />
+                <e p="8dc54b493bb8782f330c4030c2e2e334.json" t="Include" />
+                <e p="8ecc28db530f6aedef162556850c6aee.json" t="Include" />
+                <e p="95d4f7543610c3560d76773041d634d3.json" t="Include" />
+                <e p="9d5ec528d167dcd49855f6b5461023f0.json" t="Include" />
+                <e p="a0a19823b51e0c7f904ded68975aaf2f.json" t="Include" />
+                <e p="a3d54ba12f59d57dc5025d1c3159a110.json" t="Include" />
+                <e p="a6816fd5e24eed13827fb01db344e0a2.json" t="Include" />
+                <e p="a99fef15ae41198919f6024199b53a7e.json" t="Include" />
+                <e p="aea191283868b1be67c2990d2a9e7bd8.json" t="Include" />
+                <e p="aef4af276c219e32e84c49a684a29be3.json" t="Include" />
+                <e p="c00512b2930aafa0410bc74e0053cd95.json" t="Include" />
+                <e p="c3db15f376ec33f7515c16704ab16849.json" t="Include" />
+                <e p="c418083eaaebd109c031f6a12055e6b8.json" t="Include" />
+                <e p="c87c8ff300cc435261f6e5f7bb39ab51.json" t="Include" />
+                <e p="d263f2a86895bb64c1b9f470224be23c.json" t="Include" />
+                <e p="d6c553926f2ff1641b96c9ed4f92bd4d.json" t="Include" />
+                <e p="d706c13d93095fe47ae967414bb56f3d.json" t="Include" />
+                <e p="d7365418578aeca23f177c5dcf5bd59a.json" t="Include" />
+                <e p="dc536ae7351385749c88e988306f79b6.json" t="Include" />
+                <e p="e29b7542a5c43054acb021086f73758b.json" t="Include" />
+                <e p="e6c168c98142fd4b3b3a5f0c88f8e3db.json" t="Include" />
+                <e p="e8a2fe182ddc578329878861af37a9cb.json" t="Include" />
+                <e p="ec7db0515ca88bef2d607abc4a8851ac.json" t="Include" />
+                <e p="edc27e411dacb73a7bdb738dc3fb07d1.json" t="Include" />
+                <e p="ee07ed13e4a76bc1284e72cf9e829573.json" t="Include" />
+                <e p="f0970bec22c876b338bf07fea4eecef3.json" t="Include" />
+                <e p="f2480f4c70f007804641b1492ab6251f.json" t="Include" />
+                <e p="f29835e9b1c90bce22a94374a223c8c5.json" t="Include" />
+                <e p="f7980dee62c378c9a7d64911d886b82b.json" t="Include" />
+                <e p="fba771cd7678a4fd37c40c13366ba449.json" t="Include" />
               </e>
             </e>
             <e p="@babel/parser" t="IncludeRecursive" />
@@ -82,6 +94,7 @@
               <e p="react-redux" t="IncludeRecursive" />
               <e p="react-router" t="IncludeRecursive" />
               <e p="react-router-dom" t="IncludeRecursive" />
+              <e p="redux-logger" t="IncludeRecursive" />
             </e>
             <e p="axios" t="IncludeRecursive" />
             <e p="babel-jest" t="IncludeRecursive" />
@@ -108,7 +121,10 @@
             <e p="react-scripts" t="IncludeRecursive" />
             <e p="realpath-native" t="IncludeRecursive" />
             <e p="redux" t="IncludeRecursive" />
+            <e p="redux-devtools-extension" t="IncludeRecursive" />
+            <e p="redux-logger" t="IncludeRecursive" />
             <e p="redux-thunk" t="IncludeRecursive" />
+            <e p="reselect" t="IncludeRecursive" />
             <e p="rxjs" t="IncludeRecursive" />
             <e p="source-map" t="IncludeRecursive" />
             <e p="symbol-observable" t="IncludeRecursive" />
@@ -126,18 +142,66 @@
           </e>
           <e p="README.md" t="Include" />
           <e p="src" t="Include">
-            <e p="App.test.tsx" t="Include" />
             <e p="App.tsx" t="Include" />
+            <e p="components" t="Include">
+              <e p="navbar.component.tsx" t="Include" />
+              <e p="private-route.tsx" t="Include" />
+            </e>
             <e p="index.tsx" t="Include" />
             <e p="logo.svg" t="Include" />
             <e p="Pages" t="Include">
-              <e p="dashboard-page" t="Include">
-                <e p="dashboard-page.component.tsx" t="Include" />
-              </e>
+              <e p="entries.page.tsx" t="Include" />
+              <e p="entry-add-edit.page.tsx" t="Include" />
+              <e p="entry-detail.page.tsx" t="Include" />
+              <e p="index.page.tsx" t="Include" />
+              <e p="login.page.tsx" t="Include" />
+              <e p="not-found.page.tsx" t="Include" />
+              <e p="register.page.tsx" t="Include" />
+              <e p="settings.page.tsx" t="Include" />
+              <e p="virtue-add-edit.page.tsx" t="Include" />
+              <e p="virtue-detail.page.tsx" t="Include" />
+              <e p="virtues.page.tsx" t="Include" />
             </e>
             <e p="react-app-env.d.ts" t="Include" />
+            <e p="redux" t="Include">
+              <e p="auth" t="Include">
+                <e p="auth.actions.ts" t="Include" />
+                <e p="auth.reducer.ts" t="Include" />
+                <e p="auth.types.ts" t="Include" />
+                <e p="index.ts" t="Include" />
+              </e>
+              <e p="entry" t="Include">
+                <e p="entry.actions.ts" t="Include" />
+                <e p="entry.reducer.ts" t="Include" />
+                <e p="entry.types.ts" t="Include" />
+                <e p="index.ts" t="Include" />
+              </e>
+              <e p="error" t="Include">
+                <e p="error.actions.ts" t="Include" />
+                <e p="error.reducer.ts" t="Include" />
+                <e p="error.types.ts" t="Include" />
+                <e p="index.ts" t="Include" />
+              </e>
+              <e p="loading" t="Include">
+                <e p="index.ts" t="Include" />
+                <e p="loading.actions.ts" t="Include" />
+                <e p="loading.reducer.ts" t="Include" />
+                <e p="loading.types.ts" t="Include" />
+              </e>
+              <e p="root-reducer.ts" t="Include" />
+              <e p="store.ts" t="Include" />
+              <e p="virtue" t="Include">
+                <e p="index.ts" t="Include" />
+                <e p="virtue.actions.ts" t="Include" />
+                <e p="virtue.reducer.ts" t="Include" />
+                <e p="virtue.types.ts" t="Include" />
+              </e>
+            </e>
             <e p="serviceWorker.ts" t="Include" />
             <e p="styles" t="Include">
+              <e p="components" t="Include">
+                <e p="_components.navbar.scss" t="Include" />
+              </e>
               <e p="generics" t="Include">
                 <e p="_generics.base.scss" t="Include" />
               </e>

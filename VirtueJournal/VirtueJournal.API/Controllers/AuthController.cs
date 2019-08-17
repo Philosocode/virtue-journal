@@ -62,7 +62,7 @@ namespace VirtueJournal.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserCreateDto userDto)
         {
-            userDto.UserName = userDto.FirstName.ToLower();
+            userDto.UserName = userDto.UserName.ToLower();
             userDto.Email = userDto.Email.ToLower();
             
             if (await _unitOfWork.Auth.UserNameInUseAsync(userDto.UserName))

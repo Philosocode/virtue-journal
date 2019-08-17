@@ -3,17 +3,17 @@ export interface ErrorState {
 }
 
 export enum ErrorConstants {
-  GET_ERRORS = "GET_ERRORS",
-  CLEAR_ERRORS = "CLEAR_ERRORS"
+  SET_ERROR = "SET_ERROR",
+  CLEAR_ERROR = "CLEAR_ERROR"
 }
 
-export interface GetErrorsAction {
-  type: ErrorConstants.GET_ERRORS,
+export interface SetErrorAction {
+  type: ErrorConstants.SET_ERROR,
   payload: string
 }
 
-export interface ClearErrorsAction {
-  type: ErrorConstants.CLEAR_ERRORS;
+export interface ClearErrorAction {
+  type: ErrorConstants.CLEAR_ERROR;
 }
 
-export type ErrorAction = GetErrorsAction | ClearErrorsAction;
+export type ErrorAction = SetErrorAction | ClearErrorAction;
