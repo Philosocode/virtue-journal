@@ -1,7 +1,20 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from 'react-redux';
 
-class Navbar extends Component {
+import { AppState } from "../redux/store";
+import { logoutUser } from "../redux/auth";
+
+interface NavbarProps {
+  logoutUser: typeof logoutUser
+}
+
+class _Navbar extends Component<NavbarProps> {
+  handleLogout = (evt: React.SyntheticEvent) => {
+    evt.preventDefault();
+    this.props.logoutUser();
+  };
+
   render() {
     return (
       <header>
@@ -23,6 +36,9 @@ class Navbar extends Component {
               <NavLink className="c-navbar__link"  activeClassName="c-navbar__link--is-active"
                 to="/register">Register</NavLink>
             </li>
+            <li className="c-navbar__list-item">
+              <a href="/logout" onClick={this.handleLogout} className="c-navbar__link">Logout</a>
+            </li>
           </ul>
         </nav>
       </header>
@@ -30,4 +46,12 @@ class Navbar extends Component {
   }
 }
 
-export { Navbar };
+const mapStateToProps = (state: AppState) => ({
+  auth: state.auth
+});
+
+export const Navbar = connect(
+  mapStateToProps,
+  { logoutUser }
+)(_Navbar);
+ 
