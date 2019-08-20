@@ -25,9 +25,10 @@ export interface AuthState {
   isLoggedIn: boolean
 }
 
+/* ACTIONS */
 export interface LoginSuccessAction {
   type: AuthConstants.LOGIN_SUCCESS;
-  payload: any;
+  payload: User;
 }
 
 export interface LoginFailureAction {

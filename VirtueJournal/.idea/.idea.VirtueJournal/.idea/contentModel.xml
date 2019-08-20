@@ -15,57 +15,29 @@
           <e p="node_modules" t="Include">
             <e p=".cache" t="Include">
               <e p="babel-loader" t="Include">
-                <e p="0a80a3b6169f659262635147398bd0e0.json" t="Include" />
-                <e p="105cefe85cb59bd2845d52c9d2917117.json" t="Include" />
-                <e p="191485d0b1351f43302fa6f84fe1a344.json" t="Include" />
-                <e p="2ca3a9012df1740100ff1d28a2bdc687.json" t="Include" />
-                <e p="3f6c6c1e6954b3f84b67024f89226765.json" t="Include" />
-                <e p="3fb0b72608e7776209b1571b1ea41fcf.json" t="Include" />
-                <e p="44fc7ab51e55d42816a3674a2b569ab7.json" t="Include" />
-                <e p="48c92881dd4b310a5fd16bad81f1b0be.json" t="Include" />
-                <e p="49970c1248eba4af2665b1ddb4aa87de.json" t="Include" />
-                <e p="4cbb4452c34a36bc46af926334db1cdd.json" t="Include" />
-                <e p="504d773b7a31a552f16897f065e2e7a2.json" t="Include" />
-                <e p="52498cb3c241da6a6ad99c2309efb56b.json" t="Include" />
-                <e p="524a6bab61c92fdd17780680464cc116.json" t="Include" />
-                <e p="584ab31584a8fbc36f3b6ca081ef681e.json" t="Include" />
-                <e p="5d22b97b92bed23e10b19fcee00352cb.json" t="Include" />
-                <e p="6a5e281885f54f9141cedca94442858c.json" t="Include" />
-                <e p="71fe6027a4441e09f528be3c34eff835.json" t="Include" />
-                <e p="744a4d62bde4514b383a69b18bfad4f9.json" t="Include" />
-                <e p="7dde6b647747c27a4c9c1907416c5732.json" t="Include" />
-                <e p="8a2d05da186806d3dc247fa91df0aace.json" t="Include" />
-                <e p="8ace3bdfc48bbb03f2c80f356a505d0f.json" t="Include" />
-                <e p="8dc54b493bb8782f330c4030c2e2e334.json" t="Include" />
-                <e p="8ecc28db530f6aedef162556850c6aee.json" t="Include" />
-                <e p="95d4f7543610c3560d76773041d634d3.json" t="Include" />
-                <e p="9d5ec528d167dcd49855f6b5461023f0.json" t="Include" />
-                <e p="a0a19823b51e0c7f904ded68975aaf2f.json" t="Include" />
-                <e p="a3d54ba12f59d57dc5025d1c3159a110.json" t="Include" />
-                <e p="a6816fd5e24eed13827fb01db344e0a2.json" t="Include" />
-                <e p="a99fef15ae41198919f6024199b53a7e.json" t="Include" />
-                <e p="aea191283868b1be67c2990d2a9e7bd8.json" t="Include" />
-                <e p="aef4af276c219e32e84c49a684a29be3.json" t="Include" />
-                <e p="c00512b2930aafa0410bc74e0053cd95.json" t="Include" />
-                <e p="c3db15f376ec33f7515c16704ab16849.json" t="Include" />
-                <e p="c418083eaaebd109c031f6a12055e6b8.json" t="Include" />
-                <e p="c87c8ff300cc435261f6e5f7bb39ab51.json" t="Include" />
-                <e p="d263f2a86895bb64c1b9f470224be23c.json" t="Include" />
-                <e p="d6c553926f2ff1641b96c9ed4f92bd4d.json" t="Include" />
-                <e p="d706c13d93095fe47ae967414bb56f3d.json" t="Include" />
-                <e p="d7365418578aeca23f177c5dcf5bd59a.json" t="Include" />
-                <e p="dc536ae7351385749c88e988306f79b6.json" t="Include" />
-                <e p="e29b7542a5c43054acb021086f73758b.json" t="Include" />
-                <e p="e6c168c98142fd4b3b3a5f0c88f8e3db.json" t="Include" />
-                <e p="e8a2fe182ddc578329878861af37a9cb.json" t="Include" />
-                <e p="ec7db0515ca88bef2d607abc4a8851ac.json" t="Include" />
-                <e p="edc27e411dacb73a7bdb738dc3fb07d1.json" t="Include" />
-                <e p="ee07ed13e4a76bc1284e72cf9e829573.json" t="Include" />
-                <e p="f0970bec22c876b338bf07fea4eecef3.json" t="Include" />
-                <e p="f2480f4c70f007804641b1492ab6251f.json" t="Include" />
-                <e p="f29835e9b1c90bce22a94374a223c8c5.json" t="Include" />
-                <e p="f7980dee62c378c9a7d64911d886b82b.json" t="Include" />
-                <e p="fba771cd7678a4fd37c40c13366ba449.json" t="Include" />
+                <e p="19e431a10e0457cb14b0cce8206a54fe.json" t="Include" />
+                <e p="24c282cff393a8b44e5840443a0d7bdc.json" t="Include" />
+                <e p="275d8a59e0232eebf7ce606cbc52af66.json" t="Include" />
+                <e p="30be2bae5abcfeb6336c10b259f7063b.json" t="Include" />
+                <e p="39c601df30456acad512772d32cf47e5.json" t="Include" />
+                <e p="3d523ca0d37139550dff5a9906d1cca2.json" t="Include" />
+                <e p="3d92c5c13ef8ed9780902b55b0048447.json" t="Include" />
+                <e p="4351ca8ef207fb22ae071e0d9115c646.json" t="Include" />
+                <e p="48455ad5997afd4f641e2ba75c3f60cd.json" t="Include" />
+                <e p="4d4411afc902597a15e8deb1200bdf4d.json" t="Include" />
+                <e p="5b59ea8ba0d03c32f2ebff9f48459860.json" t="Include" />
+                <e p="5f8bdd7fd152a57ce0095cf1dc752df3.json" t="Include" />
+                <e p="794b03af3b4359c1e53d9b8ec8402e49.json" t="Include" />
+                <e p="8064c134e1caa10a9977a1a5be8f7da6.json" t="Include" />
+                <e p="817a1ed6e0146f06f1b0deb54b91eb7c.json" t="Include" />
+                <e p="8d882555bdf96436a35bb881cef8b5d0.json" t="Include" />
+                <e p="a990af374ce39d269f9a7e747d314a09.json" t="Include" />
+                <e p="ac739830b6c437bdf61fc8388cd5f0dd.json" t="Include" />
+                <e p="b0593970dbb2cc24f3e3960c209617b1.json" t="Include" />
+                <e p="bd17da24aa0b714a07999549dceb92d4.json" t="Include" />
+                <e p="ca7c1939a3f28e81923394af281aeb77.json" t="Include" />
+                <e p="cfe75ef276fba72c007e25c8aae706b5.json" t="Include" />
+                <e p="d36ab314b54d6b1d55c1a8898c4c259c.json" t="Include" />
               </e>
             </e>
             <e p="@babel/parser" t="IncludeRecursive" />
@@ -146,6 +118,13 @@
             <e p="components" t="Include">
               <e p="navbar.component.tsx" t="Include" />
               <e p="private-route.tsx" t="Include" />
+              <e p="shared" t="Include">
+                <e p="link-button.tsx" t="Include" />
+              </e>
+              <e p="virtue.tsx" t="Include" />
+            </e>
+            <e p="helpers" t="Include">
+              <e p="get-auth-header.ts" t="Include" />
             </e>
             <e p="index.tsx" t="Include" />
             <e p="logo.svg" t="Include" />
@@ -158,7 +137,7 @@
               <e p="not-found.page.tsx" t="Include" />
               <e p="register.page.tsx" t="Include" />
               <e p="settings.page.tsx" t="Include" />
-              <e p="virtue-add-edit.page.tsx" t="Include" />
+              <e p="virtue-create.page.tsx" t="Include" />
               <e p="virtue-detail.page.tsx" t="Include" />
               <e p="virtues.page.tsx" t="Include" />
             </e>
@@ -201,6 +180,7 @@
             <e p="styles" t="Include">
               <e p="components" t="Include">
                 <e p="_components.navbar.scss" t="Include" />
+                <e p="_components.virtue.scss" t="Include" />
               </e>
               <e p="generics" t="Include">
                 <e p="_generics.base.scss" t="Include" />

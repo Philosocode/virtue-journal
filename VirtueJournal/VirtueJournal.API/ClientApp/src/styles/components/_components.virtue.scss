@@ -1,0 +1,27 @@
+.c-virtue {
+  border: 1px solid #000;
+  cursor: pointer;
+  margin: 0 auto;
+  padding: 1rem 3rem;
+  text-align: left;
+  width: 50rem;
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  &__create-button {
+    cursor: pointer;
+    height: 3rem;
+    margin-bottom: 3rem;
+    width: 10rem;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+
+  &__metadata {
+    font-size: 1.2rem;
+  }
+}

@@ -26,10 +26,10 @@ namespace VirtueJournal.API.Controllers
         }
         
         [HttpGet]
-        public IActionResult GetVirtues()
+        public async Task<IActionResult> GetVirtues()
         {
             var userId = this.GetCurrentUserId();
-            var virtuesFromRepo = _unitOfWork.Virtues.GetVirtuesForUser(userId);
+            var virtuesFromRepo = await _unitOfWork.Virtues.GetVirtuesForUserAsync(userId);
             var virtues = _mapper.Map<IEnumerable<VirtueGetDto>>(virtuesFromRepo);
             
             return Ok(virtues);
@@ -39,7 +39,7 @@ namespace VirtueJournal.API.Controllers
         [HttpGet("test")]
         public IActionResult GetVirtuesDev()
         {
-            var virtuesFromRepo = _unitOfWork.Virtues.GetVirtuesForUser(1);
+            var virtuesFromRepo = _unitOfWork.Virtues.GetVirtuesForUserAsync(1);
             var virtues = _mapper.Map<IEnumerable<VirtueGetDto>>(virtuesFromRepo);
             
             return Ok(virtues);
@@ -159,7 +159,7 @@ namespace VirtueJournal.API.Controllers
         public async Task<IActionResult> DeleteAllVirtuesAsync()
         {
             var userId = this.GetCurrentUserId();
-            var virtuesToDelete = _unitOfWork.Virtues.GetVirtuesForUser(userId);
+            var virtuesToDelete = await _unitOfWork.Virtues.GetVirtuesForUserAsync(userId);
             
             _unitOfWork.Virtues.RemoveRange(virtuesToDelete);
             

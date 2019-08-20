@@ -55,6 +55,7 @@ class _RegisterPage extends Component<RegisterPageProps> {
       })
       .catch((err: AxiosError) => {
         const errorResponse = err.response;
+
         if (errorResponse) {
           this.setState({ errorMessage: `Error: ${errorResponse.data}` });
         }

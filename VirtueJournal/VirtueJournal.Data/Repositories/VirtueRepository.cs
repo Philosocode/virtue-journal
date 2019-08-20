@@ -12,9 +12,9 @@ namespace VirtueJournal.Data.Repositories
 
         public DataContext DataContext => Context as DataContext;
 
-        public IEnumerable<Virtue> GetVirtuesForUser(int userId)
+        public async Task<IEnumerable<Virtue>> GetVirtuesForUserAsync(int userId)
         {
-            return DataContext.Virtues.Where(v => v.UserId == userId).AsEnumerable();
+            return await DataContext.Virtues.Where(v => v.UserId == userId).ToListAsync();
         }
 
         public Task<bool> Exists(int virtueId)

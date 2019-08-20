@@ -1,9 +1,27 @@
-import { Virtue } from "./virtue.types";
+import { VirtueState, VirtueConstants, VirtueAction } from "./virtue.types";
 
-export const virtueReducer = (state: Virtue[] = [], action: any) => {
+const initialState: VirtueState = {
+  currentVirtue: undefined,
+  virtues: []
+};
+
+export const virtueReducer = (state: VirtueState = initialState, action: VirtueAction) => {
   switch (action.type) {
-    // case VirtueActionTypes.fetchVirtues:
-    //   return action.payload;
+    case VirtueConstants.GET_VIRTUES:
+      return {
+        ...state,
+        virtues: action.payload
+      };
+    case VirtueConstants.GET_VIRTUE:
+      return {
+        ...state,
+        currentVirtue: action.payload
+      };
+    case VirtueConstants.CREATE_VIRTUE:
+      return {
+        ...state,
+        virtues: [...state.virtues, action.payload]
+      };
     default:
       return state;
   }

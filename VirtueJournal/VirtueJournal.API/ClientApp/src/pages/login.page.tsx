@@ -7,13 +7,13 @@ import { AppState } from '../redux/store';
 import { loginUser } from "../redux/auth";
 import { LoadingState } from '../redux/loading';
 
-interface LoginPageProps {
+interface Props {
   auth: AuthState,
   loading: LoadingState
   loginUser: Function
 }
 
-class _LoginPage extends Component<LoginPageProps> {
+class _LoginPage extends Component<Props> {
   state = {
     username: "",
     password: "",

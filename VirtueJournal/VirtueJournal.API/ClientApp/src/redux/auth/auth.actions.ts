@@ -6,27 +6,27 @@ import {
   LoginSuccessAction,
   LoginFailureAction,
   LogoutAction,
-  UserForRegister
+  UserForRegister,
+  User
 } from "./auth.types";
 
 import { startLoading, stopLoading } from "../loading";
 
-const ROOT_URL = "api/auth";
+const BASE_URL = "/api/auth";
 
 export const registerUser = async (user: UserForRegister) => {
-  return axios.post(`${ROOT_URL}/register`, user);
+  return axios.post(`${BASE_URL}/register`, user);
 }
 
-export const loginUser = (username: string, password: string) => async (
-  dispatch: Dispatch
-) => {
+export const loginUser = (username: string, password: string) => async (dispatch: Dispatch) => {
   dispatch(startLoading());
 
   const loginData = { username, password };
 
   try {
-    const userData = await axios.post(`${ROOT_URL}/authenticate`, loginData);
-
+    const res = await axios.post<User>(`${BASE_URL}/authenticate`, loginData);
+    const userData = res.data;
+    
     // store user details and jwt token in local storage
     // to keep user logged in between page refreshes
     localStorage.setItem("user", JSON.stringify(userData));
