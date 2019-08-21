@@ -7,7 +7,7 @@ import {
   GetVirtuesAction,
   GetVirtueAction,
   VirtueForCreate,
-  CreateVirtueAction
+  CreateVirtueAction,
 } from "./virtue.types";
 
 import { getAuthHeader } from "../../helpers/get-auth-header";
@@ -56,6 +56,6 @@ export const createVirtue = (virtueToCreate: VirtueForCreate) => async (
       payload: res.data
     });
   } catch (err) {
-    throw new Error(err);
+    return Promise.reject(err);
   }
 };

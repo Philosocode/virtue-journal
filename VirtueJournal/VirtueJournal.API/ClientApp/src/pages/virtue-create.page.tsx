@@ -40,7 +40,13 @@ class _VirtueCreatePage extends Component<Props> {
         const errorResponse = err.response;
 
         if (errorResponse) {
-          this.setState({ errorMessage: `Error: ${errorResponse.data}` });
+          let errorString = `ERROR: ${errorResponse.data.title.slice(0, -1)}: `;
+
+          Object.keys(errorResponse.data.errors).forEach((errorKey: string) => {
+            errorString += ` ${errorKey}`;
+          });
+
+          this.setState({ error: errorString });
         }
       });
   }

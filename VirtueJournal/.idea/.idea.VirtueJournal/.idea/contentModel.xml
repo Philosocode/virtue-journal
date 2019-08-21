@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="node_modules/concurrently" t="IncludeRecursive" />
+      <e p="node_modules/wait-on" t="IncludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="VirtueJournal.API" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
@@ -15,29 +17,39 @@
           <e p="node_modules" t="Include">
             <e p=".cache" t="Include">
               <e p="babel-loader" t="Include">
-                <e p="19e431a10e0457cb14b0cce8206a54fe.json" t="Include" />
-                <e p="24c282cff393a8b44e5840443a0d7bdc.json" t="Include" />
-                <e p="275d8a59e0232eebf7ce606cbc52af66.json" t="Include" />
-                <e p="30be2bae5abcfeb6336c10b259f7063b.json" t="Include" />
-                <e p="39c601df30456acad512772d32cf47e5.json" t="Include" />
-                <e p="3d523ca0d37139550dff5a9906d1cca2.json" t="Include" />
-                <e p="3d92c5c13ef8ed9780902b55b0048447.json" t="Include" />
-                <e p="4351ca8ef207fb22ae071e0d9115c646.json" t="Include" />
-                <e p="48455ad5997afd4f641e2ba75c3f60cd.json" t="Include" />
-                <e p="4d4411afc902597a15e8deb1200bdf4d.json" t="Include" />
-                <e p="5b59ea8ba0d03c32f2ebff9f48459860.json" t="Include" />
-                <e p="5f8bdd7fd152a57ce0095cf1dc752df3.json" t="Include" />
-                <e p="794b03af3b4359c1e53d9b8ec8402e49.json" t="Include" />
-                <e p="8064c134e1caa10a9977a1a5be8f7da6.json" t="Include" />
-                <e p="817a1ed6e0146f06f1b0deb54b91eb7c.json" t="Include" />
-                <e p="8d882555bdf96436a35bb881cef8b5d0.json" t="Include" />
-                <e p="a990af374ce39d269f9a7e747d314a09.json" t="Include" />
-                <e p="ac739830b6c437bdf61fc8388cd5f0dd.json" t="Include" />
-                <e p="b0593970dbb2cc24f3e3960c209617b1.json" t="Include" />
-                <e p="bd17da24aa0b714a07999549dceb92d4.json" t="Include" />
-                <e p="ca7c1939a3f28e81923394af281aeb77.json" t="Include" />
-                <e p="cfe75ef276fba72c007e25c8aae706b5.json" t="Include" />
-                <e p="d36ab314b54d6b1d55c1a8898c4c259c.json" t="Include" />
+                <e p="1a0672af8bdb155fb8d24f59efd56c97.json" t="Include" />
+                <e p="24ac702d12696771820a26d4455f9258.json" t="Include" />
+                <e p="2d4c4036a6169995ee57ae47d18d439b.json" t="Include" />
+                <e p="390c5b44be57c486924465d3064e32a4.json" t="Include" />
+                <e p="39f85a7fbec22ff03235b6f4111623b2.json" t="Include" />
+                <e p="59013ce97f8eafb12ac3e8b24d2f2dbb.json" t="Include" />
+                <e p="5e75e4031b3c69924311f06bd54ee0f5.json" t="Include" />
+                <e p="652dbad72eb0fee1f968550cef5f6b1b.json" t="Include" />
+                <e p="6eeb0471ac935b81b70ac516cf1a9f2e.json" t="Include" />
+                <e p="7eced40cedd3d7c72692fd3a0827e787.json" t="Include" />
+                <e p="8926200fbffd7fd5ca364ad09ff7f56f.json" t="Include" />
+                <e p="89d8fd8edb0212bdc833f0e0f302c2f5.json" t="Include" />
+                <e p="8ba6ba88e3a8196a870ae3610d5065ba.json" t="Include" />
+                <e p="8c673feb3df14bedad917eeb6e638e00.json" t="Include" />
+                <e p="8e6b0457a4d47ea1ab580ab7ef6bed7f.json" t="Include" />
+                <e p="97e7f04d967fce7c66ac2b6416eafd02.json" t="Include" />
+                <e p="99e8d7e1bdd21ecf87a58ef45e9f30fd.json" t="Include" />
+                <e p="9b75695ef7b941f4fc1849d4f63974ba.json" t="Include" />
+                <e p="9f616e80511acfc8508b8ce284e39cef.json" t="Include" />
+                <e p="a007fe1c4a9830c86bc58f93f1405dba.json" t="Include" />
+                <e p="a38395d72091037c8094088ef4198e2f.json" t="Include" />
+                <e p="ac5b5018b6c2729525dc05f4ed2661a7.json" t="Include" />
+                <e p="b30192e79ee9b1ce0bba140202cdf87e.json" t="Include" />
+                <e p="b6ba27b18001f50e46f953d1335aaae6.json" t="Include" />
+                <e p="be0dbde7f726fe7a7d729a6f298d7dd0.json" t="Include" />
+                <e p="c6c249bc12bf4971ca3d36e279ec1800.json" t="Include" />
+                <e p="c8aad616f4915196c84efb45d46837d2.json" t="Include" />
+                <e p="cd77004bc2e78dffa57a25edc52e3c78.json" t="Include" />
+                <e p="d7cc807353bec8d6f27bfa82f359ce48.json" t="Include" />
+                <e p="e15b9a2594334d63aed10b6ff682babf.json" t="Include" />
+                <e p="eb5d99cc911d175398b8bb84129e5e98.json" t="Include" />
+                <e p="f826af150e42d5647b97fe8676a65634.json" t="Include" />
+                <e p="ffc2cf85106519336925adb00174ede7.json" t="Include" />
               </e>
             </e>
             <e p="@babel/parser" t="IncludeRecursive" />
