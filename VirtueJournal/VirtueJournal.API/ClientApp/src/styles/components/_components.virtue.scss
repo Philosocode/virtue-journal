@@ -6,6 +6,10 @@
   text-align: left;
   width: 50rem;
 
+  display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
   &:hover {
     background-color: #eee;
   }
@@ -21,7 +25,31 @@
     }
   }
 
+  &__description {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
   &__metadata {
     font-size: 1.2rem;
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  &__icons {
+    align-self: center;
+
+    display: flex;
+    font-size: 2rem;
+    justify-content: space-around;
+    width: 10rem;
+  }
+
+  &__edit:hover {
+    color: orange;
+  }
+
+  &__delete:hover {
+    color: orangered;
   }
 }

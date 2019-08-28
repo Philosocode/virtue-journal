@@ -2,18 +2,27 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 import { AppState } from '../redux/store';
-import { VirtueState, getVirtues } from "../redux/virtue";
+import { VirtueState, getVirtues, deleteVirtue } from "../redux/virtue";
 import { Virtue } from "../components/virtue";
 import { LinkButton } from "../components/shared/link-button";
 
 interface VirtuesPageProps {
   virtueState: VirtueState,
-  getVirtues: Function
+  getVirtues: Function,
+  deleteVirtue: Function
 }
 
 class _VirtuesPage extends Component<VirtuesPageProps> {
   componentDidMount() {
     this.props.getVirtues();
+  }
+
+  handleEdit = () => {
+    console.log("Edit clicked");
+  }
+
+  handleDelete = (virtueId: number) => {
+    this.props.deleteVirtue(virtueId);
   }
 
   getVirtueList = () => {
@@ -31,6 +40,8 @@ class _VirtuesPage extends Component<VirtuesPageProps> {
             icon={v.icon} 
             name={v.name} 
             virtueId={v.virtueId}
+            handleDelete={this.handleDelete}
+            handleEdit={this.handleEdit}
           />
         )
       ))
@@ -61,5 +72,5 @@ const mapStateToProps = (state: AppState) => ({
 
 export const VirtuesPage = connect(
   mapStateToProps,
-  { getVirtues }
+  { getVirtues, deleteVirtue }
 )(_VirtuesPage);

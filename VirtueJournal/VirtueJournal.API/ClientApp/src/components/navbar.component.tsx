@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { AppState } from "../redux/store";
 import { AuthState, logoutUser } from "../redux/auth";
 
-interface NavbarProps {
+interface Props {
   auth: AuthState,
   logoutUser: typeof logoutUser
 }
 
-class _Navbar extends Component<NavbarProps> {
+class _Navbar extends Component<Props> {
   handleLogout = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
     this.props.logoutUser();

@@ -22,6 +22,11 @@ export const virtueReducer = (state: VirtueState = initialState, action: VirtueA
         ...state,
         virtues: [...state.virtues, action.payload]
       };
+    case VirtueConstants.DELETE_VIRTUE:
+      return {
+        ...state,
+        virtues: state.virtues.filter(v => v.virtueId !== action.payload)
+      }
     default:
       return state;
   }

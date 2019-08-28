@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { logoutUser, LogoutAction } from "../redux/auth";
 
-interface PrivateRouteProps extends RouteProps {
+interface Props extends RouteProps {
   component: any,
   isLoggedIn: boolean,
   logoutUser: () => LogoutAction
@@ -14,7 +14,7 @@ interface PrivateRouteProps extends RouteProps {
 // If authenticated, render the private component
 // If not authenticated, redirect to /login
 // See: https://tylermcginnis.com/react-router-protected-routes-authentication/
-class _PrivateRoute extends React.Component<PrivateRouteProps> {
+class _PrivateRoute extends React.Component<Props> {
   componentDidMount() {
     if (!this.props.isLoggedIn) {
       this.props.logoutUser();

@@ -44,4 +44,11 @@ export interface CreateVirtueAction {
   payload: Virtue
 }
 
-export type VirtueAction = GetVirtuesAction | GetVirtueAction | CreateVirtueAction;
+export interface DeleteVirtueAction {
+  type: VirtueConstants.DELETE_VIRTUE,
+  payload: number
+}
+
+export type VirtueAction = (
+  GetVirtuesAction | GetVirtueAction | CreateVirtueAction | DeleteVirtueAction
+);

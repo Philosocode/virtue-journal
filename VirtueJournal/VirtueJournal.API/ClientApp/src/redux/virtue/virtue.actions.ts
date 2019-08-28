@@ -6,6 +6,7 @@ import {
   VirtueConstants,
   GetVirtuesAction,
   GetVirtueAction,
+  DeleteVirtueAction,
   VirtueForCreate,
   CreateVirtueAction,
 } from "./virtue.types";
@@ -54,6 +55,23 @@ export const createVirtue = (virtueToCreate: VirtueForCreate) => async (
     dispatch<CreateVirtueAction>({
       type: VirtueConstants.CREATE_VIRTUE,
       payload: res.data
+    });
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
+export const deleteVirtue = (virtueId: number) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    await axios.delete(`${BASE_URL}/${virtueId}`, {
+      headers: authHeader
+    });
+
+    dispatch<DeleteVirtueAction>({
+      type: VirtueConstants.DELETE_VIRTUE,
+      payload: virtueId
     });
   } catch (err) {
     return Promise.reject(err);
