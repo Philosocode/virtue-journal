@@ -14,74 +14,137 @@
         <e p="ClientApp" t="Include">
           <e p=".env" t="Include" />
           <e p=".gitignore" t="Include" />
-          <e p="node_modules/@babel/parser" t="IncludeRecursive" />
-          <e p="node_modules/@babel/types" t="IncludeRecursive" />
-          <e p="node_modules/@fortawesome/fontawesome-common-types" t="IncludeRecursive" />
-          <e p="node_modules/@fortawesome/fontawesome-svg-core" t="IncludeRecursive" />
-          <e p="node_modules/@fortawesome/free-solid-svg-icons" t="IncludeRecursive" />
-          <e p="node_modules/@fortawesome/react-fontawesome" t="IncludeRecursive" />
-          <e p="node_modules/@jest/console" t="IncludeRecursive" />
-          <e p="node_modules/@jest/fake-timers" t="IncludeRecursive" />
-          <e p="node_modules/@jest/source-map" t="IncludeRecursive" />
-          <e p="node_modules/@jest/test-result" t="IncludeRecursive" />
-          <e p="node_modules/@jest/types" t="IncludeRecursive" />
-          <e p="node_modules/@mrmlnc/readdir-enhanced" t="IncludeRecursive" />
-          <e p="node_modules/@nodelib/fs.stat" t="IncludeRecursive" />
-          <e p="node_modules/@types" t="IncludeRecursive">
-            <e p="babel__generator" t="IncludeRecursive" />
-            <e p="babel__template" t="IncludeRecursive" />
-            <e p="babel__traverse" t="IncludeRecursive" />
-            <e p="history" t="IncludeRecursive" />
+          <e p="node_modules" t="Include">
+            <e p=".cache" t="Include">
+              <e p="babel-loader" t="Include">
+                <e p="160a7fecb66a42f15fe30c4d8e367060.json" t="Include" />
+                <e p="1adad3b21cc8bcb6f07465226373fc03.json" t="Include" />
+                <e p="1e709eb9d4ed7fa612bde4b142472889.json" t="Include" />
+                <e p="1e957eaff3dca9766a7dbd7e05e03f2b.json" t="Include" />
+                <e p="1fc5fffba3e4c3f3836663c403f49c97.json" t="Include" />
+                <e p="200bbcf084126f8f73cbe088e0963506.json" t="Include" />
+                <e p="2ad1ca05421dcba62ada105017bd5baa.json" t="Include" />
+                <e p="2ee0f60066b6d683e2611b14843ec350.json" t="Include" />
+                <e p="31ba168768dab62fef750c34937c9018.json" t="Include" />
+                <e p="320a1e46a5ca8a1d4ce8fc0e2f035ec5.json" t="Include" />
+                <e p="33e4794433d8f5476b89db2cf2a6fd0b.json" t="Include" />
+                <e p="37950b29a5067afa06e7e78c69cbdaf3.json" t="Include" />
+                <e p="39315f9b84b1e21363cc8417d190bd24.json" t="Include" />
+                <e p="3f32e3ff7af39ddeeeaa009652b4d688.json" t="Include" />
+                <e p="42549109a80e5247565fca7b955e6e1c.json" t="Include" />
+                <e p="45b66dd9ec79242b69c14d53cdc3d3b9.json" t="Include" />
+                <e p="56a046149392ce7cdae92fe111150ee7.json" t="Include" />
+                <e p="570873247b4b55bbac9c2279f1f99cfe.json" t="Include" />
+                <e p="5767cd8d0999681fb1e8999dd8dcbc8f.json" t="Include" />
+                <e p="584f6ebbf5efb82dd80372abbaaac2b8.json" t="Include" />
+                <e p="5abd3049e98df955ed7fd7e9639f1cb3.json" t="Include" />
+                <e p="5d2ca49a208d2e7c1d8ebff8d7ed6da9.json" t="Include" />
+                <e p="5d8acc148c9fc758a067320d4a69a744.json" t="Include" />
+                <e p="6088549084edbfcd2f2cfc4db7c78d38.json" t="Include" />
+                <e p="65293da34e90b65af16afd1ea7bb5e4d.json" t="Include" />
+                <e p="6919b0a3c3b78401bfecbcc7bca9e0cf.json" t="Include" />
+                <e p="699d5cb698bdefb0940d0be04682101f.json" t="Include" />
+                <e p="6a3858c3d923599f1a0ad3f0a7a7e359.json" t="Include" />
+                <e p="6b5c808aee7e21e7ae36344c988e7ba3.json" t="Include" />
+                <e p="6d108de3329d5e2c899981b292afae40.json" t="Include" />
+                <e p="6d7e86e6162b5da3c1cc330f98ddaff7.json" t="Include" />
+                <e p="6da6a844ea62e89a09f902ede90980ab.json" t="Include" />
+                <e p="7a24b054c4dcb247f2812ae7e1c1f300.json" t="Include" />
+                <e p="7a7f29aa02a8ae15f3fdedd3870214c9.json" t="Include" />
+                <e p="7a904c53b408c2914684f4bca5e35df3.json" t="Include" />
+                <e p="82e024462391a14976622c65b7aa5776.json" t="Include" />
+                <e p="8b8bb355ad868abaa1fb3ecbecdbf740.json" t="Include" />
+                <e p="8ef9016a7de53fc583339d08afa05737.json" t="Include" />
+                <e p="9a87cd1f64cf3eae3f690ebf51bf0433.json" t="Include" />
+                <e p="9c39c73f3a3a943e981ea02d73a4c049.json" t="Include" />
+                <e p="a061c87a0a4cc1b4e99aa7dad62a3975.json" t="Include" />
+                <e p="a54944d3e8c55847e43e83fb09df50c0.json" t="Include" />
+                <e p="aa0772b491e33abf9a7abbee35be61e2.json" t="Include" />
+                <e p="ad197f483e8455508ad7832ea04290ef.json" t="Include" />
+                <e p="b1417a76c01ef35c2e9ace2c9e162799.json" t="Include" />
+                <e p="b967cbd20d53b3e25ddb1ed021e51269.json" t="Include" />
+                <e p="b9b4dfdc8be914c3351898283f97a823.json" t="Include" />
+                <e p="bdbc09381d29122f5c699826707213c6.json" t="Include" />
+                <e p="c4d87085043fc01595b3e8c070b7b15a.json" t="Include" />
+                <e p="cd8325e01428fa45145f2f61c85bf3ed.json" t="Include" />
+                <e p="d5f20b4fbd7e2be664eed18d6d50f26a.json" t="Include" />
+                <e p="df6e0cdda1c5a57138531fbfcce5d419.json" t="Include" />
+                <e p="dfec66fe3e4ee170d9cdeb6cbae066ec.json" t="Include" />
+                <e p="eb5ee27dc1d41c38053c6ceafb6e817c.json" t="Include" />
+                <e p="eddf8220a48eef9d5e8f59a2c123bd1f.json" t="Include" />
+                <e p="f5d4d81a9a5c220896ab542b2076cd76.json" t="Include" />
+                <e p="f851e36b387fad68cd7a66a58a94a7e7.json" t="Include" />
+              </e>
+            </e>
+            <e p="@babel/parser" t="IncludeRecursive" />
+            <e p="@babel/types" t="IncludeRecursive" />
+            <e p="@fortawesome/fontawesome-common-types" t="IncludeRecursive" />
+            <e p="@fortawesome/fontawesome-svg-core" t="IncludeRecursive" />
+            <e p="@fortawesome/free-solid-svg-icons" t="IncludeRecursive" />
+            <e p="@fortawesome/react-fontawesome" t="IncludeRecursive" />
+            <e p="@jest/console" t="IncludeRecursive" />
+            <e p="@jest/fake-timers" t="IncludeRecursive" />
+            <e p="@jest/source-map" t="IncludeRecursive" />
+            <e p="@jest/test-result" t="IncludeRecursive" />
+            <e p="@jest/types" t="IncludeRecursive" />
+            <e p="@mrmlnc/readdir-enhanced" t="IncludeRecursive" />
+            <e p="@nodelib/fs.stat" t="IncludeRecursive" />
+            <e p="@types" t="IncludeRecursive">
+              <e p="babel__generator" t="IncludeRecursive" />
+              <e p="babel__template" t="IncludeRecursive" />
+              <e p="babel__traverse" t="IncludeRecursive" />
+              <e p="history" t="IncludeRecursive" />
+              <e p="hoist-non-react-statics" t="IncludeRecursive" />
+              <e p="istanbul-lib-coverage" t="IncludeRecursive" />
+              <e p="istanbul-lib-report" t="IncludeRecursive" />
+              <e p="jest" t="IncludeRecursive" />
+              <e p="jest-diff" t="IncludeRecursive" />
+              <e p="node" t="IncludeRecursive" />
+              <e p="prop-types" t="IncludeRecursive" />
+              <e p="react" t="IncludeRecursive" />
+              <e p="react-dom" t="IncludeRecursive" />
+              <e p="react-redux" t="IncludeRecursive" />
+              <e p="react-router" t="IncludeRecursive" />
+              <e p="react-router-dom" t="IncludeRecursive" />
+              <e p="redux-logger" t="IncludeRecursive" />
+            </e>
+            <e p="axios" t="IncludeRecursive" />
+            <e p="babel-jest" t="IncludeRecursive" />
+            <e p="chalk" t="IncludeRecursive" />
+            <e p="chokidar" t="IncludeRecursive" />
+            <e p="classnames" t="IncludeRecursive" />
+            <e p="csstype" t="IncludeRecursive" />
+            <e p="dotenv-expand" t="IncludeRecursive" />
+            <e p="fast-glob" t="IncludeRecursive" />
             <e p="hoist-non-react-statics" t="IncludeRecursive" />
-            <e p="istanbul-lib-coverage" t="IncludeRecursive" />
-            <e p="istanbul-lib-report" t="IncludeRecursive" />
             <e p="jest" t="IncludeRecursive" />
-            <e p="jest-diff" t="IncludeRecursive" />
-            <e p="node" t="IncludeRecursive" />
-            <e p="prop-types" t="IncludeRecursive" />
+            <e p="jest-haste-map" t="IncludeRecursive" />
+            <e p="jest-message-util" t="IncludeRecursive" />
+            <e p="jest-mock" t="IncludeRecursive" />
+            <e p="jest-resolve" t="IncludeRecursive" />
+            <e p="jest-serializer" t="IncludeRecursive" />
+            <e p="jest-util" t="IncludeRecursive" />
+            <e p="jest-worker" t="IncludeRecursive" />
+            <e p="node-sass" t="IncludeRecursive" />
             <e p="react" t="IncludeRecursive" />
             <e p="react-dom" t="IncludeRecursive" />
             <e p="react-redux" t="IncludeRecursive" />
-            <e p="react-router" t="IncludeRecursive" />
             <e p="react-router-dom" t="IncludeRecursive" />
+            <e p="react-scripts" t="IncludeRecursive" />
+            <e p="realpath-native" t="IncludeRecursive" />
+            <e p="redux" t="IncludeRecursive" />
+            <e p="redux-devtools-extension" t="IncludeRecursive" />
             <e p="redux-logger" t="IncludeRecursive" />
+            <e p="redux-thunk" t="IncludeRecursive" />
+            <e p="reselect" t="IncludeRecursive" />
+            <e p="rxjs" t="IncludeRecursive" />
+            <e p="source-map" t="IncludeRecursive" />
+            <e p="symbol-observable" t="IncludeRecursive" />
+            <e p="tslib" t="IncludeRecursive" />
+            <e p="typescript" t="IncludeRecursive" />
+            <e p="upath" t="IncludeRecursive" />
+            <e p="worker-farm" t="IncludeRecursive" />
           </e>
-          <e p="node_modules/axios" t="IncludeRecursive" />
-          <e p="node_modules/babel-jest" t="IncludeRecursive" />
-          <e p="node_modules/chalk" t="IncludeRecursive" />
-          <e p="node_modules/chokidar" t="IncludeRecursive" />
-          <e p="node_modules/classnames" t="IncludeRecursive" />
-          <e p="node_modules/csstype" t="IncludeRecursive" />
-          <e p="node_modules/dotenv-expand" t="IncludeRecursive" />
-          <e p="node_modules/fast-glob" t="IncludeRecursive" />
-          <e p="node_modules/hoist-non-react-statics" t="IncludeRecursive" />
-          <e p="node_modules/jest" t="IncludeRecursive" />
-          <e p="node_modules/jest-haste-map" t="IncludeRecursive" />
-          <e p="node_modules/jest-message-util" t="IncludeRecursive" />
-          <e p="node_modules/jest-mock" t="IncludeRecursive" />
-          <e p="node_modules/jest-resolve" t="IncludeRecursive" />
-          <e p="node_modules/jest-serializer" t="IncludeRecursive" />
-          <e p="node_modules/jest-util" t="IncludeRecursive" />
-          <e p="node_modules/jest-worker" t="IncludeRecursive" />
-          <e p="node_modules/node-sass" t="IncludeRecursive" />
-          <e p="node_modules/react" t="IncludeRecursive" />
-          <e p="node_modules/react-dom" t="IncludeRecursive" />
-          <e p="node_modules/react-redux" t="IncludeRecursive" />
-          <e p="node_modules/react-router-dom" t="IncludeRecursive" />
-          <e p="node_modules/react-scripts" t="IncludeRecursive" />
-          <e p="node_modules/realpath-native" t="IncludeRecursive" />
-          <e p="node_modules/redux" t="IncludeRecursive" />
-          <e p="node_modules/redux-devtools-extension" t="IncludeRecursive" />
-          <e p="node_modules/redux-logger" t="IncludeRecursive" />
-          <e p="node_modules/redux-thunk" t="IncludeRecursive" />
-          <e p="node_modules/reselect" t="IncludeRecursive" />
-          <e p="node_modules/rxjs" t="IncludeRecursive" />
-          <e p="node_modules/source-map" t="IncludeRecursive" />
-          <e p="node_modules/symbol-observable" t="IncludeRecursive" />
-          <e p="node_modules/tslib" t="IncludeRecursive" />
-          <e p="node_modules/typescript" t="IncludeRecursive" />
-          <e p="node_modules/upath" t="IncludeRecursive" />
-          <e p="node_modules/worker-farm" t="IncludeRecursive" />
           <e p="package-lock.json" t="Include" />
           <e p="package.json" t="Include" />
           <e p="public" t="Include">
@@ -116,6 +179,7 @@
               <e p="settings.page.tsx" t="Include" />
               <e p="virtue-create.page.tsx" t="Include" />
               <e p="virtue-detail.page.tsx" t="Include" />
+              <e p="virtue-edit.page.tsx" t="Include" />
               <e p="virtues.page.tsx" t="Include" />
             </e>
             <e p="react-app-env.d.ts" t="Include" />

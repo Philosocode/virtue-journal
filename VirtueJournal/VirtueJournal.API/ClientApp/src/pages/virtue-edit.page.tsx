@@ -1,22 +1,53 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { createVirtue } from "../redux/virtue";
+import { AppState } from "../redux/store";
+import { editVirtue, Virtue } from "../redux/virtue";
 import { AxiosError, AxiosResponse } from "axios";
 
-interface Props {
-  createVirtue: Function
+interface Props extends RouteComponentProps {
+  editVirtue: Function,
+  virtues: Virtue[]
 }
 
-class _VirtueCreatePage extends Component<Props> {
+interface RouteProps {
+  virtueId?: string
+}
+
+class _VirtueEditPage extends Component<RouteComponentProps<RouteProps> & Props> {
   state = {
+    virtueId: null,
     color: "",
     description: "",
     icon: "",
     name: "",
     error: "",
     shouldRedirectToVirtuesPage: false
+  }
+
+  componentDidMount() {
+    const matchParams = this.props.match.params;
+
+    if (!matchParams.virtueId) {
+      console.log("matchParams.virtueId not found.");
+      return;
+    }
+
+    const virtueId = Number.parseInt(matchParams.virtueId);
+    const currentVirtue = this.props.virtues.find(v => v.virtueId === virtueId);
+
+    if (!currentVirtue) {
+      console.log("OH NO");
+    } else {
+      this.setState({
+        virtueId: currentVirtue.virtueId,
+        color: currentVirtue.color,
+        description: currentVirtue.description,
+        icon: currentVirtue.icon,
+        name: currentVirtue.name
+      });
+    }
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -29,9 +60,9 @@ class _VirtueCreatePage extends Component<Props> {
     event.preventDefault();
 
     const { color, description, icon, name } = this.state;
-    const virtueToCreate = { color, description, icon, name };
+    const virtueToEdit = { color, description, icon, name };
 
-    this.props.createVirtue(virtueToCreate)
+    this.props.editVirtue(this.state.virtueId, virtueToEdit)
       .then((res: AxiosResponse) => {
         this.setState({ shouldRedirectToVirtuesPage: true });
       })
@@ -54,7 +85,7 @@ class _VirtueCreatePage extends Component<Props> {
     return (
       <div>
         { this.state.shouldRedirectToVirtuesPage && <Redirect to="/virtues" /> }
-        <h1>Virtue Create Page</h1>
+        <h1>Virtue Edit Page</h1>
         <form onSubmit={this.handleSubmit}>
 
           <div className="form__group">
@@ -127,7 +158,11 @@ class _VirtueCreatePage extends Component<Props> {
   }
 }
 
-export const VirtueCreatePage = connect(
-  null, 
-  { createVirtue }
-)(_VirtueCreatePage);
+const mapStateToProps = (state: AppState) => ({
+  virtues: state.virtue.virtues
+});
+
+export const VirtueEditPage = withRouter(connect(
+  mapStateToProps,
+  { editVirtue }
+)(_VirtueEditPage));

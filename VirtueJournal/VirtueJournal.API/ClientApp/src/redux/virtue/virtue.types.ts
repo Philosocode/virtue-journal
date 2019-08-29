@@ -23,6 +23,13 @@ export interface VirtueForCreate {
   name: string
 }
 
+export interface VirtueForEdit {
+  color?: string,
+  description?: string,
+  icon?: string,
+  name?: string
+}
+
 export interface VirtueState {
   currentVirtue?: Virtue
   virtues: Virtue[]
@@ -42,6 +49,10 @@ export interface GetVirtueAction {
 export interface CreateVirtueAction {
   type: VirtueConstants.CREATE_VIRTUE,
   payload: Virtue
+}
+
+export interface EditVirtueAction {
+  type: VirtueConstants.EDIT_VIRTUE
 }
 
 export interface DeleteVirtueAction {

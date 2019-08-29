@@ -14,6 +14,7 @@ import { SettingsPage } from "./pages/settings.page";
 import { VirtuesPage } from "./pages/virtues.page";
 import { VirtueDetailPage } from "./pages/virtue-detail.page";
 import { VirtueCreatePage } from './pages/virtue-create.page';
+import { VirtueEditPage } from './pages/virtue-edit.page';
 
 import { EntriesPage } from "./pages/entries.page";
 import { EntryDetailPage } from "./pages/entry-detail.page";
@@ -34,7 +35,7 @@ class App extends Component {
           <PrivateRoute exact path="/virtues" component={VirtuesPage} />
           <PrivateRoute exact path="/virtues/create" component={VirtueCreatePage} />
           <PrivateRoute exact path="/virtues/:virtueId/details" component={VirtueDetailPage} />
-          {/* <PrivateRoute exact path="/virtues/:virtueId/edit" component={VirtueAddEditPage} /> */}
+          <PrivateRoute exact path="/virtues/:virtueId/edit" component={VirtueEditPage} />
           <PrivateRoute exact path="/virtues/:virtueId/entries" component={EntriesPage} />
 
           <PrivateRoute exact path="/entries/:entryId" component={EntryDetailPage} />
