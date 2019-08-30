@@ -5,7 +5,7 @@ const initialState: VirtueState = {
   virtues: []
 };
 
-export const virtueReducer = (state: VirtueState = initialState, action: VirtueAction) => {
+export const virtueReducer = (state = initialState, action: VirtueAction) => {
   switch (action.type) {
     case VirtueConstants.GET_VIRTUES:
       return {

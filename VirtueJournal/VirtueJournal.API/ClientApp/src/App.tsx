@@ -22,7 +22,7 @@ import { EntryAddEditPage } from "./pages/entry-add-edit.page";
 
 import { NotFoundPage } from "./pages/not-found.page";
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <div className="o-site-layout">
@@ -31,7 +31,7 @@ class App extends Component {
           <Route exact path="/" component={IndexPage} />
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/login" component={LoginPage} />
-          
+
           <PrivateRoute exact path="/virtues" component={VirtuesPage} />
           <PrivateRoute exact path="/virtues/create" component={VirtueCreatePage} />
           <PrivateRoute exact path="/virtues/:virtueId/details" component={VirtueDetailPage} />
@@ -48,5 +48,3 @@ class App extends Component {
     )
   }
 };
-
-export { App };

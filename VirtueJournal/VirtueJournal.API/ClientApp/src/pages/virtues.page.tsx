@@ -18,6 +18,10 @@ class _VirtuesPage extends Component<VirtuesPageProps> {
     this.props.getVirtues();
   }
 
+  handleClick = (virtueId: number) => {
+    console.log(virtueId);
+  }
+
   handleEdit = (virtueId: number) => {
     this.props.history.push(`virtues/${virtueId}/edit`)
   }
@@ -43,6 +47,7 @@ class _VirtuesPage extends Component<VirtuesPageProps> {
             virtueId={v.virtueId}
             handleDelete={this.handleDelete}
             handleEdit={this.handleEdit}
+            handleClick={this.handleClick}
           />
         )
       ))

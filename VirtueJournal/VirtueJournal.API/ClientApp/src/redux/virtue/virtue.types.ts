@@ -61,5 +61,5 @@ export interface DeleteVirtueAction {
 }
 
 export type VirtueAction = (
-  GetVirtuesAction | GetVirtueAction | CreateVirtueAction | DeleteVirtueAction
+  GetVirtuesAction | GetVirtueAction | CreateVirtueAction | EditVirtueAction | DeleteVirtueAction
 );

@@ -10,14 +10,15 @@ interface Props {
   name: string,
   handleEdit: Function,
   handleDelete: Function,
+  handleClick: Function,
   virtueId: number
 }
 
 export const Virtue = (props: Props): JSX.Element => {
-  const { color, createdAt, description, icon, name, handleEdit, handleDelete, virtueId } = props;
+  const { color, createdAt, description, icon, name, handleClick, handleEdit, handleDelete, virtueId } = props;
 
   return (
-    <div className="c-virtue">
+    <div className="c-virtue" onClick={() => handleClick(virtueId)}>
       <h3 className="c-virtue__header">{virtueId} - {name}</h3>
       <div className="c-virtue__icons">
         <div className="c-virtue__edit" onClick={() => handleEdit(virtueId)}>

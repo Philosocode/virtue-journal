@@ -1,4 +1,9 @@
-// Import actions
+export enum EntryConstants {
+  GET_ENTRIES_FOR_VIRTUE = "GET_ENTRIES_FOR_VIRTUE",
+  GET_ENTRY = "GET_ENTRY",
+  CREATE_ENTRY = "CREATE_ENTRY",
+};
+
 export interface Entry {
   entryId: number,
   title: string,
@@ -8,28 +13,48 @@ export interface Entry {
   starred: boolean
 }
 
-// public ICollection<VirtueEntryGetDto> VirtueLinks { get; set; } = new List<VirtueEntryGetDto>();
-
-export enum EntryActionTypes {
-  TEST = "TEST",
-  WOW = "WOW"
-};
-
-/*
-export const SEND_MESSAGE = 'SEND_MESSAGE'
-export const DELETE_MESSAGE = 'DELETE_MESSAGE'
-
-interface SendMessageAction {
-  type: typeof SEND_MESSAGE
-  payload: Message
+export interface EntryForCreate {
+  title: string,
+  description: string,
+  createdAt: Date,
+  starred: boolean
+  virtueLinks?: VirtueLink[]
 }
 
-interface DeleteMessageAction {
-  type: typeof DELETE_MESSAGE
-  meta: {
-    timestamp: number
-  }
+export interface VirtueLink {
+  virtueId: number,
+  difficulty: Difficulty
 }
 
-export type ChatActionTypes = SendMessageAction | DeleteMessageAction
-*/
+export enum Difficulty {
+  VeryEasy,
+  Easy,
+  Medium,
+  Hard,
+  VeryHard
+}
+
+export interface EntryState {
+  currentEntry?: Entry,
+  entries: Entry[]
+}
+
+/* ACTIONS */
+export interface GetEntriesForVirtueAction {
+  type: EntryConstants.GET_ENTRIES_FOR_VIRTUE,
+  payload: Entry[]
+}
+
+export interface GetEntryAction {
+  type: EntryConstants.GET_ENTRY,
+  payload: Entry
+}
+
+export interface CreateEntryAction {
+  type: EntryConstants.CREATE_ENTRY,
+  payload: Entry
+}
+
+export type EntryAction = (
+  GetEntriesForVirtueAction | GetEntryAction | CreateEntryAction
+);
