@@ -1,0 +1,13 @@
+.c-virtue-link {
+  &__container {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  &__item {
+    border: 1px solid black;
+    margin: 0 auto;
+    padding: 2rem 0;
+    width: 10rem;
+  }
+}

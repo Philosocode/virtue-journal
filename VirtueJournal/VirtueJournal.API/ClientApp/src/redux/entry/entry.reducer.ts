@@ -1,4 +1,4 @@
-import { Entry, EntryState, EntryConstants, EntryAction } from "./entry.types";
+import { EntryState, EntryConstants, EntryAction } from "./entry.types";
 
 const initialState: EntryState = {
   currentEntry: undefined,
@@ -8,6 +8,7 @@ const initialState: EntryState = {
 export const entryReducer = (state = initialState, action: EntryAction) => {
   switch (action.type) {
     case EntryConstants.GET_ENTRIES_FOR_VIRTUE:
+    case EntryConstants.GET_UNCATEGORIZED_ENTRIES:
       return {
         ...state,
         entries: action.payload

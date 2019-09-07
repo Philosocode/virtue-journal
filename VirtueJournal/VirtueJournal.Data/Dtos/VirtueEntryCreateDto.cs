@@ -10,7 +10,7 @@ namespace VirtueJournal.Data.Dtos
         public int VirtueId { get; set; }
         
         [Required]
-        [Range(1, 5)]
+        [Range(0, 4)]
         public Difficulty Difficulty { get; set; }
     }
 }

@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { AppState } from '../redux/store';
-import { VirtueState, getVirtues, deleteVirtue } from "../redux/virtue";
+import { VirtueState, getVirtues, deleteVirtue, setCurrentVirtue } from "../redux/virtue";
 import { Virtue } from "../components/virtue";
 import { LinkButton } from "../components/shared/link-button";
 
 interface VirtuesPageProps extends RouteComponentProps {
   virtueState: VirtueState,
-  getVirtues: Function,
-  deleteVirtue: Function
+  getVirtues: () => any,
+  deleteVirtue: (virtueId: number) => any,
+  setCurrentVirtue: Function
 }
 
 class _VirtuesPage extends Component<VirtuesPageProps> {
@@ -19,7 +20,10 @@ class _VirtuesPage extends Component<VirtuesPageProps> {
   }
 
   handleClick = (virtueId: number) => {
-    console.log(virtueId);
+    const virtueToSet = this.props.virtueState.virtues.find(v => v.virtueId === virtueId);
+
+    this.props.setCurrentVirtue(virtueToSet);
+    this.props.history.push(`virtues/${virtueId}/entries`);
   }
 
   handleEdit = (virtueId: number) => {
@@ -78,5 +82,5 @@ const mapStateToProps = (state: AppState) => ({
 
 export const VirtuesPage = withRouter(connect(
   mapStateToProps,
-  { getVirtues, deleteVirtue }
+  { getVirtues, deleteVirtue, setCurrentVirtue }
 )(_VirtuesPage));

@@ -8,10 +8,10 @@ interface Props {
   description: string,
   icon: string,
   name: string,
-  handleEdit: Function,
-  handleDelete: Function,
-  handleClick: Function,
-  virtueId: number
+  virtueId: number,
+  handleEdit: (virtueId: number) => void,
+  handleDelete: (virtueId: number) => void,
+  handleClick: (virtueId: number) => void,
 }
 
 export const Virtue = (props: Props): JSX.Element => {

@@ -26,7 +26,12 @@ export const virtueReducer = (state = initialState, action: VirtueAction) => {
       return {
         ...state,
         virtues: state.virtues.filter(v => v.virtueId !== action.payload)
-      }
+      };
+    case VirtueConstants.SET_CURRENT_VIRTUE:
+      return {
+        ...state,
+        currentVirtue: action.payload
+      };
     default:
       return state;
   }

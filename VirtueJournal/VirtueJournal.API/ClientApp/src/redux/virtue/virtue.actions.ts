@@ -93,3 +93,8 @@ export const deleteVirtue = (virtueId: number) => async (
     return Promise.reject(err);
   }
 };
+
+export const setCurrentVirtue = (virtue: Virtue) => ({
+  type: VirtueConstants.SET_CURRENT_VIRTUE,
+  payload: virtue
+});

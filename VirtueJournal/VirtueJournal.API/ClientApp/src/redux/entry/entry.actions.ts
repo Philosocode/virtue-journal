@@ -21,7 +21,22 @@ export const getEntriesForVirtue = (virtueId: number) => async (
   dispatch: Dispatch
 ) => {
   try {
-    const res = await axios.get<Entry[]>(VIRTUE_BASE_URL, {
+    const res = await axios.get<Entry[]>(`${VIRTUE_BASE_URL}/${virtueId}/entries`, {
+      headers: authHeader
+    });
+
+    dispatch<GetEntriesForVirtueAction>({
+      type: EntryConstants.GET_ENTRIES_FOR_VIRTUE,
+      payload: res.data
+    });
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+export const getUncategorizedEntries = () => async (dispatch: Dispatch) => {
+  try {
+    const res = await axios.get<Entry[]>(`${ENTRY_BASE_URL}/uncategorized`, {
       headers: authHeader
     });
 

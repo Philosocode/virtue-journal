@@ -4,7 +4,8 @@ export enum VirtueConstants {
   CREATE_VIRTUE = "CREATE_VIRTUE",
   CREATE_VIRTUE_FAILED = "CREATE_VIRTUE_FAILED",
   EDIT_VIRTUE = "EDIT_VIRTUE",
-  DELETE_VIRTUE = "DELETE_VIRTUE"
+  DELETE_VIRTUE = "DELETE_VIRTUE",
+  SET_CURRENT_VIRTUE = "SET_CURRENT_VIRTUE"
 }
 
 export interface Virtue {
@@ -60,6 +61,12 @@ export interface DeleteVirtueAction {
   payload: number
 }
 
+export interface SetCurrentVirtueAction {
+  type: VirtueConstants.SET_CURRENT_VIRTUE,
+  payload: Virtue
+}
+
 export type VirtueAction = (
-  GetVirtuesAction | GetVirtueAction | CreateVirtueAction | EditVirtueAction | DeleteVirtueAction
+  GetVirtuesAction | GetVirtueAction | CreateVirtueAction | 
+  EditVirtueAction | DeleteVirtueAction | SetCurrentVirtueAction
 );

@@ -1,5 +1,6 @@
 export enum EntryConstants {
   GET_ENTRIES_FOR_VIRTUE = "GET_ENTRIES_FOR_VIRTUE",
+  GET_UNCATEGORIZED_ENTRIES = "GET_UNCATEGORIZED_ENTRIES",
   GET_ENTRY = "GET_ENTRY",
   CREATE_ENTRY = "CREATE_ENTRY",
 };
@@ -45,6 +46,11 @@ export interface GetEntriesForVirtueAction {
   payload: Entry[]
 }
 
+export interface GetUncategorizedEntriesAction {
+  type: EntryConstants.GET_UNCATEGORIZED_ENTRIES,
+  payload: Entry[]
+}
+
 export interface GetEntryAction {
   type: EntryConstants.GET_ENTRY,
   payload: Entry
@@ -56,5 +62,6 @@ export interface CreateEntryAction {
 }
 
 export type EntryAction = (
-  GetEntriesForVirtueAction | GetEntryAction | CreateEntryAction
+  GetEntriesForVirtueAction | GetUncategorizedEntriesAction | GetEntryAction | 
+  CreateEntryAction
 );
