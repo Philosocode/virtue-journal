@@ -25,6 +25,8 @@ class _EntriesPage extends Component<RouteComponentProps<RouteProps> & Props> {
     let virtueId: number | undefined;
     if (virtueIdParam) virtueId = Number.parseInt(virtueIdParam);
 
+    this.setState({ virtueId: virtueIdParam });
+
     // Get entries for virtue
     virtueId
       ? this.props.getEntriesForVirtue(virtueId)
@@ -36,7 +38,7 @@ class _EntriesPage extends Component<RouteComponentProps<RouteProps> & Props> {
   }
 
   handleEdit = (entryId: number) => {
-
+    this.props.history.push(`/entries/${entryId}/edit`)
   }
 
   handleDelete = (entryId: number) => {

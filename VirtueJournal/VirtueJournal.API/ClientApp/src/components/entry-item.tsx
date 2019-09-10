@@ -19,7 +19,8 @@ interface Props {
 }
 
 export const EntryItem = (props: Props): JSX.Element => {
-  const { createdAt, entryId, lastEdited, title, description, starred, virtueLinks, handleDelete } = props;
+  const { createdAt, entryId, lastEdited, title, description, starred, virtueLinks, 
+    handleDelete, handleEdit } = props;
 
   return (
     <div className="c-entry-item">
@@ -27,7 +28,7 @@ export const EntryItem = (props: Props): JSX.Element => {
         <h3 className="c-entry-item__heading">{title}</h3>
 
         <div className="c-entry-item__icons">
-          <div className="c-entry-item__edit">
+          <div className="c-entry-item__edit" onClick={() => handleEdit(entryId)}>
             <FontAwesomeIcon icon={faPencilAlt} />
           </div>
           <div className="c-entry-item__delete" onClick={() => handleDelete(entryId)}>

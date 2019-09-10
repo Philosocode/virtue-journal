@@ -10,6 +10,8 @@ import {
   CreateEntryAction,
   GetUncategorizedEntriesAction,
   DeleteEntryAction,
+  EntryForEdit,
+  EditEntryAction,
 } from "./entry.types";
 
 import { getAuthHeader } from "../../helpers/get-auth-header";
@@ -79,6 +81,22 @@ export const createEntry = (entryToCreate: EntryForCreate) => async (
     dispatch<CreateEntryAction>({
       type: EntryConstants.CREATE_ENTRY,
       payload: res.data
+    });
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export const editEntry = (entryId: number, editedEntry: EntryForEdit) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    await axios.patch<Entry>(`${ENTRY_BASE_URL}/${entryId}`, editedEntry, {
+      headers: authHeader
+    });
+
+    dispatch<EditEntryAction>({
+      type: EntryConstants.EDIT_ENTRY
     });
   } catch (err) {
     return Promise.reject(err);

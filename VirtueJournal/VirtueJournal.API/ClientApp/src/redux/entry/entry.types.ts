@@ -25,6 +25,8 @@ export interface EntryForCreate {
   virtueLinks?: VirtueLink[]
 }
 
+export interface EntryForEdit extends EntryForCreate {}
+
 export interface VirtueLink {
   virtueId: number,
   difficulty: Difficulty
@@ -62,6 +64,10 @@ export interface GetEntryAction {
 export interface CreateEntryAction {
   type: EntryConstants.CREATE_ENTRY,
   payload: Entry
+}
+
+export interface EditEntryAction {
+  type: EntryConstants.EDIT_ENTRY
 }
 
 export interface DeleteEntryAction {

@@ -19,6 +19,7 @@ import { VirtueEditPage } from './pages/virtue-edit.page';
 import { EntriesPage } from "./pages/entries.page";
 import { EntryDetailPage } from "./pages/entry-detail.page";
 import { EntryCreatePage } from "./pages/entry-create.page";
+import { EntryEditPage } from "./pages/entry-edit.page";
 
 import { NotFoundPage } from "./pages/not-found.page";
 
@@ -43,7 +44,7 @@ export class App extends Component {
           <PrivateRoute exact key="uncategorized" path="/entries/uncategorized" component={EntriesPage} />
           <PrivateRoute exact path="/entries/create" component={EntryCreatePage} />
           <PrivateRoute exact path="/entries/:entryId" component={EntryDetailPage} />
-          {/* <PrivateRoute exact path="/entries/:entryId/edit" component={EntryEditPage} /> */}
+          <PrivateRoute exact path="/entries/:entryId/edit" component={EntryEditPage} />
 
           <PrivateRoute exact path="/settings" component={SettingsPage} />
           <Route component={NotFoundPage} />

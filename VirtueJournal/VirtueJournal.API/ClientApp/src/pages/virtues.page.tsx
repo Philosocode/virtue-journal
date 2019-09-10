@@ -23,11 +23,12 @@ class _VirtuesPage extends Component<VirtuesPageProps> {
     const virtueToSet = this.props.virtueState.virtues.find(v => v.virtueId === virtueId);
 
     this.props.setCurrentVirtue(virtueToSet);
-    this.props.history.push(`virtues/${virtueId}/entries`);
+    this.props.history.push(`/virtues/${virtueId}/entries`);
   }
 
-  handleEdit = (virtueId: number) => {
-    this.props.history.push(`virtues/${virtueId}/edit`)
+  handleEdit = (event: React.MouseEvent, virtueId: number) => {
+    event.stopPropagation();
+    this.props.history.push(`/virtues/${virtueId}/edit`);
   }
 
   handleDelete = (virtueId: number) => {
