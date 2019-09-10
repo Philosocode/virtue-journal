@@ -36,6 +36,18 @@ namespace VirtueJournal.API.Controllers
             
             return Ok(entriesToReturn);
         }
+        
+        [HttpGet("uncategorized")]
+        public async Task<IActionResult> GetUncategorizedEntries()
+        {
+            var userId = this.GetCurrentUserId();
+            
+            var entriesFromRepo = await _unitOfWork.Entries.GetUncategorizedEntriesAsync(userId);
+            var entriesToReturn = _mapper.Map<IEnumerable<EntryGetDto>>(entriesFromRepo);
+            
+            return Ok(entriesToReturn);
+        }
+
 
         // GET api/entries/1
         [HttpGet("{entryId}", Name = "GetEntry")] 
@@ -119,12 +131,12 @@ namespace VirtueJournal.API.Controllers
         
         // DELETE api/entries/5
         [HttpDelete("{entryId}")]
-        public async Task<IActionResult> DeleteEntryAsync(int id)
+        public async Task<IActionResult> DeleteEntryAsync(int entryId)
         {
-            var entry = await _unitOfWork.Entries.GetByIdAsync(id);
+            var entry = await _unitOfWork.Entries.GetByIdAsync(entryId);
 
             if (entry == null)
-                return NotFound($"Entry with entryId {id} could not be found");
+                return NotFound($"Entry with entryId {entryId} could not be found");
 
             if (entry.UserId != this.GetCurrentUserId())
                 return Unauthorized();
@@ -132,7 +144,7 @@ namespace VirtueJournal.API.Controllers
             _unitOfWork.Entries.Remove(entry);
             
             if (!await _unitOfWork.Complete())
-                return BadRequest($"Could not delete entry {id}");
+                return BadRequest($"Could not delete entry {entryId}");
 
             return NoContent();
         }

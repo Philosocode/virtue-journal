@@ -1,0 +1,38 @@
+.c-entry-item {
+  border: 1px solid black;
+  cursor: pointer;
+  margin: 0 auto;
+  padding: 2rem 3rem 2rem 3rem;
+  text-align: left;
+  word-wrap: break-word;
+  width: 50rem;
+
+  display: flex;
+    flex-direction: column;
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  &__top-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  &__icons {
+    align-self: center;
+
+    display: flex;
+    font-size: 2rem;
+    justify-content: space-around;
+    width: 10rem;
+  }
+
+  &__edit:hover {
+    color: orange;
+  }
+
+  &__delete:hover {
+    color: orangered;
+  }
+}

@@ -17,11 +17,7 @@
           <e p="node_modules" t="Include">
             <e p=".cache" t="Include">
               <e p="babel-loader" t="Include">
-                <e p="0796de2eaa70a7c0eca6117aaae4448a.json" t="Include" />
-                <e p="364c13de02a2e4c683d68bb039037de1.json" t="Include" />
-                <e p="6f6316de067cc6c341cadb40b869efde.json" t="Include" />
-                <e p="813988c2a075ebc187235d8ddd796539.json" t="Include" />
-                <e p="b171df049de8b9a833f820560e58f73c.json" t="Include" />
+                <e p="f7d6bd6f8444ecafc10efc6a4185830e.json" t="Include" />
               </e>
             </e>
             <e p="@babel/parser" t="IncludeRecursive" />
@@ -169,6 +165,7 @@
             <e p="serviceWorker.ts" t="Include" />
             <e p="styles" t="Include">
               <e p="components" t="Include">
+                <e p="_components.entry-item.scss" t="Include" />
                 <e p="_components.navbar.scss" t="Include" />
                 <e p="_components.virtue-link.scss" t="Include" />
                 <e p="_components.virtue.scss" t="Include" />

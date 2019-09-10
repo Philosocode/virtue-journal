@@ -86,7 +86,7 @@ class _EntryCreatePage extends Component<Props> {
     const { virtues } = this.props.virtue;
 
     return virtues.map(v => { 
-      if (virtueLinkIds.includes(v.virtueId)) return;
+      if (virtueLinkIds.includes(v.virtueId)) return null;
 
       return <option key={v.virtueId} value={v.virtueId}>{v.name}</option>
     });

@@ -3,6 +3,8 @@ export enum EntryConstants {
   GET_UNCATEGORIZED_ENTRIES = "GET_UNCATEGORIZED_ENTRIES",
   GET_ENTRY = "GET_ENTRY",
   CREATE_ENTRY = "CREATE_ENTRY",
+  EDIT_ENTRY = "EDIT_ENTRY",
+  DELETE_ENTRY = "DELETE_ENTRY"
 };
 
 export interface Entry {
@@ -11,7 +13,8 @@ export interface Entry {
   description: string,
   createdAt: Date,
   lastEdited: Date,
-  starred: boolean
+  starred: boolean,
+  virtueLinks?: VirtueLink[]
 }
 
 export interface EntryForCreate {
@@ -61,7 +64,12 @@ export interface CreateEntryAction {
   payload: Entry
 }
 
+export interface DeleteEntryAction {
+  type: EntryConstants.DELETE_ENTRY,
+  payload: number
+}
+
 export type EntryAction = (
   GetEntriesForVirtueAction | GetUncategorizedEntriesAction | GetEntryAction | 
-  CreateEntryAction
+  CreateEntryAction | DeleteEntryAction
 );

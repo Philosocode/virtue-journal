@@ -33,7 +33,14 @@ namespace VirtueJournal.Data.Repositories
                 .Include(e => e.VirtueLinks)
                 .AsEnumerable();
         }
-
+        
+        public async Task<IEnumerable<Entry>> GetUncategorizedEntriesAsync(int userId)
+        {
+            return await DataContext.Entries
+                .Where(e => e.UserId == userId)
+                .Where(e => e.VirtueLinks.Count == 0)
+                .ToListAsync();
+        }
 
         public IEnumerable<Entry> GetEntriesByVirtueId(int virtueId)
         {

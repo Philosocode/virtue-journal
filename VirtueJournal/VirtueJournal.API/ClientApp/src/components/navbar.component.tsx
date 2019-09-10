@@ -40,6 +40,11 @@ class _Navbar extends Component<Props> {
         </li>
 
         <li className="c-navbar__list-item">
+          <NavLink className="c-navbar__link" activeClassName="c-navbar__link--is-active"
+            to="/entries/uncategorized">Entries</NavLink>
+        </li>
+
+        <li className="c-navbar__list-item">
           <a href="/logout" onClick={this.handleLogout} className="c-navbar__link">Logout</a>
         </li>
       </>

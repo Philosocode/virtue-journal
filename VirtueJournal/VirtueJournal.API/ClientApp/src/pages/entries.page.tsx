@@ -3,7 +3,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { AppState } from "../redux/store";
-import { Entry, getEntriesForVirtue, getUncategorizedEntries } from "../redux/entry";
+import { Entry, getEntriesForVirtue, getUncategorizedEntries, deleteEntry } from "../redux/entry";
 
 import { EntryItem } from "../components/entry-item";
 import { LinkButton } from "../components/shared/link-button";
@@ -11,7 +11,8 @@ import { LinkButton } from "../components/shared/link-button";
 interface Props extends RouteComponentProps {
   entries: Entry[],
   getEntriesForVirtue: (virtueId: number) => any,
-  getUncategorizedEntries: () => any
+  getUncategorizedEntries: () => any,
+  deleteEntry: (entryId: number) => Promise<undefined>
 }
 
 interface RouteProps {
@@ -21,13 +22,25 @@ interface RouteProps {
 class _EntriesPage extends Component<RouteComponentProps<RouteProps> & Props> {
   componentDidMount() {
     const virtueIdParam = this.props.match.params.virtueId;
-    let virtueId: number | undefined;    
+    let virtueId: number | undefined;
     if (virtueIdParam) virtueId = Number.parseInt(virtueIdParam);
 
     // Get entries for virtue
     virtueId
       ? this.props.getEntriesForVirtue(virtueId)
       : this.props.getUncategorizedEntries();
+  }
+
+  handleClick = (entryId: number) => {
+
+  }
+
+  handleEdit = (entryId: number) => {
+
+  }
+
+  handleDelete = (entryId: number) => {
+    this.props.deleteEntry(entryId);
   }
 
   getEntriesList = () => {
@@ -39,11 +52,16 @@ class _EntriesPage extends Component<RouteComponentProps<RouteProps> & Props> {
         entries.map(e => (
           <EntryItem
             key={e.entryId}
+            entryId={e.entryId}
             createdAt={e.createdAt}
             lastEdited={e.lastEdited}
             title={e.title}
             description={e.description}
             starred={e.starred}
+            virtueLinks={e.virtueLinks}
+            handleClick={this.handleClick}
+            handleDelete={this.handleDelete}
+            handleEdit={this.handleEdit}
           />
         )
       ))
@@ -74,5 +92,5 @@ const mapStateToProps = (state: AppState) => ({
 
 export const EntriesPage = withRouter(connect(
   mapStateToProps,
-  { getEntriesForVirtue, getUncategorizedEntries }
+  { getEntriesForVirtue, getUncategorizedEntries, deleteEntry }
 )(_EntriesPage));

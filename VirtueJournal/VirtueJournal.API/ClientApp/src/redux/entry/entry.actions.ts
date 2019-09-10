@@ -8,6 +8,8 @@ import {
   GetEntryAction,
   EntryForCreate,
   CreateEntryAction,
+  GetUncategorizedEntriesAction,
+  DeleteEntryAction,
 } from "./entry.types";
 
 import { getAuthHeader } from "../../helpers/get-auth-header";
@@ -40,8 +42,8 @@ export const getUncategorizedEntries = () => async (dispatch: Dispatch) => {
       headers: authHeader
     });
 
-    dispatch<GetEntriesForVirtueAction>({
-      type: EntryConstants.GET_ENTRIES_FOR_VIRTUE,
+    dispatch<GetUncategorizedEntriesAction>({
+      type: EntryConstants.GET_UNCATEGORIZED_ENTRIES,
       payload: res.data
     });
   } catch (err) {
@@ -66,7 +68,7 @@ export const getEntry = (entryId: number) => async (
   }
 }
 
-export const createEntry = (entryToCreate: EntryForCreate) => async(
+export const createEntry = (entryToCreate: EntryForCreate) => async (
   dispatch: Dispatch
 ) => {
   try {
@@ -82,3 +84,18 @@ export const createEntry = (entryToCreate: EntryForCreate) => async(
     return Promise.reject(err);
   }
 }
+
+export const deleteEntry = (entryId: number) => async (dispatch: Dispatch) => {
+  try {
+    await axios.delete(`${ENTRY_BASE_URL}/${entryId}`, {
+      headers: authHeader
+    });
+
+    dispatch<DeleteEntryAction>({
+      type: EntryConstants.DELETE_ENTRY,
+      payload: entryId
+    });
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};

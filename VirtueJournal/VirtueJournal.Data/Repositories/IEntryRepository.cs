@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using VirtueJournal.Data.Entities;
 
 namespace VirtueJournal.Data.Repositories
@@ -7,5 +8,6 @@ namespace VirtueJournal.Data.Repositories
     {
         IEnumerable<Entry> GetEntriesByVirtueId(int virtueId);
         IEnumerable<Entry> GetEntriesForUser(int userId);
+        Task<IEnumerable<Entry>> GetUncategorizedEntriesAsync(int userId);
     }
 }
