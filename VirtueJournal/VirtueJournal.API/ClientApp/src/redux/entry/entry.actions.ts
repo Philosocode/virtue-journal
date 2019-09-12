@@ -53,9 +53,7 @@ export const getUncategorizedEntries = () => async (dispatch: Dispatch) => {
   }
 }
 
-export const getEntry = (entryId: number) => async (
-  dispatch: Dispatch
-) => {
+export const getEntry = (entryId: number) => async (dispatch: Dispatch) => {
   try {
     const res = await axios.get<Entry>(`${ENTRY_BASE_URL}/${entryId}`, {
       headers: authHeader

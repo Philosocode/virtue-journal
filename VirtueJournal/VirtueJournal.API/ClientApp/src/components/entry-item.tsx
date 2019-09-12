@@ -20,10 +20,10 @@ interface Props {
 
 export const EntryItem = (props: Props): JSX.Element => {
   const { createdAt, entryId, lastEdited, title, description, starred, virtueLinks, 
-    handleDelete, handleEdit } = props;
+    handleClick, handleDelete, handleEdit } = props;
 
   return (
-    <div className="c-entry-item">
+    <div className="c-entry-item" onClick={() => handleClick(entryId)} >
       <div className="c-entry-item__top-row">
         <h3 className="c-entry-item__heading">{title}</h3>
 

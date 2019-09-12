@@ -34,11 +34,11 @@ class _EntriesPage extends Component<RouteComponentProps<RouteProps> & Props> {
   }
 
   handleClick = (entryId: number) => {
-
+    this.props.history.push(`/entries/${entryId}`);
   }
 
   handleEdit = (entryId: number) => {
-    this.props.history.push(`/entries/${entryId}/edit`)
+    this.props.history.push(`/entries/${entryId}/edit`);
   }
 
   handleDelete = (entryId: number) => {
