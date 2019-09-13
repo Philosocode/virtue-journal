@@ -5,6 +5,7 @@ import { AxiosResponse, AxiosError } from "axios";
 
 import { AppState } from "../redux/store";
 import { getEntry, EntryState, VirtueLink } from "../redux/entry";
+import { VirtueLinkList } from "../components/virtue-link-list";
 
 /*
 export interface Entry {
@@ -33,10 +34,8 @@ class _EntryDetailPage extends Component<Props> {
     this.props.getEntry(entryId);
   }
 
-  renderVirtueLinks = (virtueLinks: VirtueLink[]) => {
-    return virtueLinks.map(vl => 
-      <li className="c-virtue-link__item" key={vl.virtueId}>{vl.difficulty} - ID: {vl.virtueId}</li>
-    )
+  removeVirtueLink = (virtueId: number) => {
+    console.log(virtueId);
   }
 
   render() {
@@ -52,7 +51,11 @@ class _EntryDetailPage extends Component<Props> {
         <hr/>
         <p>Created: {currentEntry.createdAt}</p>
         <p>Last Edited: {currentEntry.lastEdited || "never"}</p>
-        <ul>{currentEntry.virtueLinks && this.renderVirtueLinks(currentEntry.virtueLinks)}</ul>
+        {currentEntry.virtueLinks && <VirtueLinkList 
+                                        virtueLinks={currentEntry.virtueLinks} 
+                                        handleDelete={this.removeVirtueLink} 
+                                      />
+        }
       </div>
     )
   }

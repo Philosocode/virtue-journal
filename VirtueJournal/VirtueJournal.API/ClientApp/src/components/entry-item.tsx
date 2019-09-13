@@ -13,7 +13,7 @@ interface Props {
   description: string,
   starred: boolean,
   virtueLinks?: VirtueLink[],
-  handleEdit: (entryId: number) => void,
+  handleEdit: (event: React.MouseEvent, entryId: number) => void,
   handleDelete: (entryId: number) => void,
   handleClick: (entryId: number) => void
 }
@@ -28,7 +28,7 @@ export const EntryItem = (props: Props): JSX.Element => {
         <h3 className="c-entry-item__heading">{title}</h3>
 
         <div className="c-entry-item__icons">
-          <div className="c-entry-item__edit" onClick={() => handleEdit(entryId)}>
+          <div className="c-entry-item__edit" onClick={(e: React.MouseEvent) => handleEdit(e, entryId)}>
             <FontAwesomeIcon icon={faPencilAlt} />
           </div>
           <div className="c-entry-item__delete" onClick={() => handleDelete(entryId)}>

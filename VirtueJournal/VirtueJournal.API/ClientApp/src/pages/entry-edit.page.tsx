@@ -6,6 +6,7 @@ import { editEntry, VirtueLink, EntryState, EntryForEdit } from "../redux/entry"
 import { getVirtues, VirtueState } from "../redux/virtue";
 import { AppState } from "../redux/store";
 import { AxiosResponse, AxiosError } from "axios";
+import { VirtueLinkList } from "../components/virtue-link-list";
 
 interface Props extends RouteComponentProps {
   virtue: VirtueState,
@@ -134,12 +135,6 @@ class _EntryEditPage extends Component<RouteComponentProps<RouteProps> & Props> 
     )
   }
 
-  renderVirtueLinks = () => {
-    return this.state.virtueLinks.map(vl => 
-      <li className="c-virtue-link__item" key={vl.virtueId}>{vl.difficulty} - ID: {vl.virtueId}</li>
-    )
-  }
-
   addVirtueLink = () => {
     const virtueId = this.state.selectedVirtue;
     if (!virtueId) return;
@@ -152,6 +147,11 @@ class _EntryEditPage extends Component<RouteComponentProps<RouteProps> & Props> 
       selectedDifficulty: 0,
       selectedVirtue: "DEFAULT",
     })
+  }
+
+  removeVirtueLink = (virtueId: number) => {
+    const filteredVirtueLinks = this.state.virtueLinks.filter(vl => vl.virtueId !== virtueId);
+    this.setState({ virtueLinks: filteredVirtueLinks });
   }
 
   render() {
@@ -246,7 +246,10 @@ class _EntryEditPage extends Component<RouteComponentProps<RouteProps> & Props> 
               >Add Virtue Link</button>
             </div>
             { this.state.virtueLinks.length === 0 && <p>No virtue links...</p>}
-            <ul className="c-virtue-link__container">{ this.renderVirtueLinks() }</ul>
+            <VirtueLinkList 
+              virtueLinks={this.state.virtueLinks} 
+              canDelete
+              handleDelete={this.removeVirtueLink} />
           </div>
 
           <button className="button" type="submit">Save Changes</button>
