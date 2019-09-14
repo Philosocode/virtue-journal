@@ -1,0 +1,13 @@
+.c-entry-detail {
+  &__edit {
+    cursor: pointer;
+    height: 4rem;
+    position: absolute;
+    transform: translateX(10rem);
+    width: 10rem;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}

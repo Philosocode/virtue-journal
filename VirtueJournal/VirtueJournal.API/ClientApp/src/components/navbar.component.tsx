@@ -41,7 +41,7 @@ class _Navbar extends Component<Props> {
 
         <li className="c-navbar__list-item">
           <NavLink className="c-navbar__link" activeClassName="c-navbar__link--is-active"
-            to="/entries" exact>All</NavLink>
+            to="/entries/all" exact>All</NavLink>
         </li>
 
         <li className="c-navbar__list-item">

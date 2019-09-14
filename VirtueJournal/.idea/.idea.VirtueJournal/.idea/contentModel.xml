@@ -17,7 +17,26 @@
           <e p="node_modules" t="Include">
             <e p=".cache" t="Include">
               <e p="babel-loader" t="Include">
-                <e p="f7d6bd6f8444ecafc10efc6a4185830e.json" t="Include" />
+                <e p="090873e6e7303e53c4b4b39032205572.json" t="Include" />
+                <e p="0e8e3f297e9de50594baab662a89c07e.json" t="Include" />
+                <e p="0fce1e4db7589bab005a9d77d99f0958.json" t="Include" />
+                <e p="1183f820c2fecce5f71dc325255f6993.json" t="Include" />
+                <e p="228a92e5345d68ba9b113994cfe8780c.json" t="Include" />
+                <e p="364fb644bb89715f4e81be2608a5ac7d.json" t="Include" />
+                <e p="3eaffe8b8b82bebcc022bbe1f43a8aa6.json" t="Include" />
+                <e p="412a989edda0d3d116d4b211b746d795.json" t="Include" />
+                <e p="5efa2959ddf505a976aca77bc8fa8b8e.json" t="Include" />
+                <e p="60ceba9e6e530ce334e65c52047aefa4.json" t="Include" />
+                <e p="853584864c71fd0eb13ed69a418c60a2.json" t="Include" />
+                <e p="8539687b506143fe9296665b62ffa411.json" t="Include" />
+                <e p="9cfde2ba3fa3f08482c055744917f07d.json" t="Include" />
+                <e p="a0e65d44dfd716d4d7fa28fe68464a66.json" t="Include" />
+                <e p="a9bb41f4e4dcf831270a5ffc207afb32.json" t="Include" />
+                <e p="ad139c78c2329148b78e2af359e10e95.json" t="Include" />
+                <e p="c917ab1a01d188a2c8342f9fe9783adc.json" t="Include" />
+                <e p="f33fd349de0a99a8e1f494e57d9d0255.json" t="Include" />
+                <e p="fbbd508762350b812391c0cfb36ccc33.json" t="Include" />
+                <e p="ff2dec7597bc732e4dc88da07b47d416.json" t="Include" />
               </e>
             </e>
             <e p="@babel/parser" t="IncludeRecursive" />
@@ -106,6 +125,7 @@
               <e p="shared" t="Include">
                 <e p="link-button.tsx" t="Include" />
               </e>
+              <e p="virtue-link-list.tsx" t="Include" />
               <e p="virtue.tsx" t="Include" />
             </e>
             <e p="helpers" t="Include">
@@ -117,6 +137,7 @@
               <e p="entries.page.tsx" t="Include" />
               <e p="entry-create.page.tsx" t="Include" />
               <e p="entry-detail.page.tsx" t="Include" />
+              <e p="entry-edit.page.tsx" t="Include" />
               <e p="index.page.tsx" t="Include" />
               <e p="login.page.tsx" t="Include" />
               <e p="not-found.page.tsx" t="Include" />
@@ -165,6 +186,7 @@
             <e p="serviceWorker.ts" t="Include" />
             <e p="styles" t="Include">
               <e p="components" t="Include">
+                <e p="_components.entry-detail.scss" t="Include" />
                 <e p="_components.entry-item.scss" t="Include" />
                 <e p="_components.navbar.scss" t="Include" />
                 <e p="_components.virtue-link.scss" t="Include" />

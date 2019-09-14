@@ -7,6 +7,7 @@ const initialState: EntryState = {
 
 export const entryReducer = (state = initialState, action: EntryAction) => {
   switch (action.type) {
+    case EntryConstants.GET_ALL_ENTRIES:
     case EntryConstants.GET_ENTRIES_FOR_VIRTUE:
     case EntryConstants.GET_UNCATEGORIZED_ENTRIES:
       return {

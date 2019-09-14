@@ -27,11 +27,11 @@ namespace VirtueJournal.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetEntries()
+        public async Task<IActionResult> GetEntries()
         {
             var userId = this.GetCurrentUserId();
             
-            var entriesFromRepo = _unitOfWork.Entries.GetEntriesForUser(userId);
+            var entriesFromRepo = await _unitOfWork.Entries.GetAllEntriesAsync(userId);
             var entriesToReturn = _mapper.Map<IEnumerable<EntryGetDto>>(entriesFromRepo);
             
             return Ok(entriesToReturn);
@@ -154,7 +154,7 @@ namespace VirtueJournal.API.Controllers
         public async Task<IActionResult> DeleteAllEntriesAsync()
         {
             var userId = this.GetCurrentUserId();
-            var entriesToDelete = _unitOfWork.Entries.GetEntriesForUser(userId);
+            var entriesToDelete = await _unitOfWork.Entries.GetAllEntriesAsync(userId);
             
             _unitOfWork.Entries.RemoveRange(entriesToDelete);
             

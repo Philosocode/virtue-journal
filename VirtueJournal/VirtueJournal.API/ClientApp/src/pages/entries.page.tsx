@@ -3,15 +3,16 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { AppState } from "../redux/store";
-import { Entry, getEntriesForVirtue, getUncategorizedEntries, deleteEntry } from "../redux/entry";
+import { Entry, getAllEntries, getEntriesForVirtue, getUncategorizedEntries, deleteEntry } from "../redux/entry";
 
 import { EntryItem } from "../components/entry-item";
 import { LinkButton } from "../components/shared/link-button";
 
 interface Props extends RouteComponentProps {
   entries: Entry[],
-  getEntriesForVirtue: (virtueId: number) => any,
-  getUncategorizedEntries: () => any,
+  getAllEntries: () => Promise<void>,
+  getEntriesForVirtue: (virtueId: number) => Promise<void>,
+  getUncategorizedEntries: () => Promise<void>,
   deleteEntry: (entryId: number) => Promise<undefined>
 }
 
@@ -21,16 +22,21 @@ interface RouteProps {
 
 class _EntriesPage extends Component<RouteComponentProps<RouteProps> & Props> {
   componentDidMount() {
-    const virtueIdParam = this.props.match.params.virtueId;
-    let virtueId: number | undefined;
-    if (virtueIdParam) virtueId = Number.parseInt(virtueIdParam);
+    const matchObj = this.props.match;
+    const virtueIdParam = matchObj.params.virtueId;
 
-    this.setState({ virtueId: virtueIdParam });
+    if (virtueIdParam) {
+      let virtueId = Number.parseInt(virtueIdParam);
+      this.setState({ virtueId: virtueIdParam });
+      return this.props.getEntriesForVirtue(virtueId)
+    }
+    if (matchObj.path.includes("all")) {
+      return this.props.getAllEntries();
+    }
 
-    // Get entries for virtue
-    virtueId
-      ? this.props.getEntriesForVirtue(virtueId)
-      : this.props.getUncategorizedEntries();
+    if (matchObj.path.includes("uncategorized")) {
+      return this.props.getUncategorizedEntries();
+    } 
   }
 
   handleClick = (entryId: number) => {
@@ -95,5 +101,5 @@ const mapStateToProps = (state: AppState) => ({
 
 export const EntriesPage = withRouter(connect(
   mapStateToProps,
-  { getEntriesForVirtue, getUncategorizedEntries, deleteEntry }
+  { getAllEntries, getEntriesForVirtue, getUncategorizedEntries, deleteEntry }
 )(_EntriesPage));

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { RouteComponentProps } from "react-router-dom";
-import { AxiosResponse, AxiosError } from "axios";
 
 import { AppState } from "../redux/store";
-import { getEntry, EntryState, VirtueLink } from "../redux/entry";
+import { getEntry, EntryState } from "../redux/entry";
 import { VirtueLinkList } from "../components/virtue-link-list";
 
 /*
@@ -34,27 +33,26 @@ class _EntryDetailPage extends Component<Props> {
     this.props.getEntry(entryId);
   }
 
-  removeVirtueLink = (virtueId: number) => {
-    console.log(virtueId);
+  handleEdit = (event: React.MouseEvent, entryId: number) => {
+    this.props.history.push(`/entries/${entryId}/edit`);
   }
 
   render() {
     const currentEntry = this.props.entry.currentEntry;
-
     if (!currentEntry) return <div>Loading...</div>
 
+    const { entryId, title, starred, description, createdAt, lastEdited, virtueLinks } = currentEntry;
+
     return (
-      <div>
-        <h1>{currentEntry.title}</h1>
-        <p>Starred: {currentEntry.starred ? "true" : "false"}</p>
-        <p>{currentEntry.description}</p>
+      <div className="c-entry-detail">
+        <button className="c-entry-detail__edit" onClick={(e) => this.handleEdit(e, entryId)}>Edit Entry</button>
+        <h1>{title}</h1>
+        <p>Starred: {starred ? "true" : "false"}</p>
+        <p>{description}</p>
         <hr/>
-        <p>Created: {currentEntry.createdAt}</p>
-        <p>Last Edited: {currentEntry.lastEdited || "never"}</p>
-        {currentEntry.virtueLinks && <VirtueLinkList 
-                                        virtueLinks={currentEntry.virtueLinks} 
-                                        handleDelete={this.removeVirtueLink} 
-                                      />
+        <p>Created: {createdAt}</p>
+        <p>Last Edited: {lastEdited || "never"}</p>
+        {virtueLinks && <VirtueLinkList virtueLinks={virtueLinks} />
         }
       </div>
     )

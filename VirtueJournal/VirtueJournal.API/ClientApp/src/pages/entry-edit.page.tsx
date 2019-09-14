@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect, RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 
-import { editEntry, VirtueLink, EntryState, EntryForEdit } from "../redux/entry";
+import { editEntry, VirtueLink, EntryState } from "../redux/entry";
 import { getVirtues, VirtueState } from "../redux/virtue";
 import { AppState } from "../redux/store";
 import { AxiosResponse, AxiosError } from "axios";
@@ -90,8 +90,9 @@ class _EntryEditPage extends Component<RouteComponentProps<RouteProps> & Props> 
     const { title, description, starred, virtueLinks } = this.state;
 
     const createdAt = new Date(this.state.createdAt);
+    const lastEdited = new Date();
 
-    const editedEntry = { title, description, createdAt, starred, virtueLinks };
+    const editedEntry = { title, description, createdAt, lastEdited, starred, virtueLinks };
 
     this.props.editEntry(this.state.entryId, editedEntry)
       .then((res: AxiosResponse) => {

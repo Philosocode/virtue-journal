@@ -42,6 +42,7 @@ export class App extends Component {
           <PrivateRoute exact key="virtue" path="/virtues/:virtueId/entries" component={EntriesPage} />
 
           <PrivateRoute exact key="uncategorized" path="/entries/uncategorized" component={EntriesPage} />
+          <PrivateRoute exact key="all" path="/entries/all" component={EntriesPage} />
           <PrivateRoute exact path="/entries/create" component={EntryCreatePage} />
           <PrivateRoute exact path="/entries/:entryId" component={EntryDetailPage} />
           <PrivateRoute exact path="/entries/:entryId/edit" component={EntryEditPage} />

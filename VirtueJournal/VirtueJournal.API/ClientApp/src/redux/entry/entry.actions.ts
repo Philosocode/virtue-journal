@@ -12,6 +12,7 @@ import {
   DeleteEntryAction,
   EntryForEdit,
   EditEntryAction,
+  GetAllEntriesAction,
 } from "./entry.types";
 
 import { getAuthHeader } from "../../helpers/get-auth-header";
@@ -21,9 +22,22 @@ const VIRTUE_BASE_URL = "/api/virtues"
 
 const authHeader = getAuthHeader();
 
-export const getEntriesForVirtue = (virtueId: number) => async (
-  dispatch: Dispatch
-) => {
+export const getAllEntries = () => async (dispatch: Dispatch) => {
+  try {
+    const res = await axios.get<Entry[]>(ENTRY_BASE_URL, {
+      headers: authHeader
+    });
+
+    dispatch<GetAllEntriesAction>({
+      type: EntryConstants.GET_ALL_ENTRIES,
+      payload: res.data
+    });
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+export const getEntriesForVirtue = (virtueId: number) => async (dispatch: Dispatch) => {
   try {
     const res = await axios.get<Entry[]>(`${VIRTUE_BASE_URL}/${virtueId}/entries`, {
       headers: authHeader
