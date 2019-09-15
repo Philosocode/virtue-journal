@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Redirect, RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 
-import { editEntry, VirtueLink, EntryState } from "../redux/entry";
+import { editEntry, VirtueLink, EntryState, EntryForEdit } from "../redux/entry";
 import { getVirtues, VirtueState } from "../redux/virtue";
 import { AppState } from "../redux/store";
 import { AxiosResponse, AxiosError } from "axios";
@@ -11,7 +11,7 @@ import { VirtueLinkList } from "../components/virtue-link-list";
 interface Props extends RouteComponentProps {
   virtue: VirtueState,
   entry: EntryState,
-  createEntry: Function,
+  prevPath?: string,
   getVirtues: () => Promise<void>,
   editEntry: Function
 }
@@ -75,6 +75,12 @@ class _EntryEditPage extends Component<RouteComponentProps<RouteProps> & Props> 
     });
   };
 
+  handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      [event.target.name]: event.target.checked
+    })
+  }
+
   handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     // Convert option value to number
     this.setState({
@@ -96,7 +102,7 @@ class _EntryEditPage extends Component<RouteComponentProps<RouteProps> & Props> 
 
     this.props.editEntry(this.state.entryId, editedEntry)
       .then((res: AxiosResponse) => {
-        this.setState({ shouldRedirectToEntriesPage: true });
+        this.props.history.goBack();
       })
       .catch((err: AxiosError) => {
         const errorResponse = err.response;
@@ -158,10 +164,8 @@ class _EntryEditPage extends Component<RouteComponentProps<RouteProps> & Props> 
   render() {
     return (
       <div>
-        { this.state.shouldRedirectToEntriesPage && <Redirect to="/virtues" /> }
         <h1>Entry Edit Page</h1>
         <form onSubmit={this.handleSubmit}>
-
           <div className="form__group">
             <label htmlFor="title" className="form__label">Title:</label>
             <div className="form__input-container">
@@ -200,6 +204,8 @@ class _EntryEditPage extends Component<RouteComponentProps<RouteProps> & Props> 
                 type="checkbox"
                 name="starred"
                 id="starred"
+                checked={this.state.starred}
+                onChange={this.handleCheckboxChange}
               />
             </div>
           </div>

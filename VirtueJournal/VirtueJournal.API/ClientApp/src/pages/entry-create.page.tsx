@@ -48,6 +48,12 @@ class _EntryCreatePage extends Component<Props> {
     });
   };
 
+  handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      [event.target.name]: event.target.checked
+    })
+  }
+
   handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     // Convert option value to number
     this.setState({
@@ -170,6 +176,8 @@ class _EntryCreatePage extends Component<Props> {
                 type="checkbox"
                 name="starred"
                 id="starred"
+                checked={this.state.starred}
+                onChange={this.handleCheckboxChange}
               />
             </div>
           </div>
