@@ -48,7 +48,8 @@ class _EntriesPage extends Component<RouteComponentProps<RouteProps> & Props> {
     this.props.history.push(`/entries/${entryId}/edit`);
   }
 
-  handleDelete = (entryId: number) => {
+  handleDelete = (event: React.MouseEvent, entryId: number) => {
+    event.stopPropagation();
     this.props.deleteEntry(entryId);
   }
 

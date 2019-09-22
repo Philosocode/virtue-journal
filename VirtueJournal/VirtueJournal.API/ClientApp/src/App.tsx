@@ -23,6 +23,20 @@ import { EntryEditPage } from "./pages/entry-edit.page";
 
 import { NotFoundPage } from "./pages/not-found.page";
 
+// Other
+import { store } from "./redux/store";
+import { tokenIsExpired } from "./helpers/check-expired";
+import { logoutUser } from './redux/auth';
+
+// Check for token
+if (localStorage.user && tokenIsExpired()) {
+  // Logout user
+  store.dispatch(logoutUser());
+
+  // Redirect to login
+  window.location.href = '/login';
+}
+
 export class App extends Component {
   render() {
     return (

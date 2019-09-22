@@ -10,7 +10,7 @@ interface Props {
   name: string,
   virtueId: number,
   handleEdit: (event: React.MouseEvent, virtueId: number) => void,
-  handleDelete: (virtueId: number) => void,
+  handleDelete: (event: React.MouseEvent, virtueId: number) => void,
   handleClick: (virtueId: number) => void,
 }
 
@@ -24,7 +24,7 @@ export const Virtue = (props: Props): JSX.Element => {
         <div className="c-virtue__edit" onClick={(event) => handleEdit(event, virtueId)}>
           <FontAwesomeIcon icon={faPencilAlt} />
         </div>
-        <div className="c-virtue__delete" onClick={() => handleDelete(virtueId)}>
+        <div className="c-virtue__delete" onClick={(e) => handleDelete(e, virtueId)}>
           <FontAwesomeIcon icon={faTrash} />
         </div>
       </div>

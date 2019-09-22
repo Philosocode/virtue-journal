@@ -31,7 +31,8 @@ class _VirtuesPage extends Component<VirtuesPageProps> {
     this.props.history.push(`/virtues/${virtueId}/edit`);
   }
 
-  handleDelete = (virtueId: number) => {
+  handleDelete = (event: React.MouseEvent, virtueId: number) => {
+    event.stopPropagation();
     this.props.deleteVirtue(virtueId);
   }
 
