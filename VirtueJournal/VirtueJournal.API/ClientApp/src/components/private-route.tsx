@@ -3,6 +3,7 @@ import { Route, Redirect, RouteProps } from "react-router-dom";
 import { connect } from 'react-redux';
 
 import { logoutUser, LogoutAction } from "../redux/auth";
+import { tokenIsExpired } from "../helpers/check-expired";
 
 interface Props extends RouteProps {
   component: any,
@@ -16,7 +17,7 @@ interface Props extends RouteProps {
 // See: https://tylermcginnis.com/react-router-protected-routes-authentication/
 class _PrivateRoute extends React.Component<Props> {
   componentDidMount() {
-    if (!this.props.isLoggedIn) {
+    if (localStorage.user && tokenIsExpired() || !this.props.isLoggedIn) {
       this.props.logoutUser();
     }
   }

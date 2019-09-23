@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AxiosResponse, AxiosError } from "axios";
 
@@ -9,7 +9,7 @@ import { getVirtues, VirtueState } from "../redux/virtue";
 
 import { VirtueLinkList } from "../components/virtue-link-list";
 
-interface Props {
+interface Props extends RouteComponentProps {
   virtue: VirtueState,
   createEntry: Function,
   getVirtues: () => Promise<void>
@@ -72,7 +72,8 @@ class _EntryCreatePage extends Component<Props> {
 
     this.props.createEntry(entryToCreate)
       .then((res: AxiosResponse) => {
-        this.setState({ shouldRedirectToEntriesPage: true });
+        this.props.history.goBack();
+        // this.setState({ shouldRedirectToEntriesPage: true });
       })
       .catch((err: AxiosError) => {
         const errorResponse = err.response;
@@ -240,7 +241,7 @@ const mapStateToProps = (state: AppState) => ({
   virtue: state.virtue
 });
 
-export const EntryCreatePage = connect(
+export const EntryCreatePage = withRouter(connect(
   mapStateToProps, 
   { createEntry, getVirtues }
-)(_EntryCreatePage);
+)(_EntryCreatePage));
