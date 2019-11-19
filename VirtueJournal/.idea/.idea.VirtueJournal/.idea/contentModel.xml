@@ -17,15 +17,15 @@
           <e p="node_modules" t="Include">
             <e p=".cache" t="Include">
               <e p="babel-loader" t="Include">
-                <e p="5c994ba7181be3ce8867ee8dcf6dabd2.json" t="Include" />
-                <e p="650dbea32f6e6430262ebd6ae8d271c8.json" t="Include" />
-                <e p="71f481f943d2792b1397f3eb276865ee.json" t="Include" />
-                <e p="81c8dcbc7cf9c845fc760358b0e1be73.json" t="Include" />
-                <e p="b379536acda823bcf3a3ba7e14ee5580.json" t="Include" />
-                <e p="caf49b9b6a39e339b370e7da03b2dc4b.json" t="Include" />
-                <e p="cbcb141e58a8c0733f2ede5414be0a55.json" t="Include" />
-                <e p="da3a12b63ae2b9cd68dd403a910015ef.json" t="Include" />
-                <e p="ddb8be8118da09e782c587ba71789ec3.json" t="Include" />
+                <e p="4654ee22e4ba676c665222411cd55426.json" t="Include" />
+                <e p="59891a62cf737aaa345e45d11e1b9424.json" t="Include" />
+                <e p="626c8216fa2db21f92acd92a56c4ae28.json" t="Include" />
+                <e p="62911e9a50f24b462215f450ec90f671.json" t="Include" />
+                <e p="80f29cef4afb0c14ac92a4082ed5ceb1.json" t="Include" />
+                <e p="aca76942118040caee82851599d73670.json" t="Include" />
+                <e p="d5ff7cac799f683cecba2f941202c53a.json" t="Include" />
+                <e p="dc2231d6b2f47fbeb55d8b95016d88c3.json" t="Include" />
+                <e p="dffa45e1522a159ee135445188c1b14f.json" t="Include" />
               </e>
             </e>
             <e p="@babel/parser" t="IncludeRecursive" />
@@ -51,6 +51,7 @@
               <e p="istanbul-lib-report" t="IncludeRecursive" />
               <e p="jest" t="IncludeRecursive" />
               <e p="jest-diff" t="IncludeRecursive" />
+              <e p="jwt-decode" t="IncludeRecursive" />
               <e p="node" t="IncludeRecursive" />
               <e p="prop-types" t="IncludeRecursive" />
               <e p="react" t="IncludeRecursive" />
@@ -77,6 +78,7 @@
             <e p="jest-serializer" t="IncludeRecursive" />
             <e p="jest-util" t="IncludeRecursive" />
             <e p="jest-worker" t="IncludeRecursive" />
+            <e p="jwt-decode" t="IncludeRecursive" />
             <e p="node-sass" t="IncludeRecursive" />
             <e p="react" t="IncludeRecursive" />
             <e p="react-dom" t="IncludeRecursive" />
@@ -119,6 +121,8 @@
             </e>
             <e p="helpers" t="Include">
               <e p="get-auth-header.ts" t="Include" />
+              <e p="setup-interceptor.ts" t="Include" />
+              <e p="tokenIsExpired.ts" t="Include" />
             </e>
             <e p="index.tsx" t="Include" />
             <e p="logo.svg" t="Include" />

@@ -4,8 +4,8 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { AppState } from '../redux/store';
 import { VirtueState, getVirtues, deleteVirtue, setCurrentVirtue } from "../redux/virtue";
-import { Virtue } from "../components/virtue";
-import { LinkButton } from "../components/shared/link-button";
+import { Virtue } from "../components/virtue.component";
+import { LinkButton } from "../components/shared/link-button.component";
 
 interface VirtuesPageProps extends RouteComponentProps {
   virtueState: VirtueState,

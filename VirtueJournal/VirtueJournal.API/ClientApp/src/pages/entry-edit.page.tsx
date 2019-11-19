@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 
-import { editEntry, VirtueLink, EntryState, EntryForEdit } from "../redux/entry";
+import { editEntry, VirtueLink, EntryState } from "../redux/entry";
 import { getVirtues, VirtueState } from "../redux/virtue";
 import { AppState } from "../redux/store";
 import { AxiosResponse, AxiosError } from "axios";
-import { VirtueLinkList } from "../components/virtue-link-list";
+import { VirtueLinkList } from "../components/virtue-link-list.component";
 
 interface Props extends RouteComponentProps {
   virtue: VirtueState,

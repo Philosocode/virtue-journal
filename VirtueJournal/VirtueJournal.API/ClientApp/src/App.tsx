@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 // Components
 import { Navbar } from './components/navbar.component';
-import { PrivateRoute } from "./components/private-route";
+import { PrivateRoute } from "./components/private-route.component";
 
 // Pages
 import { IndexPage } from "./pages/index.page";
@@ -25,8 +26,22 @@ import { NotFoundPage } from "./pages/not-found.page";
 
 // Other
 import { store } from "./redux/store";
-import { tokenIsExpired } from "./helpers/check-expired";
+import { tokenIsExpired } from "./helpers/tokenIsExpired";
 import { logoutUser } from './redux/auth';
+
+// Global interceptor setup
+axios.interceptors.response.use((response) => {
+  return response;
+}, (error) => {
+  const { status } = error.response;
+
+  if (status === 401) {
+    store.dispatch(logoutUser());
+  }
+
+  return Promise.reject(error);
+ }
+);
 
 // Check for token
 if (localStorage.user && tokenIsExpired()) {

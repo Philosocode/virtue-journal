@@ -4,7 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 
 import { AppState } from "../redux/store";
 import { getEntry, EntryState } from "../redux/entry";
-import { VirtueLinkList } from "../components/virtue-link-list";
+import { VirtueLinkList } from "../components/virtue-link-list.component";
 
 /*
 export interface Entry {

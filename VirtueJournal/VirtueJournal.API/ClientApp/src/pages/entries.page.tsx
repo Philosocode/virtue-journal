@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { AppState } from "../redux/store";
 import { Entry, getAllEntries, getEntriesForVirtue, getUncategorizedEntries, deleteEntry } from "../redux/entry";
 
-import { EntryItem } from "../components/entry-item";
-import { LinkButton } from "../components/shared/link-button";
+import { EntryItem } from "../components/entry-item.component";
+import { LinkButton } from "../components/shared/link-button.component";
 
 interface Props extends RouteComponentProps {
   entries: Entry[],

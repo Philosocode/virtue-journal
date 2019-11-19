@@ -7,7 +7,7 @@ import { AppState } from "../redux/store";
 import { createEntry, VirtueLink } from "../redux/entry";
 import { getVirtues, VirtueState } from "../redux/virtue";
 
-import { VirtueLinkList } from "../components/virtue-link-list";
+import { VirtueLinkList } from "../components/virtue-link-list.component";
 
 interface Props extends RouteComponentProps {
   virtue: VirtueState,
